@@ -235,8 +235,8 @@
   margin: 0 0 1em 0;
   color: #a8af87;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 100;
-  font-size: 9;
+  font-weight: normal;
+  font-size: x-small;
   padding-left: 4px;
   max-height: 200px;
   overflow: auto;
@@ -258,12 +258,13 @@
   min-width: 3em;
   padding: .5em;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 10;
+
 }
 .itemtable tr td{
   padding: .2em;
   max-height: 2em;
   color: yellow;
+
 }
 .input-short{
   background-color: #1f2f2f;

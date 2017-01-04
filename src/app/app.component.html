@@ -1,7 +1,13 @@
-<h1>
-  {{title}}
 
-  <a routerLink="/members">members</a>
+<div class="setheight">
+  <ul class="nav navbar-nav">
+    <li class="width20"></li>
+    <li><a [routerLink]="['/']"><button class="btn-nav">Members</button></a></li>
+    <li><a [routerLink]="['/maintenance']"><button class="btn-nav">Maintenance</button></a></li>
 
-</h1>
-<router-outlet></router-outlet>
+  </ul>
+</div>
+<div>
+  <router-outlet></router-outlet>
+</div>
+

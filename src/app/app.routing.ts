@@ -5,7 +5,7 @@ import {MaintenanceComponent} from "./maintenance/maintenance.component";
 
 //todo create some auth routes
 export const AppRoutes: Routes = [
-  { path: 'members', component: MembersComponent },
+  { path: '', component: MembersComponent },
   {path: 'maintenance', component: MaintenanceComponent}
 ];
 
