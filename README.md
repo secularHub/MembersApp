@@ -1,7 +1,12 @@
 # SecularHubMembers
 
 
-# third party 
+#Prerequesites
+First make sure angular-cli is installed!
+npm install -g angular-cli
+
+
+# this is for third party libraries only
 npm install d3 --save
 npm install @types/d3 --save-dev
 
@@ -34,3 +39,18 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 ## Further help
 
 To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+<VirtualHost *:443>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        SSLEngine On
+        # Set the path to SSL certificate
+        # Usage: SSLCertificateFile /path/to/cert.pem
+        SSLCertificateFile /etc/apache2/ssl/ca.crt
+        SSLCertificateKeyFile /etc/apache2/ssl/ca.key
+        ProxyPreserveHost On
+        ProxyPass /var/www/ http://localhost:3035/
+        ProxyPassReverse /var/www/ http://localhost:3035/
+        ServerName localhost
+</VirtualHost>

@@ -22,7 +22,7 @@ export let rules = {
 };
 
 export let confignjs = {
-    hostlocal: 'http://74.208.129.62:3035',
+    hostlocal: 'https://foxjazz.org',
     hostlocalBackup: 'http://localhost:3035',
     hostserver: 'http://74.208.129.62:3035'
 };
