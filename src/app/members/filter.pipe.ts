@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { filter } from 'lodash';
 
 import { Member } from './member';
 
@@ -10,11 +9,22 @@ export class FilterPipe implements PipeTransform {
   transform(mems: Member[], active: boolean,family: boolean, firstName: string, lastName: string): Member[] {
     let newmems = mems;
     if(active) {
-      newmems = filter(mems, {active});
+      let mems2 = new Array<Member>();
+      for (let al of newmems){
+        if (al.active === true)
+          mems2.push(al);
+      }
+      newmems = mems2;
     }
     if(family) {
-      newmems = filter(mems, {family});
+      let mems2 = new Array<Member>();
+      for (let al of newmems){
+        if (al.isFamily === true)
+          mems2.push(al);
+      }
+      newmems = mems2;
     }
+
     if(firstName != null && firstName.length > 0)
     {
       let mems2 = new Array<Member>();
