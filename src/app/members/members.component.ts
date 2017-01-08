@@ -3,7 +3,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Member} from './member';
 import {IPayment } from '../payment/payment'
 import {PaymentComponent} from '../payment/payment.component';
-import {ActivatedRoute, Params, Router}   from '@angular/router';
+import {Router}   from '@angular/router';
 import {MemberNJSService} from "./memberNJS.service";
 
 //import {EmsComponent} from "./ems.component";
@@ -25,7 +25,7 @@ export class MembersComponent implements OnInit {
   member: Member;
   picked: Member;
   memberd: Member;
-
+  showInputs: boolean;
   payments: Array<IPayment>;
   //ems: Array<ExtendedMember>;
   memberlist: Array<Member>;
@@ -63,6 +63,7 @@ export class MembersComponent implements OnInit {
     this.activeFilter = false;
     this.selected = false;
     this.usermode = "normal";
+
     //    this.memberlist = af.database.list('./members');
   }
 
@@ -106,12 +107,19 @@ export class MembersComponent implements OnInit {
       //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
       if (ln < rn) return -1;
       if (ln > rn) return 1; else return 0;
+
+
     });
+    if (this.member._id == null || this.member._id.length === 0)
+      this.member._id = this.member.firstName + this.member.lastName + this.member.email;
+
+    this.membercount = this.memberlist.length;
     this.memservice.putDoc(this.member);
     this.isShowAddNewMember = true;
     this.isShowAddFamily = false;
     this.isShowSubmit = false;
     this.isShowDiscard = false;
+    this.showInputs = false;
     this.usermode = "normal";
 
   }
@@ -157,6 +165,13 @@ export class MembersComponent implements OnInit {
     console.log("emitted from output");
     this.memservice.putDoc(this.member);
   }
+  onPayModified(b: boolean)
+  {
+    if(this.member.index == null) {
+      this.member.index = 0;
+    }
+    this.member.index++;
+  }
   onAddNewMember() {
     this.isShowSubmit = true;
     this.isShowAddNewMember = false;
@@ -165,9 +180,15 @@ export class MembersComponent implements OnInit {
     this.picked = new Member('', false);  //set placeholder
     this.member = new Member('', false);
     this.usermode = 'normal';
-
+    this.showInputs = true;
   }
-
+  isChecked(b: boolean)
+  {
+    if(b)
+      return "Y";
+    else
+      return "N";
+  }
   onDiscardMember() {
     this.btnstyle = "btn-custom";
     this.usermode = 'normal';
@@ -180,6 +201,7 @@ export class MembersComponent implements OnInit {
     else
       this.member = new Member('', false);
     this.selected = false;
+    this.showInputs = false;
   }
 
   private hasChanges(): boolean {
@@ -194,6 +216,10 @@ export class MembersComponent implements OnInit {
     if (!this.hasChanges()) {
       this.btnstyle = "btn-custom";
       this.member = Object.assign({}, al);
+/*      for(let i = 0; i < al.payments.length; i++)
+      {
+        this.member.payments.push(Object.assign({},al.payments[i]));
+      }*/
       this.memberd = al;
       this.picked = al;
       if (this.picked.isFamily === false)
@@ -202,6 +228,7 @@ export class MembersComponent implements OnInit {
       this.payments = this.member.payments;
       this.selected = true;
       this.isShowSubmit = true;
+      this.showInputs = true;
       this.isShowAddFamily = !al.isFamily;
       this.isShowAddNewMember = true;
     }
@@ -211,6 +238,7 @@ export class MembersComponent implements OnInit {
       this.isShowSubmit = true;
       this.isShowAddFamily = false;
       this.isShowAddNewMember = false;
+      this.showInputs = true;
     }
 
 
@@ -223,6 +251,7 @@ export class MembersComponent implements OnInit {
   ngOnInit() {
     let res: string;
     this.isShowAddNewMember = true;
+    this.showInputs = false;
     //Here we do the initial call to get all of the id's from the database.
     //we are making the assumption that the data is in  a format we can use. validation is not yet implemented
 
@@ -244,13 +273,13 @@ export class MembersComponent implements OnInit {
       this.ms.getAllDocs().subscribe(r1 => {
         //this.memberlist = r1;
 
-        for (let em of r1) {
+        /*for (let em of r1) {
           if (em.payments != null)
             em.payments = em.payments.sort((l, r) => {
               if (l.receivedDate < r.receivedDate) return 1;
               if (l.receivedDate > r.receivedDate) return -1; else return 0;
             });
-        }
+        }*/
         this.memberlist = r1.sort((left, right) => {
           let ln: string;
           let rn: string;
@@ -266,12 +295,12 @@ export class MembersComponent implements OnInit {
           if (ln < rn) return -1;
           if (ln > rn) return 1; else return 0;
         });
-
+        this.membercount = this.memberlist.length;
 
       });
       this.member = new Member('', false);
       this.picked = this.member;
-      this.membercount = this.memberlist.length;
+
 
 
     }

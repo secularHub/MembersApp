@@ -4,6 +4,7 @@
 /**
  * Created by fox21 on 12/29/2016.
  */
+
 export let config = {
     test: 'https://74.208.129.62:6984/members/',
     http: 'http://',
@@ -21,8 +22,10 @@ export let rules = {
 
 };
 
+
 export let confignjs = {
     hostlocal: 'https://foxjazz.org',
-    hostlocalBackup: 'http://localhost:3035',
-    hostserver: 'http://74.208.129.62:3035'
+    testing: 'http://foxjazz.org:8080',
+    production: 'https://foxjazz.org',
+    hostlocalBackup: 'just add :8080  and http from https to test on the end'
 };

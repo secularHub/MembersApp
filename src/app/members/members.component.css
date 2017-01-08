@@ -1,4 +1,102 @@
 
+/* this is for the data area that is scrollable */
+.table-container {
+  overflow-y: auto;
+  height: 250px;
+  background: #1d2528;
+  border-spacing: 0;
+  width:100%;
+  display: block;
+  float: left;
+
+}
+.table-container tr:nth-child(even){
+  background-color: #28130f;
+}
+
+/* reposition the divs in the header cells and place in the blank area of the headercontainer */
+.table-container thead {
+  width: 100%;
+  background: #000;
+  color: #c9182d;
+  padding: 2px 2px;
+  /*top: 0;*/
+  display: table;
+  /*margin-left: 1px;*/
+  line-height: normal;
+  width: calc(100% - 16px); /* assuming scrollbar width as 16px */
+
+}
+.table-container tr{
+  /*display: table;*/
+}
+.table-container tbody{
+  overflow-y: auto;
+  height: 250px;
+  padding: 2px 2px;
+  display: table;
+  width: calc(100% - 16px); /* assuming scrollbar width as 16px */
+}
+
+.table-container tr.selected:hover {
+  background-color: #1f2f2f !important;
+  color: #E9DC51;
+  cursor: pointer;
+}
+
+.table-container tr:hover {
+  background-color: #3f5a66 !important;
+  color: #e5ef27;
+}
+/* add a thin border to the left of cells, but not the first */
+/*
+.tablecontainer td + td {
+   border-left:1px solid #eee;
+ }
+*/
+
+/* cell padding and bottom border */
+/*.tablecontainer td, th {
+  border-bottom:1px solid #eee;
+  padding: 2px;
+}*/
+
+/* make the default header height 0 and make text invisible */
+/*
+.tablecontainer table thead th {
+  height: 20px;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 0;
+  visibility: hidden;
+  white-space: nowrap;
+}
+*/
+
+/* prevent the left border from above appearing in first div header */
+
+/* alternate colors for rows */
+
+
+.table-header{
+  height: 20px;
+  width: 100%;
+  border: 1px solid lightblue;
+}
+#table-wrapper {
+  height:150px;
+  overflow:auto;
+  margin-top:20px;
+}
+#table-wrapper table {
+  width:100%;
+}
+#table-wrapper table thead th {
+  height:20px;
+  width:35%;
+  border:1px solid red;
+}
+
 #scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
 #scrolltable th div { position: absolute; margin-top: -20px; }
 #scrolltableskinny { margin-top: 20px; height: 100px; overflow: auto; }
