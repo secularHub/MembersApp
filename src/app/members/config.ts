@@ -16,11 +16,13 @@ export let config = {
     IP: '74.208.129.62'
 
 };
-export let rules = {
-    recuringAmount: 5,
-    yearlyAmount: 45
-
-};
+export let rules = [
+  {TermInMonths: 12,
+    Amount: 45,
+    MembershipType: "Regular"},
+  {TermInMonths: 1, Amount: 5, MembershipType: "Regular"},
+  {TermInMonths: 12, Amount: 75, MembershipType: "Family"}
+];
 
 
 export let confignjs = {
