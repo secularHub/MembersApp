@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {IPayment, Payment} from './payment';
-import {Member} from "../../../prove/src/app/members/member";
+import {Member} from "../members/member";
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
