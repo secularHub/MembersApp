@@ -26,6 +26,7 @@ export class Member {
   Description: string;
   Notes: string;
   isFamily: boolean;
+  hasFamily: boolean;
   //ExtendedMembers: Array<ExtendedMember>;
   payments: Array<IPayment>;
 
