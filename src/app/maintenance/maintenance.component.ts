@@ -79,7 +79,7 @@ export class MaintenanceComponent implements OnInit {
         this.m = res2;
         if (this.m.payments != null && this.m.payments.length > 0) {
           let pay = this.getLastPayment(this.m.payments);
-          if (pay.amount < rules.recuringAmount) {
+          if (pay.amount < rules[0].Amount) {
             this.m.frequency = 1;
             this.m.targetDate = this.addMonths(pay.receivedDate, 1);
             pay.targetDate = this.m.targetDate;
