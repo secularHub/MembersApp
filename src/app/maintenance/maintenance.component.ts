@@ -84,22 +84,20 @@ export class MaintenanceComponent implements OnInit {
       for (let res2 of this.memberlist) {
         this.forloop.push(res2);
         let member = Object.assign({}, res2);
-        if(member.memType == undefined)
-          member.memType = "Not Active";
+//        if(member.memType == undefined)
+//          member.memType = "Not Active";
         if (member.memType === "VIP") {
           member.isActive = true;
         }
         else {
-
           member.isActive = false;
           if (member.payments != null && member.payments.length > 0) {
             let total = 1;
             this.payloop.push(member);
             for (let mypay of member.payments) {
               if(mypay.receivedDate != undefined) {
-                if (mypay.receivedDate > new Date(thist.toISOString())) {
+                if (new Date(mypay.receivedDate) > thist) 
                   total = total + mypay.amount;
-                }
               }
             }
             for (let r of rules) {
@@ -111,8 +109,8 @@ export class MaintenanceComponent implements OnInit {
             }
           }
         }
-        if (member.memType == undefined)
-          member.memType = "Not Active";
+//        if (member.memType === undefined)
+//          member.memType = "Not Active";
         this.ms.putDoc(member);
       }
     });
