@@ -73,70 +73,38 @@ export class MaintenanceComponent implements OnInit {
   private m: Member;
   private reconcile() {
     let tnow = new Date();
+    let thist = this.addMonths(tnow, -12);
     this.ms.getAllDocs().subscribe(r1 => {
       this.memberlist = r1;
       for (let res2 of this.memberlist) {
-        this.m = res2;
-        if (this.m.payments != null && this.m.payments.length > 0) {
-          let pay = this.getLastPayment(this.m.payments);
-          if (pay.amount < rules[0].Amount) {
-            this.m.frequency = 1;
-            this.m.targetDate = this.addMonths(pay.receivedDate, 1);
-            pay.targetDate = this.m.targetDate;
-          }
-          else {
-            this.m.frequency = 12;
-            this.m.targetDate = this.addMonths(pay.receivedDate, 12);
-            pay.targetDate = this.m.targetDate;
-          }
-
-          if (this.m.targetDate > tnow) {
-            this.m.active = true;
-          }
-          else this.m.active = false;
+        let member = Object.assign({}, res2);
+        if (member.memType === "VIP") {
+          member.isActive = true;
         }
         else {
-          this.m.active = false;
-        }
-        this.ms.putDoc(this.m);
-      }
-    });
-  }
-
-
-  private doConvert(){
-    this.ms.getAllDocs().subscribe(r1 => {
-      this.memberlist = r1;
-      for (let res2 of this.memberlist) {
-        let m = new Member(res2.email, false);
-        m.address = res2.address;
-        m._id = res2._id;
-        m.city = res2.city;
-        m.state = res2.state;
-        m.zip = res2.zip;
-        m.payments = new Array<IPayment>();
-        m.email = res2.email;
-        m.firstName = res2.firstName;
-        m.lastName = res2.lastName;
-        if (res2.payments != null && res2.payments.length > 0) {
-          for (let p of res2.payments) {
-            let pay: IPayment;
-            pay = {
-              receivedDate: p.receivedDate,
-              amount: p.amount,
-              type: '',
-              active: false,
-              targetDate: undefined,
-              receivedDateNumeric: 0
-            };
-            m.payments.push(pay);
+          member.isActive = false;
+          if (member.payments != null && member.payments.length > 0) {
+            let total = 1;
+            for (let mypay of member.payments) {
+              if (mypay.receivedDate.toISOString() > thist.toISOString()) {
+                total = total + mypay.amount;
+              }
+            }
+            for (let r of rules) {
+              if (total > r.Amount) {
+                member.isActive = true;
+                member.memType = r.MembershipType;
+              }
+            }
           }
         }
-        this.ms.putDoc(m);
+        if (member.memType == undefined)
+          member.memType = "Not Active";
+        this.ms.putDoc(member);
       }
     });
-
   }
+
   public onUsingTable ( al: Member) {
     if(event.target["id"] === "filter") {
       this.temp = '';

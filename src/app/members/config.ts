@@ -17,11 +17,10 @@ export let config = {
 
 };
 export let rules = [
-  {TermInMonths: 12,
-    Amount: 45,
-    MembershipType: "Regular"},
-  {TermInMonths: 1, Amount: 5, MembershipType: "Regular"},
-  {TermInMonths: 12, Amount: 75, MembershipType: "Family"}
+  {TermInMonths: 0, Amount: 0, MembershipType: "Not Active"},
+  {TermInMonths: 12, Amount: 45, MembershipType: "Regular"},
+  {TermInMonths: 12, Amount: 75, MembershipType: "Family"},
+  {TermInMonths: 12, Amount: 9999, MembershipType: "VIP"},
 ];
 
 

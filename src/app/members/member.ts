@@ -18,7 +18,17 @@ export class Member {
   createdAt: number;
   joinedDate: Date;
   completed: boolean;
-  active: boolean;
+  isActive: boolean;
+  set active(b:boolean){
+    if (b === true) {
+      this.memType="VIP";
+    }
+    else 
+        this.memType="";
+
+    this.isActive=b;
+  }
+  get active(){return this.isActive;}
   frequency: number;
   skills: string;
   durationmonths: number;
@@ -26,7 +36,7 @@ export class Member {
   Description: string;
   Notes: string;
   isFamily: boolean;
-  hasFamily: boolean;
+  memType: string;
   //ExtendedMembers: Array<ExtendedMember>;
   payments: Array<IPayment>;
 
