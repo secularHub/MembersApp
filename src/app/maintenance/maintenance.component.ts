@@ -5,6 +5,7 @@ import {Member} from '../members/member';
 
 import {MemberNJSService} from "../members/memberNJS.service";
 import {rules} from "../members/config";
+import {isNullOrUndefined} from "util";
 
 @Component({
 
@@ -19,6 +20,10 @@ export class MaintenanceComponent implements OnInit {
   //ems: Array<ExtendedMember>;
   memberlist: Array<Member>;
   ms: MemberNJSService;
+  payloop = [];
+  forloop = [];
+  elseloop = [];
+
   temp: string;
   filterName: string;
   constructor(private lms: MemberNJSService){
@@ -77,22 +82,30 @@ export class MaintenanceComponent implements OnInit {
     this.ms.getAllDocs().subscribe(r1 => {
       this.memberlist = r1;
       for (let res2 of this.memberlist) {
+        this.forloop.push(res2);
         let member = Object.assign({}, res2);
+        if(member.memType == undefined)
+          member.memType = "Not Active";
         if (member.memType === "VIP") {
           member.isActive = true;
         }
         else {
+
           member.isActive = false;
           if (member.payments != null && member.payments.length > 0) {
             let total = 1;
+            this.payloop.push(member);
             for (let mypay of member.payments) {
-              if (mypay.receivedDate.toISOString() > thist.toISOString()) {
-                total = total + mypay.amount;
+              if(mypay.receivedDate != undefined) {
+                if (mypay.receivedDate > new Date(thist.toISOString())) {
+                  total = total + mypay.amount;
+                }
               }
             }
             for (let r of rules) {
               if (total > r.Amount) {
                 member.isActive = true;
+                this.elseloop.push(member);
                 member.memType = r.MembershipType;
               }
             }
