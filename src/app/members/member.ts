@@ -19,16 +19,16 @@ export class Member {
   joinedDate: Date;
   completed: boolean;
   isActive: boolean;
-  set active(b:boolean){
+/*  set active(b:boolean){
     if (b === true) {
       this.memType="VIP";
     }
     else 
-        this.memType="";
-
+        this.memType="Regular";
     this.isActive=b;
   }
   get active(){return this.isActive;}
+*/  
   frequency: number;
   skills: string;
   durationmonths: number;
@@ -50,7 +50,7 @@ export class Member {
     // this.key = members.length;
   }
   public delete(){
-    this.active = false;
+    this.isActive = false;
 
   }
 

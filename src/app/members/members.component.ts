@@ -37,9 +37,11 @@ export class MembersComponent implements OnInit {
   isShowAddNewMember: boolean;
   isShowAddFamily: boolean;
   isShowDiscard: boolean;
+  isShowToggleVIP: boolean;
 
   familyFilter: boolean;
   activeFilter: boolean;
+  VIPFilter: boolean;
   firstNameFilter: string;
   lastNameFilter: string;
   selected: boolean;
@@ -116,10 +118,11 @@ export class MembersComponent implements OnInit {
     this.membercount = this.memberlist.length;
     this.memservice.putDoc(this.member);
     this.isShowAddNewMember = true;
-    this.isShowAddFamily = false;
-    this.isShowSubmit = false;
+    this.isShowAddFamily = true;
+    this.isShowSubmit = true;
     this.isShowDiscard = false;
-    this.showInputs = false;
+    this.isShowToggleVIP = true;
+    this.showInputs = true;
     this.usermode = "normal";
 
   }
@@ -146,9 +149,20 @@ export class MembersComponent implements OnInit {
     this.isShowAddNewMember = false;
     this.isShowSubmit = true;
     this.isShowAddFamily = false;
+    this.isShowToggleVIP = true;
     this.usermode = 'normal';
   }
 
+  onToggleVIP() {
+    if (this.member.isActive === false) {
+      this.member.isActive = true;
+      this.member.memType = "VIP"
+    }
+    else {
+      this.member.isActive = false;
+      this.member.memType = "Not Active"
+    }
+  }
   /*
 
 
@@ -177,6 +191,7 @@ export class MembersComponent implements OnInit {
     this.isShowAddNewMember = false;
     this.isShowAddFamily = false;
     this.isShowDiscard = true;
+    this.isShowToggleVIP = true;
     this.picked = new Member('', false);  //set placeholder
     this.member = new Member('', false);
     this.usermode = 'normal';
@@ -196,6 +211,7 @@ export class MembersComponent implements OnInit {
     this.isShowAddFamily = false;
     this.isShowSubmit = false;
     this.isShowDiscard = false;
+    this.isShowToggleVIP = false;
     if (this.picked != null)
       this.member = this.picked;
     else
@@ -215,7 +231,8 @@ export class MembersComponent implements OnInit {
     //add logic to check user's changes
     if (!this.hasChanges()) {
       this.btnstyle = "btn-custom";
-      this.member = Object.assign({}, al);
+      this.ms.getDoc(al._id).subscribe(m => this.member = m);
+/*      this.member = Object.assign({}, al);
 /*      for(let i = 0; i < al.payments.length; i++)
       {
         this.member.payments.push(Object.assign({},al.payments[i]));
@@ -231,6 +248,7 @@ export class MembersComponent implements OnInit {
       this.showInputs = true;
       this.isShowAddFamily = !al.isFamily;
       this.isShowAddNewMember = true;
+      this.isShowToggleVIP = true;
     }
     else{
       this.btnstyle = "btn-red";
@@ -238,6 +256,7 @@ export class MembersComponent implements OnInit {
       this.isShowSubmit = true;
       this.isShowAddFamily = false;
       this.isShowAddNewMember = false;
+      this.isShowToggleVIP = false;
       this.showInputs = true;
     }
 

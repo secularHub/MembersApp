@@ -17,6 +17,8 @@
           <div>
             <label for="selActive">is active</label>
             <input type="checkbox" id="selActive" name="selActive" value="false" class="form-control" [(ngModel)]="activeFilter">
+            <label for="selVIP">is VIP</label>
+            <input type="checkbox" id="selVIP" name="selVIP" value="false" class="form-control" [(ngModel)]="VIPFilter">
           </div>
           <div>
             <label for="selFamily">is family</label>
@@ -63,7 +65,7 @@
                 <th>active</th>
               </tr>
 
-              <tr  *ngFor="let al of (memberlist | asFilter:activeFilter:familyFilter:firstNameFilter:lastNameFilter);" [class.itemselected]="item === selectedItem" (click)="onUsingTable(al)" >
+              <tr  *ngFor="let al of (memberlist | asFilter:activeFilter:familyFilter:VIPFilter:firstNameFilter:lastNameFilter);" [class.itemselected]="item === selectedItem" (click)="onUsingTable(al)" >
 
                 <td> {{al.firstName}} </td>
                 <td> {{al.lastName}} </td>
@@ -73,7 +75,7 @@
                 <td> {{al.address}}</td>
                 <td> {{al.city}} {{al.state}} {{al.zip}}</td>
 -->
-                <td>{{isChecked(al.active)}}</td>
+                <td>{{isChecked(al.isActive)}}</td>
               </tr>
             </tbody>
             </table>
@@ -125,8 +127,8 @@
               <div class="form-inline">
                 <label for="ph">Phone</label>
                 <input [(ngModel)]="member.phone" id="ph" name="phone" type="text" class="form-control input-custom" size="10">
-                <label for="active">Active</label>
-                <input [(ngModel)]="member.active" id="active" name="active" type="checkbox" class="form-control" size="5">
+<!--                <label for="active">Active</label>
+                <input [(ngModel)]="member.active" id="active" name="active" type="checkbox" class="form-control" size="5">-->
                 Family Of: {{member.parentName}}
               </div>
               <div class="form-inline">
@@ -139,6 +141,7 @@
               <button *ngIf="isShowAddNewMember" type="button" class="btn-custom" (click)="onAddNewMember()">Add New Member</button>
               <button *ngIf="isShowDiscard" type="button" class="{{btnstyle}}" (click)="onDiscardMember()">Discard</button>
               <button *ngIf="isShowAddFamily" type="button" class="btn-custom" (click)="onAddFamily()" >Add Family</button>
+              <button *ngIf="isShowToggleVIP" type="button" class="btn-custom" (click)="onToggleVIP()" >Toggle VIP</button>
             </div>
             <!--<label><input type="checkbox" [(ngModel)]="showCompleted" name="memberCompleted"> show completed</label>-->
           </form>
