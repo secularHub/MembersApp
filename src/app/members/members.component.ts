@@ -231,14 +231,17 @@ export class MembersComponent implements OnInit {
     //add logic to check user's changes
     if (!this.hasChanges()) {
       this.btnstyle = "btn-custom";
-      this.ms.getDoc(al._id).subscribe(m => this.member = m);
+      this.ms.getDoc(al._id).subscribe(m => {
+        this.member = Object.assign({}, m);
+        this.picked = m;
+      });
 /*      this.member = Object.assign({}, al);
 /*      for(let i = 0; i < al.payments.length; i++)
       {
         this.member.payments.push(Object.assign({},al.payments[i]));
       }*/
-      this.memberd = al;
-      this.picked = al;
+//      this.memberd = al;
+//      this.picked = al;
       if (this.picked.isFamily === false)
         this.isShowAddFamily = true;
 //        this.ems = this.member.ExtendedMembers;

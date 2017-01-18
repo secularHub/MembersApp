@@ -107,6 +107,8 @@ export class MaintenanceComponent implements OnInit {
                 member.memType = r.MembershipType;
               }
             }
+            if (member.memType === "Not Active")
+              member.isActive = false;
           }
         }
 //        if (member.memType === undefined)
