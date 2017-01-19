@@ -1,11 +1,13 @@
 import { RouterModule, Routes } from '@angular/router';
 import {MembersComponent} from "./members/members.component";
 import {MaintenanceComponent} from "./maintenance/maintenance.component";
+import {LoginComponent} from "./login/login.component";
 
 
 //todo create some auth routes
 export const AppRoutes: Routes = [
-  { path: '', component: MembersComponent },
+  { path: '', component: LoginComponent },
+  { path: 'members', component: MembersComponent },
   {path: 'maintenance', component: MaintenanceComponent}
 ];
 
