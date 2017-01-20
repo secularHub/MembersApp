@@ -22,6 +22,7 @@ export class MembersComponent implements OnInit {
   @Input()
   from: string;
 
+
   member: Member;
   picked: Member;
   memberd: Member;
