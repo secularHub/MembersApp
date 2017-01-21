@@ -30,6 +30,8 @@ export class MembersComponent implements OnInit {
   //ems: Array<ExtendedMember>;
   memberlist: Array<Member>;
   membercount: number;
+  activecount: number;
+  vipcount: number;
 
   router: Router;
   btnstyle:string;
@@ -78,7 +80,6 @@ export class MembersComponent implements OnInit {
   getMember(): Member {
     return this.member;
   }
-
   /*
    getExtended(): Array<ExtendedMember>{
    if(this.ems == null)
@@ -89,9 +90,8 @@ export class MembersComponent implements OnInit {
 
   submitForm() {
     //let m = new Member('',false);
-    //
     this.btnstyle = "btn-custom";
-    this.Delete(this.memberd);  //referenced saved for possible deletes
+//    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
     this.memberlist.push(this.member);
     this.picked = this.member;
     this.memberlist = this.memberlist.sort((left, right) => {
@@ -100,8 +100,8 @@ export class MembersComponent implements OnInit {
       if (left.firstName != null) {
         ln = left.firstName.toLowerCase();
       }
-      else ln = "";
-
+      else
+        ln = "";
       if (right.firstName != null) {
         rn = right.firstName.toLowerCase();
       }
@@ -109,12 +109,9 @@ export class MembersComponent implements OnInit {
       //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
       if (ln < rn) return -1;
       if (ln > rn) return 1; else return 0;
-
-
     });
     if (this.member._id == null || this.member._id.length === 0)
       this.member._id = this.member.firstName + this.member.lastName + this.member.email;
-
     this.membercount = this.memberlist.length;
     this.memservice.putDoc(this.member);
     this.isShowAddNewMember = true;
@@ -124,7 +121,6 @@ export class MembersComponent implements OnInit {
     this.isShowToggleVIP = true;
     this.showInputs = true;
     this.usermode = "normal";
-
   }
 
   Delete(p: Member) {
@@ -133,11 +129,11 @@ export class MembersComponent implements OnInit {
       this.memberlist.splice(index, 1);
     }
   }
-
   /* delMember(i: number) {
    let res: string;
    this.memberlist[i].delete();
    }*/
+
   onAddFamily() {
     this.tempid = this.member._id;
     this.tempName = this.member.firstName + ' ' + this.member.lastName;
@@ -164,28 +160,28 @@ export class MembersComponent implements OnInit {
     }
   }
   /*
-
-
    onEdit() {
    this.usermode = 'screenMember';
    }
-
    onAdd() {
    this.member = new Member('', false);
    this.usermode = 'screenMember';
    }
    */
-  onSave(b: boolean) {
-    console.log("emitted from output");
-    this.memservice.putDoc(this.member);
-  }
-  onPayModified(b: boolean)
-  {
+
+  onSave(b: boolean) { /* don't think this is being used... */
+    //console.log("emitted from output");
+    if (!this.hasChanges())
+      this.memservice.putDoc(this.member);      
+    }
+
+  onPayModified(b: boolean){
     if(this.member.index == null) {
       this.member.index = 0;
     }
     this.member.index++;
   }
+
   onAddNewMember() {
     this.isShowSubmit = true;
     this.isShowAddNewMember = false;
@@ -204,6 +200,7 @@ export class MembersComponent implements OnInit {
     else
       return "N";
   }
+
   onDiscardMember() {
     this.btnstyle = "btn-custom";
     this.usermode = 'normal';
@@ -220,7 +217,7 @@ export class MembersComponent implements OnInit {
     this.showInputs = false;
   }
 
-  private hasChanges(): boolean {
+  private hasChanges(): boolean { /*always returns false ?!?!*/
     if (JSON.stringify(this.member) === JSON.stringify(this.picked))
       return false;
     else
@@ -262,10 +259,7 @@ export class MembersComponent implements OnInit {
       this.isShowToggleVIP = false;
       this.showInputs = true;
     }
-
-
   }
-
   /* ngOnDestroy(){
    localStorage.setItem('members', JSON.stringify(this.memberlist));
    localStorage.setItem('members', JSON.stringify(new Date().getTime()));
@@ -276,10 +270,7 @@ export class MembersComponent implements OnInit {
     this.showInputs = false;
     //Here we do the initial call to get all of the id's from the database.
     //we are making the assumption that the data is in  a format we can use. validation is not yet implemented
-
-
     this.memberlist = new Array<Member>();
-
     if (this.from === 'extended')  //from meanse user is coming from extendedMembers component so we don't have to go out to the server and recollect the data.
     {
       res = localStorage.getItem('members');
@@ -294,7 +285,6 @@ export class MembersComponent implements OnInit {
     if (this.from !== 'extended') {
       this.ms.getAllDocs().subscribe(r1 => {
         //this.memberlist = r1;
-
         /*for (let em of r1) {
           if (em.payments != null)
             em.payments = em.payments.sort((l, r) => {
@@ -318,13 +308,10 @@ export class MembersComponent implements OnInit {
           if (ln > rn) return 1; else return 0;
         });
         this.membercount = this.memberlist.length;
-
+        
       });
       this.member = new Member('', false);
       this.picked = this.member;
-
-
-
     }
   }
 }
