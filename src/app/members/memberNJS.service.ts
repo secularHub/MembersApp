@@ -5,17 +5,25 @@ import { Injectable } from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {Member, } from './member';
-import {config, confignjs} from './config';
+import {Member } from './member';
+import { confignjs} from './config';
+import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/catch';
+
+
 @Injectable()
 export class MemberNJSService
 {
   extractdata: string;
   private http;
-  constructor(private h: Http)
+  jwt: string;
+  decodedJwt: string;
+  response: string;
+  constructor(private h: Http,public authHttp: AuthHttp)
   {
     this.http = h;
+    this.jwt = localStorage.getItem('id_token');
+    //this.decodedJwt = this.jwt && window.jwt_decode(this.jwt);
   }
 
   public getAllDocs(): Observable<Array<Member>>

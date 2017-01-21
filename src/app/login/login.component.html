@@ -1,0 +1,18 @@
+<form (submit)="login($event, username.value, password.value)" #memberForm="ngForm">
+
+  <!--<span [hidden]="member.email.valid" class="badge badge-warning">Required</span>-->
+  <div>
+    <div class="form-inline">
+      <label for="un">User Name</label>
+      <input #username  id="un" name="un" type="text" class="form-control input-custom" size="10">
+    </div>
+    <div class="form-inline">
+      <label for="pw">Password</label>
+      <input #password id="pw" name="pw" type="password" class="form-control input-custom" size="10">
+    </div>
+  </div>
+  <div class="submit">
+    <button  type="submit" class="btn-custom">Login</button>
+  </div>
+  <!--<label><input type="checkbox" [(ngModel)]="showCompleted" name="memberCompleted"> show completed</label>-->
+</form>

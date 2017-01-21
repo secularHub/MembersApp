@@ -9,6 +9,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import {routing} from "./app.routing";
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     FilterPipe,
     PaymentComponent,
     MaintenanceComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,13 @@
 
 <div class="setheight">
-  <ul class="nav navbar-nav">
+  <nav>
+  <ul>
     <li class="width20"></li>
-    <li><a [routerLink]="['/']"><button class="btn-nav">Members</button></a></li>
-    <li><a [routerLink]="['/maintenance']"><button class="btn-nav">Maintenance</button></a></li>
+    <li><a [routerLink]="['/']">Members</a></li>
+    <li><a [routerLink]="['/maintenance']">Maintenance</a></li>
 
   </ul>
+  </nav>
 </div>
 <div>
   <router-outlet></router-outlet>
