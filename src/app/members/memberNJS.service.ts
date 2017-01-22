@@ -17,27 +17,42 @@ export class MemberNJSService
   private http: Http;
   jwt: string;
   decodedJwt: string;
+
+  private options: RequestOptions;
+
   constructor(private h: Http)
   {
     this.http = h;
     this.jwt = localStorage.getItem('id_token');
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    this.options = new RequestOptions( { headers: headers } );
+    this.createAuthorizationHeader(headers);
     /*this.decodedJwt = this.jwt && window.jwt_decode(this.jwt);*/
     //this.decodedJwt = this.jwt && window.jwt_decode(this.jwt);
   }
+  private createAuthorizationHeader(headers: Headers)
+  {
 
+    headers.append('Authorization','JWT' + this.jwt);
+  }
   public getAllDocs(): Observable<Array<Member>>
   {
-    let uri = confignjs.hostlocal + '/couchDataAll';
+    let uri = confignjs.hostlocal + '/couchDataAll?jwt=' + this.jwt;
     return this.http.get(uri)
       .map((res: Response) => res.json());
   }
 
   public getDoc(id: string): Observable<Member> {
     let uri = confignjs.hostlocal + '/couchGet';
-    return this.http.get(uri + '?id=' + id)
+    return this.http.get(uri + '?id=' + id + '?jwt=' + this.jwt)
       .map((res: Response) => res.json());
   }
 
+  public getProtected(id: string): Observable<string>{
+    let uri = confignjs.hostlocal + '/api/protected/random-quote';
+    return this.http.get(uri + '?jwt=' + localStorage.getItem('id_token'))
+      .map((res: Response) => res.json());
+  }
   private handleError (error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;
@@ -51,7 +66,7 @@ export class MemberNJSService
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
-  public testSave2(): Observable<any>{
+  /*public testSave2(): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions( { headers: headers } );
     let uri = confignjs.hostlocal + '/couchSave';
@@ -60,10 +75,10 @@ export class MemberNJSService
 
     return this.http.post(uri, data, options).map(x => console.log(x.json()))
       .catch( this.handleError);
-  }
-  public testSave(){
+  }*/
+  /*public testSave(){
     this.testSave2().subscribe(m => console.log(JSON.stringify(m)));
-  }
+  }*/
   public putDoc(member: Member) {
     let uri = confignjs.hostlocal + '/couchSave';
     this.save(uri,JSON.stringify(member)).subscribe(m => {member._rev = m.rev;});
@@ -71,9 +86,9 @@ export class MemberNJSService
   private save(uri: string,data: string) : Observable<any>{
     // this won't actually work because the StarWars API doesn't
     // is read-only. But it would look like this:
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions( { headers: headers } );
-    return this.http.post(uri, data, options).map(x => x.json());
+
+
+    return this.http.post(uri, data, this.options).map(x => x.json());
 
   }
 

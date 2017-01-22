@@ -173,7 +173,7 @@ export class MembersComponent implements OnInit {
   onSave(b: boolean) { /* don't think this is being used... */
     //console.log("emitted from output");
     if (!this.hasChanges())
-      this.memservice.putDoc(this.member);      
+      this.memservice.putDoc(this.member);
     }
 
   onPayModified(b: boolean){
@@ -266,6 +266,11 @@ export class MembersComponent implements OnInit {
    localStorage.setItem('members', JSON.stringify(new Date().getTime()));
    }*/
   ngOnInit() {
+/*    this.bug = "started:"
+    this.ms.getProtected('test').subscribe(r => {
+      console.log(r);
+      this.bug += r
+    });*/
     let res: string;
     this.isShowAddNewMember = true;
     this.showInputs = false;
@@ -309,7 +314,7 @@ export class MembersComponent implements OnInit {
           if (ln > rn) return 1; else return 0;
         });
         this.membercount = this.memberlist.length;
-        
+
       });
       this.member = new Member('', false);
       this.picked = this.member;
