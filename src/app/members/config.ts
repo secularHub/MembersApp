@@ -29,5 +29,6 @@ export let confignjs = {
     hostlocal: 'https://foxjazz.org',
     testing: 'http://foxjazz.org:8080',
     production: 'https://foxjazz.org',
+    local: 'http://localhost',
     hostlocalBackup: 'just add :8080  and http from https to test on the end'
 };

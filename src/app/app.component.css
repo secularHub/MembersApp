@@ -100,12 +100,12 @@ ul li:hover ul {
 
 nav li{
   display:inline-block;
-  border-bottom:1px solid #935fbf;
+  border-bottom:1px solid #472c5e;
   margin-left:-20px;
 }
 nav a{
   color:#fff;
-  background:#935fbf;
+  background:#472c5e;
   position:relative;
   display:inline-block;
   margin:0 22px;
@@ -118,7 +118,7 @@ nav a:after{
   content:" ";
   position: absolute;
   top:0;
-  width: 23px;
+  width: 25px;
   height: 100%;
   background-color: inherit;
 }
@@ -131,7 +131,7 @@ nav a:after{
   border-radius: 0 12px 0 0;
   transform: skew(24deg);
   right: -13px; /* play with this one to give the LI border ~2px extrusion */
-  border-right: 1px solid #935fbf;
+  border-right: 1px solid #472c5e;
   z-index: 1; /* overlap next element */
 }
 /* LI ACTIVE  */
@@ -139,7 +139,7 @@ nav li.active{
   border-bottom:1px solid #0c0f1d;
 }
 nav li.active a{
-  color:#935fbf;
+  color: #472c5e;
   background: #0c0f1d;
 }
 nav li.active a:before{

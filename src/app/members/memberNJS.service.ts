@@ -7,22 +7,21 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Member } from './member';
 import { confignjs} from './config';
-import { AuthHttp } from 'angular2-jwt';
+//import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/catch';
 
 
 @Injectable()
 export class MemberNJSService
 {
-
-  private http;
+  private http: Http;
   jwt: string;
   decodedJwt: string;
-  constructor(private h: Http,public authHttp: AuthHttp)
+  constructor(private h: Http)
   {
     this.http = h;
     this.jwt = localStorage.getItem('id_token');
-    this.decodedJwt = this.jwt && window.jwt_decode(this.jwt);
+    /*this.decodedJwt = this.jwt && window.jwt_decode(this.jwt);*/
     //this.decodedJwt = this.jwt && window.jwt_decode(this.jwt);
   }
 
@@ -32,11 +31,15 @@ export class MemberNJSService
     return this.http.get(uri)
       .map((res: Response) => res.json());
   }
-  public getDoc(id: string): Observable<Member>{
+
+  public getDoc(id: string): Observable<Member> {
     let uri = confignjs.hostlocal + '/couchGet';
     return this.http.get(uri + '?id=' + id)
-      .map((res: Member) => res);
+      .map((res: Response) => {
+        return res.json();
+      });
   }
+
   private handleError (error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;
@@ -57,7 +60,7 @@ export class MemberNJSService
     let obj = {"testField:": "testVariable"};
     let data = JSON.stringify(obj);
 
-    return this.authHttp.post(uri, data, options).map(x => console.log(x.json()))
+    return this.http.post(uri, data, options).map(x => console.log(x.json()))
       .catch( this.handleError);
   }
   public testSave(){
@@ -72,7 +75,7 @@ export class MemberNJSService
     // is read-only. But it would look like this:
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions( { headers: headers } );
-    return this.authHttp.post(uri, data, options).map(x => x.json());
+    return this.http.post(uri, data, options).map(x => x.json());
 
   }
 

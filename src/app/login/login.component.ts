@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { AuthHttp } from 'angular2-jwt';
+//import { AuthHttp } from 'angular2-jwt';
 import { contentHeaders } from '../common/headers';
 import { confignjs} from '../members/config';
 
@@ -15,18 +15,22 @@ import { confignjs} from '../members/config';
 export class LoginComponent implements OnInit {
 
   constructor(public router: Router,public http: Http) { }
-
+  someData: string;
   login(event, username, password) {
     event.preventDefault();
+    let h = confignjs.hostlocal;
+    this.someData="init:";
     let body = JSON.stringify({ username, password });
-    this.http.post(confignjs.hostlocal + '/sessions/login', body, { headers: contentHeaders })
+    this.http.post(h + '/sessions/login', body, { headers: contentHeaders })
       .subscribe(
         response => {
           localStorage.setItem('id_token', response.json().id_token);
-          this.router.navigate(['members']);
+          this.someData="ok";
+          this.router.navigate(['/members']);
         },
         error => {
-          alert(error.text());
+
+          this.someData = "error: " + error.text();
           console.log(error.text());
         }
       );

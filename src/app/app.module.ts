@@ -10,6 +10,7 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import {routing} from "./app.routing";
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
+//import {AuthHttp} from "angular2-jwt";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing,
+    routing
 
   ],
   providers: [],
