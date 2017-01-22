@@ -93,7 +93,15 @@ export class MembersComponent implements OnInit {
     //let m = new Member('',false);
     this.btnstyle = "btn-custom";
 //    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
-    this.memberlist.push(this.member);
+
+    let found = false;
+    for (let obj of this.memberlist)
+    {
+      if(obj._id === this.member._id)
+        found = true;
+    }
+    if(!found)
+      this.memberlist.push(this.member);
     this.picked = this.member;
     this.memberlist = this.memberlist.sort((left, right) => {
       let ln: string;
