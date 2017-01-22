@@ -321,6 +321,15 @@ export class MembersComponent implements OnInit {
           if (ln < rn) return -1;
           if (ln > rn) return 1; else return 0;
         });
+
+        this.activecount = 0;
+        this.vipcount = 0;
+        for(let o of this.memberlist){
+          if (o.isActive === true)
+            this.activecount += 1;
+          if(o.memType === "VIP")
+            this.vipcount += 1;
+        }
         this.membercount = this.memberlist.length;
 
       });
