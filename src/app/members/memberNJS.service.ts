@@ -44,7 +44,7 @@ export class MemberNJSService
 
   public getDoc(id: string): Observable<Member> {
     let uri = confignjs.hostlocal + '/couchGet';
-    return this.http.get(uri + '?id=' + id + '?jwt=' + this.jwt)
+    return this.http.get(uri + '?id=' + id + '&jwt=' + this.jwt)
       .map((res: Response) => res.json());
   }
 
