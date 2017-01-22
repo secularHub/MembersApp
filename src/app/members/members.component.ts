@@ -31,6 +31,8 @@ export class MembersComponent implements OnInit {
   //ems: Array<ExtendedMember>;
   memberlist: Array<Member>;
   membercount: number;
+  activecount: number;
+  vipcount: number;
 
   router: Router;
   btnstyle:string;
@@ -38,9 +40,11 @@ export class MembersComponent implements OnInit {
   isShowAddNewMember: boolean;
   isShowAddFamily: boolean;
   isShowDiscard: boolean;
+  isShowToggleVIP: boolean;
 
   familyFilter: boolean;
   activeFilter: boolean;
+  VIPFilter: boolean;
   firstNameFilter: string;
   lastNameFilter: string;
   selected: boolean;
@@ -77,7 +81,6 @@ export class MembersComponent implements OnInit {
   getMember(): Member {
     return this.member;
   }
-
   /*
    getExtended(): Array<ExtendedMember>{
    if(this.ems == null)
@@ -88,9 +91,8 @@ export class MembersComponent implements OnInit {
 
   submitForm() {
     //let m = new Member('',false);
-    //
     this.btnstyle = "btn-custom";
-    this.Delete(this.memberd);  //referenced saved for possible deletes
+//    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
     this.memberlist.push(this.member);
     this.picked = this.member;
     this.memberlist = this.memberlist.sort((left, right) => {
@@ -99,8 +101,8 @@ export class MembersComponent implements OnInit {
       if (left.firstName != null) {
         ln = left.firstName.toLowerCase();
       }
-      else ln = "";
-
+      else
+        ln = "";
       if (right.firstName != null) {
         rn = right.firstName.toLowerCase();
       }
@@ -108,21 +110,18 @@ export class MembersComponent implements OnInit {
       //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
       if (ln < rn) return -1;
       if (ln > rn) return 1; else return 0;
-
-
     });
     if (this.member._id == null || this.member._id.length === 0)
       this.member._id = this.member.firstName + this.member.lastName + this.member.email;
-
     this.membercount = this.memberlist.length;
     this.memservice.putDoc(this.member);
     this.isShowAddNewMember = true;
-    this.isShowAddFamily = false;
-    this.isShowSubmit = false;
+    this.isShowAddFamily = true;
+    this.isShowSubmit = true;
     this.isShowDiscard = false;
-    this.showInputs = false;
+    this.isShowToggleVIP = true;
+    this.showInputs = true;
     this.usermode = "normal";
-
   }
 
   Delete(p: Member) {
@@ -131,11 +130,11 @@ export class MembersComponent implements OnInit {
       this.memberlist.splice(index, 1);
     }
   }
-
   /* delMember(i: number) {
    let res: string;
    this.memberlist[i].delete();
    }*/
+
   onAddFamily() {
     this.tempid = this.member._id;
     this.tempName = this.member.firstName + ' ' + this.member.lastName;
@@ -147,37 +146,49 @@ export class MembersComponent implements OnInit {
     this.isShowAddNewMember = false;
     this.isShowSubmit = true;
     this.isShowAddFamily = false;
+    this.isShowToggleVIP = true;
     this.usermode = 'normal';
   }
 
+  onToggleVIP() {
+    if (this.member.isActive === false) {
+      this.member.isActive = true;
+      this.member.memType = "VIP"
+    }
+    else {
+      this.member.isActive = false;
+      this.member.memType = "Not Active"
+    }
+  }
   /*
-
-
    onEdit() {
    this.usermode = 'screenMember';
    }
-
    onAdd() {
    this.member = new Member('', false);
    this.usermode = 'screenMember';
    }
    */
-  onSave(b: boolean) {
-    console.log("emitted from output");
-    this.memservice.putDoc(this.member);
-  }
-  onPayModified(b: boolean)
-  {
+
+  onSave(b: boolean) { /* don't think this is being used... */
+    //console.log("emitted from output");
+    if (!this.hasChanges())
+      this.memservice.putDoc(this.member);      
+    }
+
+  onPayModified(b: boolean){
     if(this.member.index == null) {
       this.member.index = 0;
     }
     this.member.index++;
   }
+
   onAddNewMember() {
     this.isShowSubmit = true;
     this.isShowAddNewMember = false;
     this.isShowAddFamily = false;
     this.isShowDiscard = true;
+    this.isShowToggleVIP = true;
     this.picked = new Member('', false);  //set placeholder
     this.member = new Member('', false);
     this.usermode = 'normal';
@@ -190,6 +201,7 @@ export class MembersComponent implements OnInit {
     else
       return "N";
   }
+
   onDiscardMember() {
     this.btnstyle = "btn-custom";
     this.usermode = 'normal';
@@ -197,6 +209,7 @@ export class MembersComponent implements OnInit {
     this.isShowAddFamily = false;
     this.isShowSubmit = false;
     this.isShowDiscard = false;
+    this.isShowToggleVIP = false;
     if (this.picked != null)
       this.member = this.picked;
     else
@@ -205,7 +218,7 @@ export class MembersComponent implements OnInit {
     this.showInputs = false;
   }
 
-  private hasChanges(): boolean {
+  private hasChanges(): boolean { /*always returns false ?!?!*/
     if (JSON.stringify(this.member) === JSON.stringify(this.picked))
       return false;
     else
@@ -216,13 +229,17 @@ export class MembersComponent implements OnInit {
     //add logic to check user's changes
     if (!this.hasChanges()) {
       this.btnstyle = "btn-custom";
-      this.member = Object.assign({}, al);
+      this.ms.getDoc(al._id).subscribe(m => {
+        this.member = Object.assign({}, m);
+        this.picked = m;
+      });
+/*      this.member = Object.assign({}, al);
 /*      for(let i = 0; i < al.payments.length; i++)
       {
         this.member.payments.push(Object.assign({},al.payments[i]));
       }*/
-      this.memberd = al;
-      this.picked = al;
+//      this.memberd = al;
+//      this.picked = al;
       if (this.picked.isFamily === false)
         this.isShowAddFamily = true;
 //        this.ems = this.member.ExtendedMembers;
@@ -232,6 +249,7 @@ export class MembersComponent implements OnInit {
       this.showInputs = true;
       this.isShowAddFamily = !al.isFamily;
       this.isShowAddNewMember = true;
+      this.isShowToggleVIP = true;
     }
     else{
       this.btnstyle = "btn-red";
@@ -239,12 +257,10 @@ export class MembersComponent implements OnInit {
       this.isShowSubmit = true;
       this.isShowAddFamily = false;
       this.isShowAddNewMember = false;
+      this.isShowToggleVIP = false;
       this.showInputs = true;
     }
-
-
   }
-
   /* ngOnDestroy(){
    localStorage.setItem('members', JSON.stringify(this.memberlist));
    localStorage.setItem('members', JSON.stringify(new Date().getTime()));
@@ -255,10 +271,7 @@ export class MembersComponent implements OnInit {
     this.showInputs = false;
     //Here we do the initial call to get all of the id's from the database.
     //we are making the assumption that the data is in  a format we can use. validation is not yet implemented
-
-
     this.memberlist = new Array<Member>();
-
     if (this.from === 'extended')  //from meanse user is coming from extendedMembers component so we don't have to go out to the server and recollect the data.
     {
       res = localStorage.getItem('members');
@@ -273,7 +286,6 @@ export class MembersComponent implements OnInit {
     if (this.from !== 'extended') {
       this.ms.getAllDocs().subscribe(r1 => {
         //this.memberlist = r1;
-
         /*for (let em of r1) {
           if (em.payments != null)
             em.payments = em.payments.sort((l, r) => {
@@ -297,13 +309,10 @@ export class MembersComponent implements OnInit {
           if (ln > rn) return 1; else return 0;
         });
         this.membercount = this.memberlist.length;
-
+        
       });
       this.member = new Member('', false);
       this.picked = this.member;
-
-
-
     }
   }
 }
