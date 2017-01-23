@@ -34,6 +34,7 @@ export class MembersComponent implements OnInit {
   activecount: number;
   vipcount: number;
 
+  saveResults: string;
   router: Router;
   btnstyle:string;
   isShowSubmit: boolean;
@@ -127,6 +128,13 @@ export class MembersComponent implements OnInit {
       this.member._id = this.member.firstName + this.member.lastName + this.member.email;
     this.membercount = this.memberlist.length;
     this.memservice.putDoc(this.member);
+    this.memservice.getDoc(this.member._id).subscribe(res =>{
+      let doc = res;
+      if(doc._rev === this.member._rev)
+        this.saveResults = "saved success";
+      else
+        this.saveResults = "someone beat you to the save. Please reload the record."
+    });
     this.isShowAddNewMember = true;
     this.isShowAddFamily = true;
     this.isShowSubmit = true;
@@ -134,6 +142,9 @@ export class MembersComponent implements OnInit {
     this.isShowToggleVIP = true;
     this.showInputs = true;
     this.usermode = "normal";
+
+
+
   }
 
   Delete(p: Member) {

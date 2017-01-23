@@ -144,6 +144,10 @@
               <button *ngIf="isShowDiscard" type="button" class="{{btnstyle}}" (click)="onDiscardMember()">Discard</button>
               <button *ngIf="isShowAddFamily" type="button" class="btn-custom" (click)="onAddFamily()" >Add Family</button>
               <button *ngIf="isShowToggleVIP" type="button" class="btn-custom" (click)="onToggleVIP()" >Toggle VIP</button>
+
+            </div>
+            <div>
+              Results: {{saveResults}}
             </div>
             <!--<label><input type="checkbox" [(ngModel)]="showCompleted" name="memberCompleted"> show completed</label>-->
           </form>

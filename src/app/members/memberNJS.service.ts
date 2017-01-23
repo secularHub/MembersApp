@@ -81,7 +81,10 @@ export class MemberNJSService
   }*/
   public putDoc(member: Member) {
     let uri = confignjs.hostlocal + '/couchSave';
-    this.save(uri,JSON.stringify(member)).subscribe(m => {member._rev = m.rev;});
+    this.save(uri,JSON.stringify(member)).subscribe(m => {
+
+      member._rev = m.rev;}
+      );
   };
   private save(uri: string,data: string) : Observable<any>{
     // this won't actually work because the StarWars API doesn't
