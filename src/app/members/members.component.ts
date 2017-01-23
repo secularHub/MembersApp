@@ -89,26 +89,28 @@ export class MembersComponent implements OnInit {
    return this.ems;
    }
    */
-
+  private replaceMemberInList(m: Member)
+  {
+    let temp: Member;
+    for (let obj of this.memberlist)
+    {
+      if(obj._id === this.member._id) {
+        temp = obj;
+      }
+    }
+    this.Delete(temp);
+    this.memberlist.push(m);
+    this.sort();
+  }
   submitForm() {
     //let m = new Member('',false);
     this.btnstyle = "btn-custom";
 //    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
 
-    let found = false;
-    let temp: Member;
-    for (let obj of this.memberlist)
-    {
-      if(obj._id === this.member._id) {
-        found = true;
-        temp = obj;
-      }
-    }
-    this.Delete(temp);
-    this.memberlist.push(this.member);
 
+    this.replaceMemberInList(this.member);
     this.picked = this.member;
-    this.sort();
+
 
     if (this.member._id == null || this.member._id.length === 0)
       this.member._id = this.member.firstName + this.member.lastName + this.member.email;
@@ -223,6 +225,7 @@ export class MembersComponent implements OnInit {
       this.member = this.picked;
     else
       this.member = new Member('', false);
+    this.replaceMemberInList(this.picked);
     this.selected = false;
     this.showInputs = false;
   }
@@ -241,16 +244,7 @@ export class MembersComponent implements OnInit {
       this.ms.getDoc(al._id).subscribe(m => {
         this.member = Object.assign({}, m);
         this.picked = m;
-        let temp: Member;
-        for (let obj of this.memberlist)
-        {
-          if(obj._id === this.member._id) {
-            temp = obj;
-          }
-        }
-        this.Delete(temp);
-        this.memberlist.push(this.member);
-        this.sort();
+        this.replaceMemberInList(this.member);
 
       });
 /*      this.member = Object.assign({}, al);
