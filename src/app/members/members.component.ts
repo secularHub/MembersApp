@@ -108,22 +108,7 @@ export class MembersComponent implements OnInit {
     this.memberlist.push(this.member);
 
     this.picked = this.member;
-    this.memberlist = this.memberlist.sort((left, right) => {
-      let ln: string;
-      let rn: string;
-      if (left.firstName != null && left.lastName != null) {
-        ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
-      }
-      else
-        ln = "";
-      if (right.firstName != null && right.lastName != null) {
-        rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
-      }
-      else rn = "";
-      //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
-      if (ln < rn) return -1;
-      if (ln > rn) return 1; else return 0;
-    });
+    this.sort();
     if (this.member._id == null || this.member._id.length === 0)
       this.member._id = this.member.firstName + this.member.lastName + this.member.email;
     this.membercount = this.memberlist.length;
@@ -264,7 +249,7 @@ export class MembersComponent implements OnInit {
         }
         this.Delete(temp);
         this.memberlist.push(this.member);
-
+        this.sort();
       });
 /*      this.member = Object.assign({}, al);
 /*      for(let i = 0; i < al.payments.length; i++)
@@ -293,6 +278,25 @@ export class MembersComponent implements OnInit {
       this.isShowToggleVIP = false;
       this.showInputs = true;
     }
+  }
+
+  private sort(){
+    this.memberlist = this.memberlist.sort((left, right) => {
+      let ln: string;
+      let rn: string;
+      if (left.firstName != null && left.lastName != null) {
+        ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
+      }
+      else
+        ln = "";
+      if (right.firstName != null && right.lastName != null) {
+        rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
+      }
+      else rn = "";
+      //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
+      if (ln < rn) return -1;
+      if (ln > rn) return 1; else return 0;
+    });
   }
   /* ngOnDestroy(){
    localStorage.setItem('members', JSON.stringify(this.memberlist));
@@ -335,21 +339,7 @@ export class MembersComponent implements OnInit {
               if (l.receivedDate > r.receivedDate) return -1; else return 0;
             });
         }*/
-        this.memberlist = r1.sort((left, right) => {
-          let ln: string;
-          let rn: string;
-          if (left.firstName != null && left.lastName != null) {
-            ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
-          }
-          else ln = "";
-
-          if (right.firstName != null && right.lastName != null) {
-            rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
-          }
-          else rn = "";
-          if (ln < rn) return -1;
-          if (ln > rn) return 1; else return 0;
-        });
+        this.sort();
 
         this.activecount = 0;
         this.vipcount = 0;
