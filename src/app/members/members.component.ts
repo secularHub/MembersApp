@@ -251,6 +251,7 @@ export class MembersComponent implements OnInit {
         this.Delete(temp);
         this.memberlist.push(this.member);
         this.sort();
+
       });
 /*      this.member = Object.assign({}, al);
 /*      for(let i = 0; i < al.payments.length; i++)
@@ -342,7 +343,7 @@ export class MembersComponent implements OnInit {
               if (l.receivedDate > r.receivedDate) return -1; else return 0;
             });
         }*/
-        this.sort();
+        this.memberlist = r1.sort(this.compareMember);
 
         this.activecount = 0;
         this.vipcount = 0;
