@@ -107,12 +107,12 @@ export class MembersComponent implements OnInit {
       let ln: string;
       let rn: string;
       if (left.firstName != null) {
-        ln = left.firstName.toLowerCase();
+        ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
       }
       else
         ln = "";
       if (right.firstName != null) {
-        rn = right.firstName.toLowerCase();
+        rn = right.firstName.toLowerCase() + left.lastName.toLowerCase();
       }
       else rn = "";
       //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
@@ -279,6 +279,10 @@ export class MembersComponent implements OnInit {
       console.log(r);
       this.bug += r
     });*/
+    /*let jwt = localStorage.getItem('id_token');
+    if(jwt.length === 0)
+      this.router.navigate(['']);*/
+
     let res: string;
     this.isShowAddNewMember = true;
     this.showInputs = false;
@@ -310,12 +314,12 @@ export class MembersComponent implements OnInit {
           let ln: string;
           let rn: string;
           if (left.firstName != null) {
-            ln = left.firstName.toLowerCase();
+            ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
           }
           else ln = "";
 
           if (right.firstName != null) {
-            rn = right.firstName.toLowerCase();
+            rn = right.firstName.toLowerCase() + left.lastName.toLowerCase();
           }
           else rn = "";
           if (ln < rn) return -1;

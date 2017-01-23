@@ -96,7 +96,7 @@ export class MaintenanceComponent implements OnInit {
             this.payloop.push(member);
             for (let mypay of member.payments) {
               if(mypay.receivedDate != undefined) {
-                if (new Date(mypay.receivedDate) > thist) 
+                if (new Date(mypay.receivedDate) > thist)
                   total = total + mypay.amount;
               }
             }
@@ -128,6 +128,7 @@ export class MaintenanceComponent implements OnInit {
 
   }
   ngOnInit(){
+    let jwt = localStorage.getItem('id_token');
     this.temp = '';
   }
 }
