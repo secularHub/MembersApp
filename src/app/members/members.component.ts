@@ -244,6 +244,16 @@ export class MembersComponent implements OnInit {
       this.ms.getDoc(al._id).subscribe(m => {
         this.member = Object.assign({}, m);
         this.picked = m;
+        let temp: Member;
+        for (let obj of this.memberlist)
+        {
+          if(obj._id === this.member._id) {
+            temp = obj;
+          }
+        }
+        this.Delete(temp);
+        this.memberlist.push(this.member);
+
       });
 /*      this.member = Object.assign({}, al);
 /*      for(let i = 0; i < al.payments.length; i++)
