@@ -95,13 +95,17 @@ export class MembersComponent implements OnInit {
 //    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
 
     let found = false;
+    let temp: Member;
     for (let obj of this.memberlist)
     {
-      if(obj._id === this.member._id)
+      if(obj._id === this.member._id) {
         found = true;
+        temp = obj;
+      }
     }
-    if(!found)
-      this.memberlist.push(this.member);
+    this.Delete(temp);
+    this.memberlist.push(this.member);
+
     this.picked = this.member;
     this.memberlist = this.memberlist.sort((left, right) => {
       let ln: string;
