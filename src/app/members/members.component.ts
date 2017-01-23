@@ -109,6 +109,7 @@ export class MembersComponent implements OnInit {
 
     this.picked = this.member;
     this.sort();
+
     if (this.member._id == null || this.member._id.length === 0)
       this.member._id = this.member.firstName + this.member.lastName + this.member.email;
     this.membercount = this.memberlist.length;
@@ -281,7 +282,9 @@ export class MembersComponent implements OnInit {
   }
 
   private sort(){
-    this.memberlist = this.memberlist.sort((left, right) => {
+    this.memberlist = this.memberlist.sort(this.compareMember);
+  }
+  private compareMember(left, right){
       let ln: string;
       let rn: string;
       if (left.firstName != null && left.lastName != null) {
@@ -296,8 +299,8 @@ export class MembersComponent implements OnInit {
       //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
       if (ln < rn) return -1;
       if (ln > rn) return 1; else return 0;
-    });
-  }
+    }
+
   /* ngOnDestroy(){
    localStorage.setItem('members', JSON.stringify(this.memberlist));
    localStorage.setItem('members', JSON.stringify(new Date().getTime()));
