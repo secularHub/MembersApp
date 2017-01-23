@@ -106,13 +106,13 @@ export class MembersComponent implements OnInit {
     this.memberlist = this.memberlist.sort((left, right) => {
       let ln: string;
       let rn: string;
-      if (left.firstName != null) {
+      if (left.firstName != null && left.lastName != null) {
         ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
       }
       else
         ln = "";
-      if (right.firstName != null) {
-        rn = right.firstName.toLowerCase() + left.lastName.toLowerCase();
+      if (right.firstName != null && right.lastName != null) {
+        rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
       }
       else rn = "";
       //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
@@ -313,13 +313,13 @@ export class MembersComponent implements OnInit {
         this.memberlist = r1.sort((left, right) => {
           let ln: string;
           let rn: string;
-          if (left.firstName != null) {
+          if (left.firstName != null && left.lastName != null) {
             ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
           }
           else ln = "";
 
-          if (right.firstName != null) {
-            rn = right.firstName.toLowerCase() + left.lastName.toLowerCase();
+          if (right.firstName != null && right.lastName != null) {
+            rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
           }
           else rn = "";
           if (ln < rn) return -1;
