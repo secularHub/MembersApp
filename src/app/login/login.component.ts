@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewChildren } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 //import { AuthHttp } from 'angular2-jwt';
@@ -12,10 +12,12 @@ import { confignjs} from '../members/config';
   styleUrls: ['..//members/members.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
+  @ViewChildren('username') vc;
+  someData: string;
 
   constructor(public router: Router,public http: Http) { }
-  someData: string;
+
   login(event, username, password) {
     event.preventDefault();
     let h = confignjs.hostlocal;
@@ -37,5 +39,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
   }
-
+  ngAfterViewInit() {            
+    this.vc.first.nativeElement.focus();
+  }
 }
