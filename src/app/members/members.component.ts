@@ -180,6 +180,7 @@ export class MembersComponent implements OnInit {
 
   onRefresh() {
     this.saveResults = "";
+    this.ngOnInit();
   }
 
   /*
