@@ -80,7 +80,7 @@ export class MembersComponent implements OnInit {
     return this.payments;
   }
 
-  getMember(): Member {
+  getMember(): Member { /*don't think this is being used */
     return this.member;
   }
   /*
@@ -220,6 +220,7 @@ export class MembersComponent implements OnInit {
     this.usermode = 'normal';
     this.showInputs = true;
   }
+
   isChecked(b: boolean)
   {
     if(b)
@@ -243,8 +244,8 @@ export class MembersComponent implements OnInit {
     else
       this.member = new Member('', false);
     this.replaceMemberInList(this.picked);
-    this.selected = false;
-    this.showInputs = false;
+    this.selected = true;
+    this.showInputs = true;
   }
 
   private hasChanges(): boolean { /*always returns false ?!?!*/
@@ -332,7 +333,7 @@ export class MembersComponent implements OnInit {
 
     let res: string;
     this.isShowAddNewMember = true;
-    this.showInputs = false;
+    this.showInputs = true;
     //Here we do the initial call to get all of the id's from the database.
     //we are making the assumption that the data is in  a format we can use. validation is not yet implemented
     this.memberlist = new Array<Member>();
@@ -372,6 +373,7 @@ export class MembersComponent implements OnInit {
       });
       this.member = new Member('', false);
       this.picked = this.member;
+      
     }
   }
 }
