@@ -42,6 +42,7 @@ export class MembersComponent implements OnInit {
   isShowAddFamily: boolean;
   isShowDiscard: boolean;
   isShowToggleVIP: boolean;
+  isShowRefresh: boolean;
 
   familyFilter: boolean;
   activeFilter: boolean;
@@ -102,6 +103,7 @@ export class MembersComponent implements OnInit {
     this.memberlist.push(m);
     this.sort();
   }
+
   submitForm() {
     //let m = new Member('',false);
     this.btnstyle = "btn-custom";
@@ -119,15 +121,16 @@ export class MembersComponent implements OnInit {
     this.memservice.getDoc(this.member._id).subscribe(res =>{
       let doc = res;
       if(doc._rev === this.member._rev)
-        this.saveResults = "saved success";
+        this.saveResults = "Changes saved successfully!";
       else
-        this.saveResults = "someone beat you to the save. Please reload the record."
+        this.saveResults = "Save Failed! Refresh and try again."
     });
     this.isShowAddNewMember = true;
     this.isShowAddFamily = true;
     this.isShowSubmit = true;
     this.isShowDiscard = false;
     this.isShowToggleVIP = true;
+    this.isShowRefresh = true;
     this.showInputs = true;
     this.usermode = "normal";
 
@@ -147,6 +150,7 @@ export class MembersComponent implements OnInit {
    }*/
 
   onAddFamily() {
+    this.saveResults = "";
     this.tempid = this.member._id;
     this.tempName = this.member.firstName + ' ' + this.member.lastName;
     this.member = new Member('', false);
@@ -158,10 +162,12 @@ export class MembersComponent implements OnInit {
     this.isShowSubmit = true;
     this.isShowAddFamily = false;
     this.isShowToggleVIP = true;
+    this.isShowRefresh = true;
     this.usermode = 'normal';
   }
 
   onToggleVIP() {
+    this.saveResults = "";
     if (this.member.isActive === false) {
       this.member.isActive = true;
       this.member.memType = "VIP"
@@ -171,6 +177,11 @@ export class MembersComponent implements OnInit {
       this.member.memType = "Not Active"
     }
   }
+
+  onRefresh() {
+    this.saveResults = "";
+  }
+
   /*
    onEdit() {
    this.usermode = 'screenMember';
@@ -188,6 +199,7 @@ export class MembersComponent implements OnInit {
     }
 
   onPayModified(b: boolean){
+    this.saveResults = "";
     if(this.member.index == null) {
       this.member.index = 0;
     }
@@ -195,11 +207,13 @@ export class MembersComponent implements OnInit {
   }
 
   onAddNewMember() {
+    this.saveResults = "";
     this.isShowSubmit = true;
     this.isShowAddNewMember = false;
     this.isShowAddFamily = false;
     this.isShowDiscard = true;
     this.isShowToggleVIP = true;
+    this.isShowRefresh = true;
     this.picked = new Member('', false);  //set placeholder
     this.member = new Member('', false);
     this.usermode = 'normal';
@@ -214,6 +228,7 @@ export class MembersComponent implements OnInit {
   }
 
   onDiscardMember() {
+    this.saveResults = "";
     this.btnstyle = "btn-custom";
     this.usermode = 'normal';
     this.isShowAddNewMember = true;
@@ -221,6 +236,7 @@ export class MembersComponent implements OnInit {
     this.isShowSubmit = false;
     this.isShowDiscard = false;
     this.isShowToggleVIP = false;
+    this.isShowRefresh = true;
     if (this.picked != null)
       this.member = this.picked;
     else
@@ -254,6 +270,8 @@ export class MembersComponent implements OnInit {
       }*/
 //      this.memberd = al;
 //      this.picked = al;
+      this.isShowRefresh = true;
+      this.saveResults = "";
       if (this.picked.isFamily === false)
         this.isShowAddFamily = true;
 //        this.ems = this.member.ExtendedMembers;
@@ -300,6 +318,7 @@ export class MembersComponent implements OnInit {
    localStorage.setItem('members', JSON.stringify(this.memberlist));
    localStorage.setItem('members', JSON.stringify(new Date().getTime()));
    }*/
+   
   ngOnInit() {
 /*    this.bug = "started:"
     this.ms.getProtected('test').subscribe(r => {
