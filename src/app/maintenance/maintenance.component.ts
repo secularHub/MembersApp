@@ -2,6 +2,7 @@ import {Component,  OnInit} from '@angular/core';
 
 import { IPayment} from '../payment/payment';
 import {Member} from '../members/member';
+import {Router}   from '@angular/router';
 
 import {MemberNJSService} from "../members/memberNJS.service";
 import {rules} from "../members/config";
@@ -15,6 +16,7 @@ import {isNullOrUndefined} from "util";
   styleUrls: ['./maintenance.component.css']
 })
 export class MaintenanceComponent implements OnInit {
+  router: Router;
   member: Member;
   payments: Array<IPayment>;
   //ems: Array<ExtendedMember>;
@@ -26,7 +28,8 @@ export class MaintenanceComponent implements OnInit {
 
   temp: string;
   filterName: string;
-  constructor(private lms: MemberNJSService){
+  constructor(private r: Router, private lms: MemberNJSService){
+    this.router = r;
     this.ms = lms;
   }
   /*    private addDays(date: Date, days: number): Date {
@@ -129,6 +132,9 @@ export class MaintenanceComponent implements OnInit {
   }
   ngOnInit(){
     let jwt = localStorage.getItem('id_token');
+    if(jwt.length == 0)
+      this.router.navigate(['']);
+      
     this.temp = '';
   }
 }

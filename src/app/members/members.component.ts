@@ -325,9 +325,9 @@ export class MembersComponent implements OnInit {
       console.log(r);
       this.bug += r
     });*/
-    /*let jwt = localStorage.getItem('id_token');
-    if(jwt.length === 0)
-      this.router.navigate(['']);*/
+    let jwt = localStorage.getItem('id_token');
+    if(jwt.length == 0)
+      this.router.navigate(['']);
 
     let res: string;
     this.isShowAddNewMember = true;
