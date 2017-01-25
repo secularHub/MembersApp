@@ -14,7 +14,7 @@ import {Member} from "../members/member";
 export class PaymentComponent implements OnInit {
   constructor(){
     if(this.payments == null || this.payments.length === 0){
-      this.pay =  {receivedDate: new Date(), amount: 0, type: "cash", targetDate: new Date(), active: false, receivedDateNumeric : 0};
+      this.pay =  {receivedDate: new Date(), amount: 0, type: "check", targetDate: new Date(), active: false, receivedDateNumeric : 0};
     }
     else {
       this.pay = this.payments[0];
@@ -118,13 +118,16 @@ export class PaymentComponent implements OnInit {
     this.showInputs = true;
     this.saveResults = "";
     this.OnSaved.emit(true);
+    this.pay =  {receivedDate: new Date(), amount: 0, type: "", targetDate: new Date(), active: false, receivedDateNumeric: 0};
+    this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
   }
 
   onAdd(){
     if ((this.member.firstName == undefined && this.member.lastName == undefined) || this.pay.amount <= 0)
       this.saveResults = "Cannot add payment, invalid member or amount!";
-    else {  
-//      this.pay =  {receivedDate: new Date(), amount: 0, type: "cash", targetDate: new Date(), active: false, receivedDateNumeric: 0};
+    else  
+      this.submitForm();
+/*//      this.pay =  {receivedDate: new Date(), amount: 0, type: "cash", targetDate: new Date(), active: false, receivedDateNumeric: 0};
       this.payments.push(this.pay);
       this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
 
@@ -137,7 +140,7 @@ export class PaymentComponent implements OnInit {
       if (this.lmember.index == null)
         this.lmember.index++;  
       this.OnPayModified.emit(true);
-    }
+    }*/
   }
 
   onDiscard(){
@@ -162,8 +165,14 @@ export class PaymentComponent implements OnInit {
 
 
   }
+
   ngOnInit(){
-//    this.saveResults = "";
+    this.isShowAddNew = true;
+    this.isShowSubmit = false;
+    this.isShowDiscard = false;
+    this.isShowDelete = false;
+    this.showInputs = true;
+    this.saveResults = "";
 
     /*for(let p of this.payments)
      {

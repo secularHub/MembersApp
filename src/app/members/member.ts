@@ -19,6 +19,7 @@ export class Member {
   joinedDate: Date;
   completed: boolean;
   isActive: boolean;
+  needsNametag: boolean;
 /*  set active(b:boolean){
     if (b === true) {
       this.memType="VIP";
@@ -46,6 +47,7 @@ export class Member {
     this.joinedDate = new Date();
     this.payments = new Array<IPayment>();
     this.frequency = 12;  //frequency of payments in months
+    this.needsNametag = true;
     // members.push(this);
     // this.key = members.length;
   }
@@ -65,5 +67,18 @@ export class Member {
     this.zip = '';
     this.completed = false;
   }
+  
+  ToggleVIP() {
+    if (this.isActive === false) {
+      this.isActive = true;
+      this.memType = "VIP"
+    }
+    else {
+      this.isActive = false;
+      this.memType = "Not Active"
+    }
+  }
+
 }
+
 
