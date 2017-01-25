@@ -18,12 +18,13 @@ export class AppComponent implements OnInit{
 
   onLoginSuccess(){
     this.login = false;
+    this.router.navigate(['/#members']);
   }
   routeToMembers(){
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
     {
-      this.router.navigate(['/members']);
+      this.router.navigate(['/#members']);
     }
   }
 
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit{
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
     {
-      this.router.navigate(['/maintenance']);
+      this.router.navigate(['/#maintenance']);
     }
   }
 
@@ -39,7 +40,7 @@ export class AppComponent implements OnInit{
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
     {
-      this.router.navigate(['/nametags']);
+      this.router.navigate(['/#nametags']);
     }
   }
 

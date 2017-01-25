@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           localStorage.setItem('id_token', response.json().id_token);
           this.someData="ok";
           this.OnLoginSuccess.emit(true);
-          this.router.navigate(['/members']);
+
         },
         error => {
 

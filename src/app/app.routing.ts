@@ -8,6 +8,7 @@ import { NametagsComponent } from './nametags/nametags.component';
 export const AppRoutes: Routes = [
   { path: '#login', component: LoginComponent },
   { path: '#members', component: MembersComponent },
+  /*{ path: 'members', component: MembersComponent },*/
   { path: '#maintenance', component: MaintenanceComponent },
   { path: '#nametags', component: NametagsComponent }
 ];

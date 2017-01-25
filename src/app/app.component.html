@@ -1,8 +1,8 @@
 <div *ngIf="login">
   <app-login (OnLoginSuccess)="onLoginSuccess($event)"></app-login>
 </div>
-<div *ngIf="!login">
-  <div class="setheight">
+<div *ngIf="!login" class="setheight">
+
     <!--<nav>
       <ul>
         <li class="width20"></li>
@@ -11,11 +11,9 @@
         <li><button (click)="routeToNameTags()" class="btn-custom">Name Tags</button></li>
       </ul>
     </nav>-->
-    <as-navbar></as-navbar>
+    <as-navbar *ngIf="!login"></as-navbar>
 
-  </div>
-
-  <div class="deal">
-    <router-outlet></router-outlet>
-  </div>
+</div>
+<div class="deal">
+  <router-outlet></router-outlet>
 </div>
