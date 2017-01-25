@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewChildren } from '@angular/core';
+import {Component,EventEmitter, OnInit, AfterViewInit, ViewChild, ViewChildren, Output} from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 //import { AuthHttp } from 'angular2-jwt';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   someData: string;
 
   constructor(public router: Router,public http: Http) { }
-
+  @Output() OnLoginSuccess = new EventEmitter<boolean>();
   login(event, username, password) {
     event.preventDefault();
     let h = confignjs.hostlocal;
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         response => {
           localStorage.setItem('id_token', response.json().id_token);
           this.someData="ok";
+          this.OnLoginSuccess.emit(true);
           this.router.navigate(['/members']);
         },
         error => {
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {
   }
-  ngAfterViewInit() {            
+  ngAfterViewInit() {
     this.vc.first.nativeElement.focus();
   }
 }
