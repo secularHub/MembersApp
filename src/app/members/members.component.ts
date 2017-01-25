@@ -41,12 +41,13 @@ export class MembersComponent implements OnInit {
   isShowAddNewMember: boolean;
   isShowAddFamily: boolean;
   isShowDiscard: boolean;
-  isShowToggleVIP: boolean;
+//  isShowToggleVIP: boolean;
   isShowRefresh: boolean;
 
   familyFilter: boolean;
   activeFilter: boolean;
   VIPFilter: boolean;
+  nametagFilter: boolean;
   firstNameFilter: string;
   lastNameFilter: string;
   selected: boolean;
@@ -80,7 +81,7 @@ export class MembersComponent implements OnInit {
     return this.payments;
   }
 
-  getMember(): Member {
+  getMember(): Member { /*don't think this is being used */
     return this.member;
   }
   /*
@@ -129,7 +130,7 @@ export class MembersComponent implements OnInit {
     this.isShowAddFamily = true;
     this.isShowSubmit = true;
     this.isShowDiscard = false;
-    this.isShowToggleVIP = true;
+//    this.isShowToggleVIP = true;
     this.isShowRefresh = true;
     this.showInputs = true;
     this.usermode = "normal";
@@ -161,21 +162,9 @@ export class MembersComponent implements OnInit {
     this.isShowAddNewMember = false;
     this.isShowSubmit = true;
     this.isShowAddFamily = false;
-    this.isShowToggleVIP = true;
+//    this.isShowToggleVIP = true;
     this.isShowRefresh = true;
     this.usermode = 'normal';
-  }
-
-  onToggleVIP() {
-    this.saveResults = "";
-    if (this.member.isActive === false) {
-      this.member.isActive = true;
-      this.member.memType = "VIP"
-    }
-    else {
-      this.member.isActive = false;
-      this.member.memType = "Not Active"
-    }
   }
 
   onRefresh() {
@@ -193,11 +182,14 @@ export class MembersComponent implements OnInit {
    }
    */
 
-  onSave(b: boolean) { /* don't think this is being used... */
-    //console.log("emitted from output");
-    if (!this.hasChanges())
-      this.memservice.putDoc(this.member);
-    }
+  onSave(b: boolean) {
+      this.submitForm();
+/*    this.memservice.putDoc(this.member);
+    this.ms.getDoc(this.member._id).subscribe(m => {
+     this.member = Object.assign({}, m);
+     this.picked = m;
+    });*/
+  }
 
   onPayModified(b: boolean){
     this.saveResults = "";
@@ -211,15 +203,16 @@ export class MembersComponent implements OnInit {
     this.saveResults = "";
     this.isShowSubmit = true;
     this.isShowAddNewMember = false;
-    this.isShowAddFamily = false;
+    this.isShowAddFamily = true;
     this.isShowDiscard = true;
-    this.isShowToggleVIP = true;
+//    this.isShowToggleVIP = true;
     this.isShowRefresh = true;
     this.picked = new Member('', false);  //set placeholder
     this.member = new Member('', false);
     this.usermode = 'normal';
     this.showInputs = true;
   }
+
   isChecked(b: boolean)
   {
     if(b)
@@ -234,17 +227,20 @@ export class MembersComponent implements OnInit {
     this.usermode = 'normal';
     this.isShowAddNewMember = true;
     this.isShowAddFamily = false;
-    this.isShowSubmit = false;
-    this.isShowDiscard = false;
-    this.isShowToggleVIP = false;
+    this.isShowSubmit = true;
+    this.isShowDiscard = true;
+//    this.isShowToggleVIP = true;
     this.isShowRefresh = true;
-    if (this.picked != null)
+    this.selected = true;
+    this.showInputs = true;
+    if (this.picked != null) {
       this.member = this.picked;
-    else
-      this.member = new Member('', false);
-    this.replaceMemberInList(this.picked);
-    this.selected = false;
-    this.showInputs = false;
+      this.ms.getDoc(this.member._id).subscribe(m => {
+        this.member = Object.assign({}, m);
+        this.picked = m;
+        this.replaceMemberInList(this.picked);
+      });  
+    }
   }
 
   private hasChanges(): boolean { /*always returns false ?!?!*/
@@ -282,7 +278,7 @@ export class MembersComponent implements OnInit {
       this.showInputs = true;
       this.isShowAddFamily = !al.isFamily;
       this.isShowAddNewMember = true;
-      this.isShowToggleVIP = true;
+//      this.isShowToggleVIP = true;
     }
     else{
       this.btnstyle = "btn-red";
@@ -290,7 +286,7 @@ export class MembersComponent implements OnInit {
       this.isShowSubmit = true;
       this.isShowAddFamily = false;
       this.isShowAddNewMember = false;
-      this.isShowToggleVIP = false;
+//      this.isShowToggleVIP = false;
       this.showInputs = true;
     }
   }
@@ -298,6 +294,7 @@ export class MembersComponent implements OnInit {
   private sort(){
     this.memberlist = this.memberlist.sort(this.compareMember);
   }
+
   private compareMember(left, right){
       let ln: string;
       let rn: string;
@@ -321,18 +318,13 @@ export class MembersComponent implements OnInit {
    }*/
    
   ngOnInit() {
-/*    this.bug = "started:"
-    this.ms.getProtected('test').subscribe(r => {
-      console.log(r);
-      this.bug += r
-    });*/
     let jwt = localStorage.getItem('id_token');
     if(jwt.length == 0)
       this.router.navigate(['']);
 
     let res: string;
-    this.isShowAddNewMember = true;
-    this.showInputs = false;
+//    this.isShowAddNewMember = false;
+//    this.showInputs = true;
     //Here we do the initial call to get all of the id's from the database.
     //we are making the assumption that the data is in  a format we can use. validation is not yet implemented
     this.memberlist = new Array<Member>();
@@ -372,6 +364,8 @@ export class MembersComponent implements OnInit {
       });
       this.member = new Member('', false);
       this.picked = this.member;
+      this.onAddNewMember();
+      
     }
   }
 }
