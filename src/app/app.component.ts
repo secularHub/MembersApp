@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css', './members/members.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
   constructor(public router: Router) { this.login = true;}
 
@@ -46,6 +46,7 @@ export class AppComponent {
   ngOnInit(){
     this.title ='Secular Hub Members';
     localStorage.setItem('id_token', '');
+    this.router.navigate(['/#login']);
   }
 
 }
