@@ -41,7 +41,7 @@ export class MembersComponent implements OnInit {
   isShowAddNewMember: boolean;
   isShowAddFamily: boolean;
   isShowDiscard: boolean;
-//  isShowToggleVIP: boolean;
+  isShowToggleVIP: boolean;
   isShowRefresh: boolean;
 
   familyFilter: boolean;
@@ -110,10 +110,8 @@ export class MembersComponent implements OnInit {
     this.btnstyle = "btn-custom";
 //    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
 
-
     this.replaceMemberInList(this.member);
     this.picked = this.member;
-
 
     if (this.member._id == null || this.member._id.length === 0)
       this.member._id = this.member.firstName + this.member.lastName + this.member.email;
@@ -130,13 +128,10 @@ export class MembersComponent implements OnInit {
     this.isShowAddFamily = true;
     this.isShowSubmit = true;
     this.isShowDiscard = false;
-//    this.isShowToggleVIP = true;
+    this.isShowToggleVIP = true;
     this.isShowRefresh = true;
     this.showInputs = true;
     this.usermode = "normal";
-
-
-
   }
 
   Delete(p: Member) {
@@ -162,7 +157,7 @@ export class MembersComponent implements OnInit {
     this.isShowAddNewMember = false;
     this.isShowSubmit = true;
     this.isShowAddFamily = false;
-//    this.isShowToggleVIP = true;
+    this.isShowToggleVIP = true;
     this.isShowRefresh = true;
     this.usermode = 'normal';
   }
@@ -203,9 +198,9 @@ export class MembersComponent implements OnInit {
     this.saveResults = "";
     this.isShowSubmit = true;
     this.isShowAddNewMember = false;
-    this.isShowAddFamily = true;
+    this.isShowAddFamily = false;
     this.isShowDiscard = true;
-//    this.isShowToggleVIP = true;
+    this.isShowToggleVIP = true;
     this.isShowRefresh = true;
     this.picked = new Member('', false);  //set placeholder
     this.member = new Member('', false);
@@ -225,11 +220,11 @@ export class MembersComponent implements OnInit {
     this.saveResults = "";
     this.btnstyle = "btn-custom";
     this.usermode = 'normal';
-    this.isShowAddNewMember = true;
+    this.isShowAddNewMember = false;
     this.isShowAddFamily = false;
     this.isShowSubmit = true;
     this.isShowDiscard = true;
-//    this.isShowToggleVIP = true;
+    this.isShowToggleVIP = true;
     this.isShowRefresh = true;
     this.selected = true;
     this.showInputs = true;
@@ -278,7 +273,7 @@ export class MembersComponent implements OnInit {
       this.showInputs = true;
       this.isShowAddFamily = !al.isFamily;
       this.isShowAddNewMember = true;
-//      this.isShowToggleVIP = true;
+      this.isShowToggleVIP = true;
     }
     else{
       this.btnstyle = "btn-red";
@@ -286,7 +281,7 @@ export class MembersComponent implements OnInit {
       this.isShowSubmit = true;
       this.isShowAddFamily = false;
       this.isShowAddNewMember = false;
-//      this.isShowToggleVIP = false;
+      this.isShowToggleVIP = false;
       this.showInputs = true;
     }
   }
