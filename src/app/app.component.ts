@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
 
   onLoginSuccess(){
     this.login = false;
-    this.router.navigate(['/#members']);
+    this.router.navigate(['/members']);
   }
   routeToMembers(){
     this.jwt = localStorage.getItem('id_token');
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this.title ='Secular Hub Members';
     localStorage.setItem('id_token', '');
-    this.router.navigate(['/#login']);
+    this.router.navigate(['/login']);
   }
 
 }
