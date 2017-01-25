@@ -10,6 +10,7 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import {routing} from "./app.routing";
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
+import { NametagsComponent } from './nametags/nametags.component';
 //import {AuthHttp} from "angular2-jwt";
 
 
@@ -21,7 +22,8 @@ import { LoginComponent } from './login/login.component';
     PaymentComponent,
     MaintenanceComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    NametagsComponent
   ],
   imports: [
     BrowserModule,

@@ -11,9 +11,11 @@ import {Router} from "@angular/router";
 export class AppComponent {
 
   constructor(public router: Router) { }
+
   title: string;
   login: false;
   jwt: string;
+
   routeToMembers(){
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
@@ -21,6 +23,7 @@ export class AppComponent {
       this.router.navigate(['/members']);
     }
   }
+
   routeToMaintenance(){
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
@@ -28,6 +31,15 @@ export class AppComponent {
       this.router.navigate(['/maintenance']);
     }
   }
+
+  routeToNameTags(){
+    this.jwt = localStorage.getItem('id_token');
+    if(this.jwt.length > 0)
+    {
+      this.router.navigate(['/nametags']);
+    }
+  }
+  
   ngOnInit(){
     this.title ='Secular Hub Members';
     localStorage.setItem('id_token', '');

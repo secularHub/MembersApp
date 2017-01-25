@@ -1,0 +1,90 @@
+<div *ngIf="!isShowPreview" class="panel">
+
+  <div class="panel-body">
+    <button *ngIf="!isShowPreview" type="button" class="btn-custom" (click)="onPreview()" >Preview</button>
+    <div class="row">
+      <div class="col-md-4">
+          <div>
+            <h3>Name Tags</h3>
+          </div>
+      </div>
+      <div class="col-md-8">
+        <div>
+          <table class="table-container">
+            <thead>
+              <tr>
+                <th>first name</th>
+                <th>last name</th>
+                <th>phone</th>
+                <th>email</th>
+                <th>active</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- <tr  *ngFor="let al of (memberlist | asFilter:activeFilter:familyFilter:VIPFilter:firstNameFilter:lastNameFilter);" [class.itemselected]="item === selectedItem" (click)="onUsingTable(al)" > -->
+              <tr  *ngFor="let al of memberlist;" [class.itemselected]="item === selectedItem" (click)="onClickTable(al)" >
+                <td> {{al.firstName}} </td>
+                <td> {{al.lastName}} </td>
+                <td> {{al.phone}} </td>
+                <td> {{al.email}} </td>
+                <td> {{ toYN(al.isActive) }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div *ngIf="isShowPreview" class="panel nametags-previewpage">
+  <div class="panel-body nametags-previewpage">
+
+    <!-- TODO: float button to upleft so it takes no space-->
+    <button type="button" class="btn-custom" (click)="onExitPreview()" >Exit Preview</button>
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="nametags-tagcontainer">
+          <div class="nametags-tagbox">
+            <div class="nametags-tag">
+              <div class="nametags-firstname">
+                Zed
+              </div>
+              <div class="nametags-lastname">
+                Zilby
+              </div>
+              <div class="nametags-image">
+                <img class="nametags-image" [src]="logoUrl"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="nametags-tagcontainer">
+          <div class="nametags-tagbox">
+            <div class="nametags-tag">
+              <div class="nametags-firstname">
+                Zeda
+              </div>
+              <div class="nametags-lastname">
+                Zetler
+              </div>
+              <div class="nametags-image">
+                <img class="nametags-image" [src]="logoUrl"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>
