@@ -31,7 +31,8 @@ export class FilterPipe implements PipeTransform {
           mems2.push(al);
       }
       newmems = mems2;
-    }    if(nametag) {
+    }
+    if(nametag) {
       let mems2 = new Array<Member>();
       for (let al of newmems){
         if (al.needsNametag === true)

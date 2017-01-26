@@ -97,10 +97,6 @@
   border:1px solid red;
 }
 
-#scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
-#scrolltable th div { position: absolute; margin-top: -20px; }
-#scrolltableskinny { margin-top: 20px; height: 100px; overflow: auto; }
-#scrolltableskinny th div { position: absolute; margin-top: -20px; }
 h3{
   background-color: #1d2528;
 }

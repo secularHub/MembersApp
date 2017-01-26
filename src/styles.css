@@ -116,3 +116,10 @@
   background-image: linear-gradient(to bottom, #000000, #111111);
   text-decoration: none;
 }
+
+/* Table styles */
+
+#scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
+#scrolltable th div { position: absolute; margin-top: -20px; }
+#scrolltableskinny { margin-top: 20px; height: 250px; overflow: auto; }
+#scrolltableskinny th div { position: absolute; margin-top: -20px; }
