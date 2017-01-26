@@ -2,6 +2,7 @@
 
   <!-- Main page -->
 <div *ngIf="!isPreview" class="nametags-panel panel" [ngClass]="{'panel': !isPreview }">
+  <div class="setheight no-print"></div>
   <div class="nametags-panel-body panel-body" [ngClass]="{'panel-body': !isPreview }">
     <button type="button" class="btn-custom nametags-cornered" (click)="setPreview(true);" >Preview</button>
     <div class="row">
@@ -48,9 +49,112 @@
 
   <div class="nametags-page">
 
-    <div class="nametags-left">
-      <div class="Xnametags-tagcontainer">
-        <div class="Xnametags-tagbox">
+    <div class="nametags-table">
+      <div class="nametags-row">
+        <div class="nametags-cell">
+          <div class="tag1 nametags-tag">
+            <div class="nametags-firstname">
+              Zed
+            </div>
+            <div class="nametags-lastname">
+              Zilby
+            </div>
+            <div class="nametags-logo-container">
+              <img class="nametags-logo" [src]="logoUrl"/>
+            </div>
+          </div>
+        </div>
+        <div class="nametags-cell">
+          <div class="tag2 nametags-tag">
+            <div class="nametags-firstname">
+              Honeyblossom
+            </div>
+            <div class="nametags-lastname">
+              Zomi-Freaktastic
+            </div>
+            <div class="nametags-logo-container">
+              <img class="nametags-logo" [src]="logoUrl"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nametags-row"tr>
+        <div class="nametags-cell">
+          <div class="tag3 nametags-tag">
+            <div class="nametags-firstname">
+              Ooo. Long Longoooo
+            </div>
+            <div class="nametags-lastname">
+              Forkulator
+            </div>
+            <div class="nametags-logo-container">
+              <img class="nametags-logo" [src]="logoUrl"/>
+            </div>
+          </div>
+        </div>
+        <div class="nametags-cell">
+          <div class="tag4 nametags-tag">
+            <div class="nametags-firstname">
+              Ooo. Long Longoooo
+            </div>
+            <div class="nametags-lastname">
+              Perkinator Z
+            </div>
+            <div class="nametags-logo-container">
+              <img class="nametags-logo" [src]="logoUrl"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nametags-row">
+        <div class="nametags-cell">
+          <div class="tag5 nametags-tag">
+            <div class="nametags-firstname">
+              Blinglie
+            </div>
+            <div class="nametags-lastname">
+              Richardson
+            </div>
+            <div class="nametags-logo-container">
+              <img class="nametags-logo" [src]="logoUrl"/>
+            </div>
+          </div>
+        </div>
+        <div class="nametags-cell">
+          <div class="tag6 nametags-tag">
+            <div class="nametags-firstname">
+              Thomas
+            </div>
+            <div class="nametags-lastname">
+              Thompson
+            </div>
+            <div class="nametags-logo-container">
+              <img class="nametags-logo" [src]="logoUrl"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--
+    <div class="nametags-table">
+      <div id="div1" class="nametags-tag nametags-table-cell">
+      <div id="div2" class="nametags-tag nametags-table-cell">
+    </div>
+    <div class="nametags-table">
+      <div id="div3" class="nametags-tag nametags-table-cell">
+      <div id="div4" class="nametags-tag nametags-table-cell">
+    </div>    
+    <div class="Xnametags-table">
+      <div id="div5" class="nametags-tag nametags-table-cell">
+      <div id="div6" class="nametags-tag nametags-table-cell">
+    </div>
+-->
+
+<!--
+    <div class="nametags-table">
+      <div class="nametags-row">
+        <div class="nametags-cell">
           <div class="nametags-tag">
             <div class="nametags-firstname">
               Zed
@@ -64,11 +168,9 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="nametags-right">
-      <div class="Xnametags-tagcontainer">
-        <div class="Xnametags-tagbox">
+      <div class="nametags-row">
+        <div class="nametags-cell">
           <div class="nametags-tag">
             <div class="nametags-firstname">
               Zeda
@@ -82,7 +184,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </div> --><!-- table -->
 
-</div>
+  </div> <!-- nametags-page -->
+
+</div> <!-- nametags-previewpage -->
