@@ -1,5 +1,6 @@
 
-<div class="setheight">
+
+<div class="setheight deal" *ngIf="!isMenuHidden" >
   <nav>
     <ul>
       <li class="width20"></li>
@@ -10,7 +11,7 @@
   </nav>
   <!--<as-navbar></as-navbar>-->
 </div>
-<div class="deal">
+<div class="deal" [ngClass]="{'deal': !isMenuHidden}">
   <router-outlet></router-outlet>
 </div>
 

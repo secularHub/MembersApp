@@ -15,6 +15,11 @@ export class AppComponent {
   title: string;
   login: false;
   jwt: string;
+  isMenuHidden: boolean = false;
+
+  public setMenuHidden(value: boolean) {
+    this.isMenuHidden = value;
+  }
 
   routeToMembers(){
     this.jwt = localStorage.getItem('id_token');

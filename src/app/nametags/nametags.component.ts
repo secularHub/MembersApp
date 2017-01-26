@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Member} from '../members/member';
 import {Router}   from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-nametags',
@@ -10,15 +11,17 @@ import {Router}   from '@angular/router';
 export class NametagsComponent implements OnInit {
 
   router: Router;
+  app: AppComponent;
   
   memberlist: Array<Member>;
   member: Member;
 
-  isShowPreview: boolean = false;
+  isPreview: boolean = false;
   logoUrl: string = "/assets/images/cropped-faceboook-logo-whole-hub-e1454810467184.png";
 
-  constructor(private r: Router) {
+  constructor(private r: Router, private a: AppComponent) {
     this.router = r;
+    this.app = a;
   }
 
   ngOnInit() {
@@ -26,21 +29,33 @@ export class NametagsComponent implements OnInit {
 
     this.populateMemberListWithSampleData();
 
-    this.isShowPreview = false;
+    this.setPreview(false);
+  }
+
+  ngOnDestroy() {
+    this.setPreview(false);
+  }
+
+  /* Use this method to change isPreview.  DO NOT change this.isValue directly. */
+  setPreview(value: boolean) {
+    //if (value !== this.isPreview) {
+      this.isPreview = value;
+      this.app.setMenuHidden(this.isPreview);
+    //}
+  }
+
+  onPreview() {
+    this.setPreview(true);
+  }
+
+  onExitPreview() {
+    this.setPreview(false);
   }
 
   navigateToRootWhenNotLoggedIn() {
     let jwt = localStorage.getItem('id_token');
     if(jwt.length == 0)
       this.router.navigate(['']);
-  }
-
-  onPreview() {
-    this.isShowPreview = true;
-  }
-
-  onExitPreview() {
-    this.isShowPreview = false;
   }
 
   private populateMemberListWithSampleData(){

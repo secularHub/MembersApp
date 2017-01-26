@@ -1,50 +1,177 @@
 /* -------------------------------------*/
 /* NEW STUFF SPECIFICALLY FOR NAMETAGES */
 
+/* Overriding global data */
+body {
+  background-color: white;
+  margin: 0px;
+  padding: 0px;
+  border: 0px solid black;
+}
+
+/* --- --- --- --- --- --- */
+/* OLD STUFF STILL IN USE */
+
+.panel-body{
+  background-color: #1d2528;
+  color: lightblue;
+}
+
+/* --- --- --- --- --- --- */
+
+@page {
+  size: letter portrait;
+  margin: 1.0in 0.23in 1.0in 0.23in;
+}
+
+@media print
+{    
+  .no-print, .no-print *
+  {
+    display: none !important;
+  }
+}
+
+.nametags-table {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+.nametags-tr {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+.nametags-td {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+.nametags-cornered {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+}
+.nametags-page {
+  page-break-before: always;
+  background-color: white;
+}
 .nametags-previewpage { 
-  background-color: dimgray; 
+  /* background-color: white; */
+}
+.nametags-left {
+  display: inline;
+}
+.nametags-right {
+  display: block;
 }
 .nametags-tagcontainer { 
-  display: table;
-  background-color: green; 
+  /* display: table; */
+  /*background-color: orange; */
+  border: 0px solid peachpuff; 
 }
 .nametags-tagbox { 
-  background-color: lightblue;
-  display: table-cell; 
-  vertical-align:middle;
+  /*background-color: orange;*/
+  /*display: table-cell; */
+  vertical-align: middle;
+  border: 0px solid red; 
 }
 .nametags-tag { 
-  background-color: white;
-  margin-left:auto; 
-  margin-right: auto; 
+  background-color: lightblue;
+  margin: 0; 
+  border-width: 0;
+  padding: 0.25in;
+  width: 3.5in;
+  height: 2.5in;
+  border: 0px solid black;  
 }
 .nametags-firstname {
-  font-size: 20px;
+  font-size: 0.5in;
   color: black;
   text-align: center;
+  border: 0px solid black;  
 }
 .nametags-lastname {
   color: black;
-  font-size: 18px;
+  font-size: 0.5in;
+  text-align: center;
+  border: 0px solid black;  
+}
+.nametags-logo-container {
+  vertical-align: middle;
   text-align: center;
 }
-.nametags-image { 
-  height: 100px; 
-  width: 100px; 
+.nametags-logo { 
+  height: 1.0in; 
+  width:  1.0in;
+  vertical-align: middle;
+  text-align: center;
+  border: 3px solid peachpuff;
 }
-.nametags-logo {
-  height: 100px;
-  width: 100px;
-  background-image: url("assets/images/cropped-faceboook-logo-whole-hub-e1454810467184.png");
-  background-repeat: no-repeat;
-  background-position: left top;
-  padding-top:10px;
-  margin-bottom:20px;
-}
-
-/* changed */
 
 /* -------------------------------------*/
+/* The following MIGHT be needed ??? -- probably not */
+
+/*
+.visible {
+  display: block
+}
+.hidden {
+  display: none
+}
+[hidden] {
+  display: none;
+}
+.deal{
+  background-color: #1d2528;
+  color: lightgrey;
+}
+.badge:hover {
+  background-color: orangered;
+  cursor: pointer;
+}
+.list-options {
+  vertical-align: middle;
+  display: inline-block;
+}
+[hidden] {
+  display: none;
+}
+.form-control{
+  background-color: #1d2528;
+  color: lightblue;
+}
+.form-group{
+  background-color: #1d2528;
+  color: lightblue;
+}
+.form-inline{
+  background-color: #1d2528;
+  color: lightblue;
+}
+*/
+/* green: */
+/*
+.ng-valid[required] {
+  border-left: 5px solid #42A948; 
+}
+*/
+/* orange: */
+/*.ng-invalid:not(form) {
+  border-left: 5px solid orange; 
+}
+*/
+
+/* -------------------------------------*/
+/* TRASH -- BELOW THIS POINT */
+
+/* this fix is needed for IE7- :  *display: inline */
+/*
+.horizontal li {
+  display: inline-block;
+  zoom: 1;
+  *display: inline; 
+}
 
 #scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
 #scrolltable th div { position: absolute; margin-top: -20px; }
@@ -134,49 +261,12 @@
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
 }
-.deal{
-  background-color: #1d2528;
-  color: lightgrey;
-}
 .submit {
   background-color: #1d2528;
   color: lightgreen;
   font-size: large;
   min-height: 20px;
   min-width: 50px;
-}
-.badge:hover {
-  background-color: orangered;
-  cursor: pointer;
-}
-.list-options {
-  vertical-align: middle;
-  display: inline-block;
-}
-[hidden] {
-  display: none;
-}
-.ng-valid[required] {
-  border-left: 5px solid #42A948; /* green */
-}
-.ng-invalid:not(form) {
-  border-left: 5px solid orange; /* orange */
-}
-.form-control{
-  background-color: #1d2528;
-  color: lightblue;
-}
-.panel-body{
-  background-color: #1d2528;
-  color: lightblue;
-}
-.form-group{
-  background-color: #1d2528;
-  color: lightblue;
-}
-.form-inline{
-  background-color: #1d2528;
-  color: lightblue;
 }
 
 .clred {
@@ -356,11 +446,7 @@
   left: .1em;
 }
 
-.horizontal li {
-  display: inline-block;
-  zoom: 1;
-  *display: inline; /* this fix is needed for IE7- */
-}
+
 .bomtext{
   margin-left: 5px;
   color: #a8af87;
@@ -717,3 +803,5 @@ img.imager {
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
+
+*/
