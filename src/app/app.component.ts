@@ -8,12 +8,12 @@ import {Router} from "@angular/router";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css', './members/members.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) { this.login = true;}
 
   title: string;
-  login: false;
+  login: boolean;
   jwt: string;
   isMenuHidden: boolean = false;
 
@@ -21,11 +21,15 @@ export class AppComponent {
     this.isMenuHidden = value;
   }
 
+  onLoginSuccess(){
+    this.login = false;
+    this.router.navigate(['/members']);
+  }
   routeToMembers(){
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
     {
-      this.router.navigate(['/members']);
+      this.router.navigate(['/#members']);
     }
   }
 
@@ -33,7 +37,7 @@ export class AppComponent {
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
     {
-      this.router.navigate(['/maintenance']);
+      this.router.navigate(['/#maintenance']);
     }
   }
 
@@ -41,13 +45,14 @@ export class AppComponent {
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
     {
-      this.router.navigate(['/nametags']);
+      this.router.navigate(['/#nametags']);
     }
   }
-  
+
   ngOnInit(){
     this.title ='Secular Hub Members';
     localStorage.setItem('id_token', '');
+    this.router.navigate(['/login']);
   }
 
 }

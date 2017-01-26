@@ -1,17 +1,19 @@
-
-
-<div class="setheight deal" *ngIf="!isMenuHidden" >
-  <nav>
-    <ul>
-      <li class="width20"></li>
-      <li><button (click)="routeToMembers()" class="btn-custom">Members</button></li>
-      <li><button (click)="routeToMaintenance()" class="btn-custom">Maintenance</button></li>
-      <li><button (click)="routeToNameTags()" class="btn-custom">Name Tags</button></li>
-    </ul>
-  </nav>
-  <!--<as-navbar></as-navbar>-->
+<div *ngIf="login">
+  <app-login (OnLoginSuccess)="onLoginSuccess($event)"></app-login>
 </div>
-<div class="deal" [ngClass]="{'deal': !isMenuHidden}">
+<div *ngIf="!login" class="setheight">
+
+    <!--<nav>
+      <ul>
+        <li class="width20"></li>
+        <li><button (click)="routeToMembers()" class="btn-custom">Members</button></li>
+        <li><button (click)="routeToMaintenance()" class="btn-custom">Maintenance</button></li>
+        <li><button (click)="routeToNameTags()" class="btn-custom">Name Tags</button></li>
+      </ul>
+    </nav>-->
+    <as-navbar *ngIf="!login"></as-navbar>
+
+</div>
+<div class="deal">
   <router-outlet></router-outlet>
 </div>
-

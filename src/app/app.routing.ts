@@ -6,8 +6,9 @@ import { NametagsComponent } from './nametags/nametags.component';
 
 //todo create some auth routes
 export const AppRoutes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'members', component: MembersComponent },
+  /*{ path: 'members', component: MembersComponent },*/
   { path: 'maintenance', component: MaintenanceComponent },
   { path: 'nametags', component: NametagsComponent }
 ];
