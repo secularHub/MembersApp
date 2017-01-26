@@ -1,7 +1,7 @@
 <div *ngIf="login">
   <app-login (OnLoginSuccess)="onLoginSuccess($event)"></app-login>
 </div>
-<div *ngIf="!login" class="setheight">
+<div *ngIf="!(login||isMenuHidden)" class="setheight">
 
     <!--<nav>
       <ul>
