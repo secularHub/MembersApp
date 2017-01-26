@@ -6,6 +6,11 @@
   height: 38px;
 }
 
+.form-inline{
+  background-color: #1d2528;
+  color: lightblue;
+}
+
 .form-control {
   background-color: #1d2528;
   color: lightblue;

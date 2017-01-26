@@ -6,7 +6,7 @@ import { Member } from './member';
   name: 'asFilter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(mems: Member[], active: boolean,family: boolean, nametag: boolean, firstName: string, lastName: string): Member[] {
+  transform(mems: Member[], active: boolean, family: boolean, VIP: boolean, nametag: boolean, firstName: string, lastName: string): Member[] {
     let newmems = mems;
     if(active) {
       let mems2 = new Array<Member>();
@@ -24,7 +24,14 @@ export class FilterPipe implements PipeTransform {
       }
       newmems = mems2;
     }
-    if(nametag) {
+    if(VIP) {
+      let mems2 = new Array<Member>();
+      for (let al of newmems){
+        if (al.memType === "VIP")
+          mems2.push(al);
+      }
+      newmems = mems2;
+    }    if(nametag) {
       let mems2 = new Array<Member>();
       for (let al of newmems){
         if (al.needsNametag === true)
