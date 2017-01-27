@@ -60,25 +60,25 @@
     <p>&nbsp;</p>
     <p class="nametags-sliderlabel">Top Margin</p>
     <p class="nametags-sliderlabel">
-      <button type="button" class="" (click)="incTop(-0.1);" >up</button>
+      <button type="button" class="glyphicon glyphicon-triangle-top" (click)="incTop(-0.1);" ></button>
       <input id="Top_Slider" class="nametags-slidervalue" [(ngModel)]="topSlider" (change)="topSliderChange($event)"/>
-      <button type="button" class="" (click)="incTop(0.1);" >down</button>
+      <button type="button" class="glyphicon glyphicon-triangle-bottom" (click)="incTop(0.1);" ></button>
     </p>
       
     <p>&nbsp;</p>
     <p class="nametags-sliderlabel">Left Margin</p>
     <p class="nametags-sliderlabel">
-      <button type="button" class="" (click)="incLeft(-0.1);" >left</button>
+      <button type="button" class="glyphicon glyphicon-triangle-left" (click)="incLeft(-0.1);" ></button>
       <input id="Left_Slider" class="nametags-slidervalue" [(ngModel)]="leftSlider" (change)="leftSliderChange($event)"/>
-      <button type="button" class="" (click)="incLeft(0.1);" >right</button>
+      <button type="button" class="glyphicon glyphicon-triangle-right" (click)="incLeft(0.1);" ></button>
     </p>
 
     <p>&nbsp;</p>
     <p class="nametags-sliderlabel">Nudge Up &amp; Down</p>
     <p class="nametags-sliderlabel">
-      <button type="button" class="" (click)="incNudge(-0.1);" >up</button>
+      <button type="button" class="glyphicon glyphicon-triangle-top" (click)="incNudge(-0.1);" ></button>
       <input id="Nudge_Slider" class="nametags-slidervalue" [(ngModel)]="nudgeSlider" (change)="nudgeSliderChange($event)"/>
-      <button type="button" class="" (click)="incNudge(0.1);" >down</button>
+      <button type="button" class="glyphicon glyphicon-triangle-bottom" (click)="incNudge(0.1);" ></button>
     </p>
     <!--
     <ng2-slider min="-2" max="+2" value="0"
