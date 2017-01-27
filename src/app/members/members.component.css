@@ -2,7 +2,7 @@
 /* this is for the data area that is scrollable */
 .table-container {
   overflow-y: auto;
-  height: 250px;
+  height: 221px;
   background: #1d2528;
   border-spacing: 0;
   width:100%;
@@ -32,7 +32,7 @@
 }
 .table-container tbody{
   overflow-y: auto;
-  height: 250px;
+  height: 221px;
   padding: 2px 2px;
   display: table;
   width: calc(100% - 16px); /* assuming scrollbar width as 16px */

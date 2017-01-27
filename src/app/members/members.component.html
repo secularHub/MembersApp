@@ -144,8 +144,8 @@
               </div>
             <div class="submit">
               <button *ngIf="isShowSubmit" type="submit" class="{{btnstyle}}">Save</button>
-              <button *ngIf="isShowAddNewMember" type="button" class="btn-custom" (click)="onAddNewMember()">Add New Member</button>
               <button *ngIf="isShowDiscard" type="button" class="{{btnstyle}}" (click)="onDiscardMember()">Discard</button>
+              <button *ngIf="isShowAddNewMember" type="button" class="btn-custom" (click)="onAddNewMember()">Add New Member</button>
               <button *ngIf="isShowAddFamily" type="button" class="btn-custom" (click)="onAddFamily()" >Add Family</button>
               <button *ngIf="isShowToggleVIP" type="button" class="btn-custom" (click)="onToggleVIP()" >Toggle VIP</button>
             </div>

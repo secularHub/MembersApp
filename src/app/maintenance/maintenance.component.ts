@@ -39,7 +39,7 @@ export class MaintenanceComponent implements OnInit {
    console.log(date);
    return date;
    }*/
-  private addMonths (date, count):Date {
+  public addMonths (date, count):Date {
     if(date == null)
       return new Date();
     let nd: Date;
