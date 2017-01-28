@@ -38,6 +38,7 @@
           </div>
           <div class="submit">
             <button *ngIf="isShowRefresh" type="button" class="btn-custom" (click)="onRefresh()" >Refresh</button>
+            <button *ngIf="isShowAddNewMember" type="button" class="btn-custom" (click)="onAddNewMember()">Add New Member</button>
           </div>
         </div>
       </div>
@@ -145,7 +146,6 @@
             <div class="submit">
               <button *ngIf="isShowSubmit" type="submit" class="{{btnstyle}}">Save</button>
               <button *ngIf="isShowDiscard" type="button" class="{{btnstyle}}" (click)="onDiscardMember()">Discard</button>
-              <button *ngIf="isShowAddNewMember" type="button" class="btn-custom" (click)="onAddNewMember()">Add New Member</button>
               <button *ngIf="isShowAddFamily" type="button" class="btn-custom" (click)="onAddFamily()" >Add Family</button>
               <button *ngIf="isShowToggleVIP" type="button" class="btn-custom" (click)="onToggleVIP()" >Toggle VIP</button>
             </div>
@@ -158,7 +158,8 @@
       </div>
 
       <div class="col-md-6">
-        <as-payment *ngIf="selected" [member]="getMember()" (OnPayModified)="onPayModified($event)"    (OnSaved)="onSave($event)"></as-payment>
+<!--        <as-payment *ngIf="selected" [member]="getMember()" (OnPayModified)="onPayModified($event)"    (OnSaved)="onSave($event)"></as-payment>-->
+        <as-payment [member]="getMember()" (OnPayModified)="onPayModified($event)" (OnResponse)="onResponse($event)"    (OnSaved)="onSave($event)"></as-payment>
       </div>
 
     </div>

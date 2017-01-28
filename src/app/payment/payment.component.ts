@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {IPayment, Payment} from './payment';
 import {Member} from "../members/member";
-//import {MemberNJSService} from "../members/memberNJS.service";
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
@@ -10,21 +9,17 @@ import {Member} from "../members/member";
 
   selector: 'as-payment',
   templateUrl: './payment.component.html',
-//  providers: [MemberNJSService],
   styleUrls: ['./payment.component.css']
 })
 
 export class PaymentComponent implements OnInit {
   constructor(){
-//    this.btnstyle = "btn-custom";
     if(this.payments == null || this.payments.length === 0){
       this.pay =  {receivedDate: new Date(), amount: 0, type: "check", targetDate: new Date(), active: false, receivedDateNumeric : 0};
     }
     else {
       this.pay = this.payments[0];
     }
-    this.showInputs = true;
-    this.showList = true;
     this.isShowAddNew = false;
     this.isShowDelete = false;
     this.isShowSubmit = true;
@@ -38,8 +33,8 @@ export class PaymentComponent implements OnInit {
   set member(m: Member){
     let p = m.payments;
     this.lmember = m;
-/*    this.showInputs = true;
-    this.isShowAddNew = true;
+    this.pay =  {receivedDate: new Date(), amount: 0, type: "check", targetDate: new Date(), active: false, receivedDateNumeric : 0};
+/*    this.isShowAddNew = true;
     this.isShowDelete = false;
     this.isShowSubmit = false;
     this.isShowDiscard = false;*/
@@ -53,6 +48,7 @@ export class PaymentComponent implements OnInit {
   get member(): Member{
     return this.lmember;
   }
+  @Output() OnResponse = new EventEmitter<string>();
   @Output() OnSaved = new EventEmitter<boolean>();
   @Output() OnPayModified = new EventEmitter<boolean>();
   lmember: Member;
@@ -71,7 +67,6 @@ export class PaymentComponent implements OnInit {
   datetry: any;
   usermode: string;
   private pmts: Array<IPayment>;
-//  private memservice: MemberNJSService;
  
   set humanDate(e){
     let ee = e.split('/');
@@ -95,16 +90,14 @@ export class PaymentComponent implements OnInit {
         this.isShowSubmit = true;
         this.isShowDiscard = true;
         this.isShowDelete = false;
-        this.showInputs = true;
         this.saveResults = "";
         this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
         this.OnSaved.emit(true);
 /* Need to actually save the payment here */        
 //        if (this.pmts != null && this.pmts.length > 0)
-        this.showList = true;
         this.saveResults = "Payment saved successfully!";
-
       }
+     this.OnResponse.emit(this.saveResults);  
   }
 
   Delete(p: Payment){
@@ -120,7 +113,7 @@ export class PaymentComponent implements OnInit {
     this.isShowSubmit = true;
     this.isShowDiscard = true;
     this.isShowDelete = false;
-    this.showInputs = true;
+//    this.showInputs = true;
     this.saveResults = "";
     this.OnSaved.emit(true);
     this.pay =  {receivedDate: new Date(), amount: 0, type: "", targetDate: new Date(), active: false, receivedDateNumeric: 0};
@@ -147,7 +140,6 @@ export class PaymentComponent implements OnInit {
       this.isShowSubmit = false;
       this.isShowDiscard = true;
       this.isShowDelete = false;
-      this.showInputs = true;
       this.saveResults = "";
       if (this.lmember.index == null)
         this.lmember.index++;
@@ -156,20 +148,16 @@ export class PaymentComponent implements OnInit {
 
   onDiscard(){
     this.saveResults = "";
-    this.showInputs = true;
     this.isShowAddNew = false;
     this.isShowSubmit = true;
     this.isShowDiscard = true;
     this.isShowDelete = false;
-    this.pay.receivedDate = new Date();
-    this.pay.amount = 0;
-    this.pay.type = "check";
+    this.pay =  {receivedDate: new Date(), amount: 0, type: "check", targetDate: new Date(), active: false, receivedDateNumeric : 0};
   }
 
   public onPaymentTable(pay :IPayment){
     this.pay = pay;
     this.saveResults = "";
-    this.showInputs = true;
     this.isShowAddNew = false;
     this.isShowSubmit = true;
     this.isShowDiscard = false;
@@ -184,7 +172,8 @@ export class PaymentComponent implements OnInit {
 //    this.isShowSubmit = true;
 //    this.isShowDiscard = true;
 //    this.isShowDelete = false;
-//    this.showInputs = true;
+    this.showInputs = true;
+    this.showList = true;
 //    this.saveResults = "";
 
     /*for(let p of this.payments)

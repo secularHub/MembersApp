@@ -39,28 +39,6 @@ export class MaintenanceComponent implements OnInit {
    console.log(date);
    return date;
    }*/
-  public addMonths (date, count):Date {
-    if(date == null)
-      return new Date();
-    let nd: Date;
-    if (date && count) {
-      nd = new Date(date);
-
-      if(count === 12) {
-        nd.setFullYear(nd.getFullYear() + 1);
-      }
-      else {
-        if(nd.getMonth() === 11)
-        {
-          nd.setMonth(0,1);
-          nd.setFullYear(nd.getFullYear() + 1);
-        }
-        nd.setMonth(nd.getMonth() + count, 1);
-      }
-
-    }
-    return nd;
-  }
   getLastPayment(ps: Array<IPayment>) : IPayment
   {
     let last : IPayment;
@@ -81,7 +59,7 @@ export class MaintenanceComponent implements OnInit {
   private m: Member;
   private reconcile() {
     let tnow = new Date();
-    let thist = this.addMonths(tnow, -12);
+    let thist = this.ms.addMonths(tnow, -12);
     this.ms.getAllDocs().subscribe(r1 => {
       this.memberlist = r1;
       for (let res2 of this.memberlist) {
