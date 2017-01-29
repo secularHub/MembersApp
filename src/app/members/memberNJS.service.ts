@@ -94,6 +94,28 @@ export class MemberNJSService
     return this.http.post(uri, data, this.options).map(x => x.json());
 
   }
+  public addMonths (date, count):Date {
+    if(date == null)
+      return new Date();
+    let nd: Date;
+    if (date && count) {
+      nd = new Date(date);
+
+      if(count === 12) {
+        nd.setFullYear(nd.getFullYear() + 1);
+      }
+      else {
+        if(nd.getMonth() === 11)
+        {
+          nd.setMonth(0,1);
+          nd.setFullYear(nd.getFullYear() + 1);
+        }
+        nd.setMonth(nd.getMonth() + count, 1);
+      }
+
+    }
+    return nd;
+  }
 
 
 }

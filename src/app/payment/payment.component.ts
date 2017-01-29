@@ -11,6 +11,7 @@ import {Member} from "../members/member";
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
+
 export class PaymentComponent implements OnInit {
   constructor(){
     if(this.payments == null || this.payments.length === 0){
@@ -19,12 +20,10 @@ export class PaymentComponent implements OnInit {
     else {
       this.pay = this.payments[0];
     }
-    this.showInputs = true;
-    this.showList = true;
     this.isShowAddNew = false;
     this.isShowDelete = false;
-    this.isShowSubmit = false;
-    this.isShowDiscard = false;
+    this.isShowSubmit = true;
+    this.isShowDiscard = true;
 
   }
   //todo add setter for members
@@ -34,11 +33,11 @@ export class PaymentComponent implements OnInit {
   set member(m: Member){
     let p = m.payments;
     this.lmember = m;
-    this.showInputs = true;
-    this.isShowAddNew = true;
+    this.pay =  {receivedDate: new Date(), amount: 0, type: "check", targetDate: new Date(), active: false, receivedDateNumeric : 0};
+/*    this.isShowAddNew = true;
     this.isShowDelete = false;
     this.isShowSubmit = false;
-    this.isShowDiscard = false;
+    this.isShowDiscard = false;*/
     if(p != null && p.length > 0) {
       this.showList = true;
       this.pmts = p.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
@@ -49,6 +48,7 @@ export class PaymentComponent implements OnInit {
   get member(): Member{
     return this.lmember;
   }
+  @Output() OnResponse = new EventEmitter<string>();
   @Output() OnSaved = new EventEmitter<boolean>();
   @Output() OnPayModified = new EventEmitter<boolean>();
   lmember: Member;
@@ -67,7 +67,7 @@ export class PaymentComponent implements OnInit {
   datetry: any;
   usermode: string;
   private pmts: Array<IPayment>;
-
+ 
   set humanDate(e){
     let ee = e.split('/');
     let d = new Date(Date.UTC(Number(ee[0]), Number(ee[1])-1, Number(ee[2])));
@@ -84,22 +84,20 @@ export class PaymentComponent implements OnInit {
       /*this.Delete(this.payd);  //referenced saved for possible deletes
       this.payments.push(this.pay);*/
       if (this.pay.amount <= 0)
-        this.saveResults = "Cannot add payment, invalid amount!";
+        this.saveResults = "Invalid amount! Cannot add payment.";
       else {
-        this.isShowAddNew = true;
-        this.isShowSubmit = false;
-        this.isShowDiscard = false;
+        this.isShowAddNew = false;
+        this.isShowSubmit = true;
+        this.isShowDiscard = true;
         this.isShowDelete = false;
-        this.showInputs = true;
         this.saveResults = "";
         this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
         this.OnSaved.emit(true);
 /* Need to actually save the payment here */        
 //        if (this.pmts != null && this.pmts.length > 0)
-        this.showList = true;
         this.saveResults = "Payment saved successfully!";
-
       }
+     this.OnResponse.emit(this.saveResults);  
   }
 
   Delete(p: Payment){
@@ -111,55 +109,58 @@ export class PaymentComponent implements OnInit {
 
   onDelete(){
     this.Delete(this.pay);
-    this.isShowAddNew = true;
-    this.isShowSubmit = false;
-    this.isShowDiscard = false;
+    this.isShowAddNew = false;
+    this.isShowSubmit = true;
+    this.isShowDiscard = true;
     this.isShowDelete = false;
-    this.showInputs = true;
+//    this.showInputs = true;
     this.saveResults = "";
     this.OnSaved.emit(true);
     this.pay =  {receivedDate: new Date(), amount: 0, type: "", targetDate: new Date(), active: false, receivedDateNumeric: 0};
     this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
   }
 
-  onAdd(){
+  onAdd(){ /*Not being used at the moment */
     if ((this.member.firstName == undefined && this.member.lastName == undefined) || this.pay.amount <= 0)
-      this.saveResults = "Cannot add payment, invalid member or amount!";
+      this.saveResults = "Invalid member or amount! Cannot add payment";
     else  
-      this.submitForm();
-/*//      this.pay =  {receivedDate: new Date(), amount: 0, type: "cash", targetDate: new Date(), active: false, receivedDateNumeric: 0};
+//      this.submitForm();
+//      this.pay =  {receivedDate: new Date(), amount: 0, type: "cash", targetDate: new Date(), active: false, receivedDateNumeric: 0};
       this.payments.push(this.pay);
       this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
-
-      this.isShowAddNew = false;
-      this.isShowSubmit = true;
+/*      this.memservice.putDoc(this.member);
+      this.memservice.getDoc(this.member._id).subscribe(res =>{
+        let doc = res;
+        if(doc._rev === this.member._rev)
+          this.saveResults = "Changes saved successfully!";
+        else
+          this.saveResults = "Save Failed! Refresh and try again."
+      });*/
+      this.isShowAddNew = true;
+      this.isShowSubmit = false;
       this.isShowDiscard = true;
       this.isShowDelete = false;
-      this.showInputs = true;
       this.saveResults = "";
       if (this.lmember.index == null)
-        this.lmember.index++;  
+        this.lmember.index++;
       this.OnPayModified.emit(true);
-    }*/
-  }
+    }
 
   onDiscard(){
     this.saveResults = "";
-    this.showInputs = true;
-    this.isShowAddNew = true;
-    this.isShowSubmit = false;
-    this.isShowDiscard = false;
+    this.isShowAddNew = false;
+    this.isShowSubmit = true;
+    this.isShowDiscard = true;
     this.isShowDelete = false;
-
-
+    this.pay =  {receivedDate: new Date(), amount: 0, type: "check", targetDate: new Date(), active: false, receivedDateNumeric : 0};
   }
+
   public onPaymentTable(pay :IPayment){
     this.pay = pay;
     this.saveResults = "";
-    this.showInputs = true;
-    this.isShowAddNew = true;
+    this.isShowAddNew = false;
     this.isShowSubmit = true;
-    this.isShowDiscard = true;
+    this.isShowDiscard = false;
     this.isShowDelete = true;
     this.OnPayModified.emit(true);
 
@@ -167,12 +168,13 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.isShowAddNew = true;
-    this.isShowSubmit = false;
-    this.isShowDiscard = false;
-    this.isShowDelete = false;
+//    this.isShowAddNew = true;
+//    this.isShowSubmit = true;
+//    this.isShowDiscard = true;
+//    this.isShowDelete = false;
     this.showInputs = true;
-    this.saveResults = "";
+    this.showList = true;
+//    this.saveResults = "";
 
     /*for(let p of this.payments)
      {
@@ -187,7 +189,7 @@ export class PaymentComponent implements OnInit {
      let d = new Date(p.receivedDate.valueOf());
      p.receivedDateString = d.toISOString();
      }
-     */
+     */   
   }
 }
 

@@ -6,7 +6,7 @@ import { Member } from './member';
   name: 'asFilter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(mems: Member[], active: boolean,family: boolean, VIP: boolean, nametag: boolean, firstName: string, lastName: string): Member[] {
+  transform(mems: Member[], active: boolean, family: boolean, VIP: boolean, nametag: boolean, firstName: string, lastName: string): Member[] {
     let newmems = mems;
     if(active) {
       let mems2 = new Array<Member>();

@@ -6,6 +6,11 @@
   height: 38px;
 }
 
+.form-inline{
+  background-color: #1d2528;
+  color: lightblue;
+}
+
 .form-control {
   background-color: #1d2528;
   color: lightblue;
@@ -111,3 +116,10 @@
   background-image: linear-gradient(to bottom, #000000, #111111);
   text-decoration: none;
 }
+
+/* Table styles */
+
+#scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
+#scrolltable th div { position: absolute; margin-top: -20px; }
+#scrolltableskinny { margin-top: 20px; height: 240px; overflow: auto; }
+#scrolltableskinny th div { position: absolute; margin-top: -20px; }
