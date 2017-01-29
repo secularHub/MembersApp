@@ -182,17 +182,15 @@ export class MembersComponent implements OnInit {
   }
 
   onToggleVIP() {
-    if (this.member.isActive === false) {
+    if (this.member.memType != "VIP") {
       this.member.isActive = true;
       this.member.memType = "VIP";
     }
-    else { /* DF: This isn't working!!! */
+    else { 
       let tnow = new Date();
       let thist = this.memservice.addMonths(tnow, -12);
-      this.member.isActive = false;
       if (this.member.payments != null) {
         let total = 1;
-            this.maintservice.payloop.push(this.member);
         for (let mypay of this.member.payments) {
           if(mypay.receivedDate != undefined) {
             if (new Date(mypay.receivedDate) > thist)
@@ -201,13 +199,13 @@ export class MembersComponent implements OnInit {
         }
         for (let r of rules) {
            if (total > r.Amount) {
-             this.member.isActive = true;
-                this.maintservice.elseloop.push(this.member);
              this.member.memType = r.MembershipType;
           }
-         }
-         if (this.member.memType === "Not Active")
+        }
+        if (this.member.memType === "Not Active")
           this.member.isActive = false;
+        else
+          this.member.isActive = true;
       }
       else {
         this.member.memType = "Not Active";
@@ -287,7 +285,7 @@ export class MembersComponent implements OnInit {
     }*/
   }
 
-  private hasChanges(): boolean { /*always returns false ?!?!*/
+  private hasChanges(): boolean { /*always returns false ?!?! Not sure this is working...*/
     if (JSON.stringify(this.member) === JSON.stringify(this.picked))
       return false;
     else
