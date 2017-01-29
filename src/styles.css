@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Classes */
+body{
+  background-color: #1d2528;
+  color: lightblue;
+}
+
+
 
 .setheight {
   height: 38px;
