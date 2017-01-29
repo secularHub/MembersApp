@@ -66,31 +66,21 @@ export class MemberNJSService
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
-  /*public testSave2(): Observable<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions( { headers: headers } );
-    let uri = confignjs.hostlocal + '/couchSave';
-    let obj = {"testField:": "testVariable"};
-    let data = JSON.stringify(obj);
 
-    return this.http.post(uri, data, options).map(x => console.log(x.json()))
-      .catch( this.handleError);
-  }*/
-  /*public testSave(){
-    this.testSave2().subscribe(m => console.log(JSON.stringify(m)));
-  }*/
   public putDoc(member: Member) {
-    let uri = confignjs.hostlocal + '/couchSave';
-    this.save(uri,JSON.stringify(member)).subscribe(m => {
-
+    this.save(JSON.stringify(member)).subscribe(m => {
       member._rev = m.rev;}
       );
   };
-  private save(uri: string,data: string) : Observable<any>{
+  public saveMember(data: Member) : Observable<any>{
+    let uri = confignjs.hostlocal + '/couchSave';
+    return this.http.post(uri, JSON.stringify(data), this.options).map(x => x.json());
+  }
+  private save(data: string) : Observable<any>{
     // this won't actually work because the StarWars API doesn't
     // is read-only. But it would look like this:
 
-
+    let uri = confignjs.hostlocal + '/couchSave';
     return this.http.post(uri, data, this.options).map(x => x.json());
 
   }

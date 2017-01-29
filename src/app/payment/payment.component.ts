@@ -29,7 +29,7 @@ export class PaymentComponent implements OnInit {
   //todo add setter for members
 
   @Input('member')
-  
+
   set member(m: Member){
     let p = m.payments;
     this.lmember = m;
@@ -67,7 +67,7 @@ export class PaymentComponent implements OnInit {
   datetry: any;
   usermode: string;
   private pmts: Array<IPayment>;
- 
+
   set humanDate(e){
     let ee = e.split('/');
     let d = new Date(Date.UTC(Number(ee[0]), Number(ee[1])-1, Number(ee[2])));
@@ -91,13 +91,14 @@ export class PaymentComponent implements OnInit {
         this.isShowDiscard = true;
         this.isShowDelete = false;
         this.saveResults = "";
+        this.payments.push(this.pay);
         this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
         this.OnSaved.emit(true);
-/* Need to actually save the payment here */        
+/* Need to actually save the payment here */
 //        if (this.pmts != null && this.pmts.length > 0)
         this.saveResults = "Payment saved successfully!";
       }
-     this.OnResponse.emit(this.saveResults);  
+     this.OnResponse.emit(this.saveResults);
   }
 
   Delete(p: Payment){
@@ -123,7 +124,7 @@ export class PaymentComponent implements OnInit {
   onAdd(){ /*Not being used at the moment */
     if ((this.member.firstName == undefined && this.member.lastName == undefined) || this.pay.amount <= 0)
       this.saveResults = "Invalid member or amount! Cannot add payment";
-    else  
+    else
 //      this.submitForm();
 //      this.pay =  {receivedDate: new Date(), amount: 0, type: "cash", targetDate: new Date(), active: false, receivedDateNumeric: 0};
       this.payments.push(this.pay);
@@ -189,7 +190,7 @@ export class PaymentComponent implements OnInit {
      let d = new Date(p.receivedDate.valueOf());
      p.receivedDateString = d.toISOString();
      }
-     */   
+     */
   }
 }
 

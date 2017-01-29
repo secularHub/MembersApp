@@ -61,7 +61,7 @@ export class MembersComponent implements OnInit {
   private memservice: MemberNJSService;
   private maintservice: MaintenanceComponent;
 //  private payservice: PaymentComponent;
-  
+
   private showCompleted: Boolean;
 
   //  memberlist: FirebaseListObservable<any[]>;
@@ -132,14 +132,11 @@ export class MembersComponent implements OnInit {
     if (this.member._id == null || this.member._id.length === 0)
       this.member._id = this.member.firstName + this.member.lastName + this.member.email;
     this.membercount = this.memberlist.length;
-    this.memservice.putDoc(this.member);
-    this.memservice.getDoc(this.member._id).subscribe(res =>{
-      let doc = res;
-      if(doc._rev === this.member._rev)
-        this.saveResults = "Changes saved successfully!";
-      else
-        this.saveResults = "Save Failed! Refresh and try again."
-    });
+    this.memservice.saveMember(this.member).subscribe((saveRes => {
+      this.member._rev = saveRes._rev;
+
+    }));
+
     this.isShowAddFamily = true;
     this.isShowSubmit = true;
     this.isShowDiscard = false;
@@ -186,7 +183,7 @@ export class MembersComponent implements OnInit {
       this.member.isActive = true;
       this.member.memType = "VIP";
     }
-    else { 
+    else {
       let tnow = new Date();
       let thist = this.memservice.addMonths(tnow, -12);
       if (this.member.payments != null) {
@@ -281,7 +278,7 @@ export class MembersComponent implements OnInit {
         this.member = Object.assign({}, m);
         this.picked = m;
         this.replaceMemberInList(this.picked);
-      });  
+      });
     }*/
   }
 
@@ -358,7 +355,7 @@ export class MembersComponent implements OnInit {
    localStorage.setItem('members', JSON.stringify(this.memberlist));
    localStorage.setItem('members', JSON.stringify(new Date().getTime()));
    }*/
-   
+
   ngOnInit() {
     let jwt = localStorage.getItem('id_token');
     if(jwt.length == 0)
