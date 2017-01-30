@@ -69,12 +69,10 @@ export class PaymentComponent implements OnInit {
   usermode: string;
   private pmts: Array<IPayment>;
 
-/* Esperimental, don't think this is used */
   set humanDate(e){
     let ee = e.split('/');
     let d = new Date(Date.UTC(Number(ee[0]), Number(ee[1])-1, Number(ee[2])));
     this.pay.receivedDate = new Date(d.toISOString().substring(0,19));
-//    this.pay.receivedDate = d;
   }
   get humanDate(){
     if(this.pay != null) {
@@ -86,18 +84,14 @@ export class PaymentComponent implements OnInit {
   submitForm() {
       /*this.Delete(this.payd);  //referenced saved for possible deletes
       this.payments.push(this.pay);*/
-      if (this.pay.amount <= 0 || this.isShowAddNew === true)
-        this.saveResults = "Invalid amount or record! Cannot add payment.";
+      if (this.pay.amount <= 0 || (this.lmember.firstName == undefined && this.lmember.lastName == undefined))
+        this.saveResults = "Invalid amount or name! Cannot add payment.";
       else {
         this.isShowAddNew = false;
         this.isShowSubmit = true;
         this.isShowDiscard = true;
         this.isShowDelete = false;
         this.saveResults = "";
-//        let d = new Date(this.pay.receivedDate.valueOf());     /*Normalize the payment date*/
-//        this.receivedDateFormatted = d.toISOString();          /*  -convert to ISO string  */  
-//        let s = this.receivedDateFormatted.substring(0,19);    /*  - truncate it to 19 char*/
-//        this.pay.receivedDate =  convertstringtodate(s);
         this.payments.push(this.pay);
         this.OnSaved.emit(true);
         this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
