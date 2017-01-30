@@ -3,6 +3,7 @@ import {MembersComponent} from "./members/members.component";
 import {MaintenanceComponent} from "./maintenance/maintenance.component";
 import {LoginComponent} from "./login/login.component";
 import { NametagsComponent } from './nametags/nametags.component';
+import { ReportsComponent } from './reports/reports.component';
 
 //todo create some auth routes
 export const AppRoutes: Routes = [
@@ -10,7 +11,8 @@ export const AppRoutes: Routes = [
   { path: 'members', component: MembersComponent },
   /*{ path: 'members', component: MembersComponent },*/
   { path: 'maintenance', component: MaintenanceComponent },
-  { path: 'nametags', component: NametagsComponent }
+  { path: 'nametags', component: NametagsComponent },
+  {path: 'reports', component: ReportsComponent}
 ];
 
 export const routing = RouterModule.forRoot(
