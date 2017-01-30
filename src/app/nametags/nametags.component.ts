@@ -1,23 +1,28 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {Member} from '../members/member';
 import {Router} from '@angular/router';
-import { AppComponent } from '../app.component';
+import {AppComponent} from '../app.component';
+import {MemberNJSService} from "../members/memberNJS.service";
 
 @Component({
   selector: 'app-nametags',
   templateUrl: './nametags.component.html',
-  styleUrls: ['./nametags.component.css']
+  styleUrls: ['./nametags.component.css'],
+  providers: [ MemberNJSService ]
+
 })
 export class NametagsComponent implements OnInit {
   @Output() onTopChanged = new EventEmitter<number>();
   @Output() onLeftChanged = new EventEmitter<number>();
   @Output() onNudgeChanged = new EventEmitter<number>();
 
-  router: Router;
-  app: AppComponent;
+  private router: Router;
+  private app: AppComponent;
+  private memservice: MemberNJSService;
   
-  memberlist: Array<Member>;
   member: Member;
+  memberlist: Array<Member>;
+  rows: Array<NametagsComponent.Row>;
 
   topSlider : number = 0.0;
   leftSlider : number = 0.0;
@@ -26,8 +31,9 @@ export class NametagsComponent implements OnInit {
   isPreview: boolean = false;
   logoUrl: string = "/assets/images/cropped-faceboook-logo-whole-hub-e1454810467184.png";
 
-  constructor(private r: Router, private a: AppComponent) {
+  constructor(private r: Router, private ms: MemberNJSService, private a: AppComponent) {
     this.router = r;
+    this.memservice = ms;
     this.app = a;
   }
 
@@ -109,9 +115,7 @@ export class NametagsComponent implements OnInit {
 
   ngOnInit() {
     this.navigateToRootWhenNotLoggedIn();
-
-    this.populateMemberListWithSampleData();
-
+    this.populateMemberList();
     this.setPreview(false);
   }
 
@@ -141,35 +145,99 @@ export class NametagsComponent implements OnInit {
       this.router.navigate(['']);
   }
 
-  private populateMemberListWithSampleData(){
-    /* TODO: Populate with REAL data from database. */
-
-    let sampleMembers = [
-      {first: "Abe", last: "Arturo"},
-      {first: "Bob", last: "Brandon"},
-      {first: "Carl", last: "Crackin"},
-      {first: "Donny", last: "Dringle"},
-      {first: "Eve", last: "Easter"},
-      {first: "Fran", last: "Flynn"}
-    ];
-
+  private populateMemberList(){
     this.memberlist = new Array<Member>();
+    this.ms.getAllDocs().subscribe(response => {
+        this.memberlist = response.sort(this.compareMember);
+        this.memberlist = this.memberlist.filter(
+            member => member.needsNametag === true
+        );
 
-    for (let m of sampleMembers) {
-      this.member = new Member('', false);
-      this.member.firstName = m.first;
-      this.member.lastName = m.last;
+        this.fillPreviewFromMemberList();
+        // this.fillMemberListFromSamples();  // only for initial testing
+      });
+  }
 
-      this.memberlist.push(this.member);
+  // fillMemberListFromSamples() {
+  //   let sampleMembers = [
+  //     {first: "Abe", last: "Arturo"},
+  //     {first: "Bob", last: "Brandon"},
+  //     {first: "Carl", last: "Crackin"},
+  //     {first: "Donny", last: "Dringle"},
+  //     {first: "Eve", last: "Easter"},
+  //     {first: "Fran", last: "Flynn"}
+  //   ];
+  //   let sampleMembersLong = [
+  //     {first: "Zed", last: "Zilby"},
+  //     {first: "Honeyblossum", last: "Zomi-Freaktastic"},
+  //     {first: "Ooo. Long Longoooo", last: "Forkulator"},
+  //     {first: "Ooo. Long Longoooo", last: "Perkinator Z"},
+  //     {first: "Blingie", last: "Richardson"},
+  //     {first: "Thomas", last: "Thompson"}
+  //   ];
+
+  //   this.memberlist = new Array<Member>();
+  //   for (let m of sampleMembers) {
+  //     let member: Member = new Member('', false);
+  //     member.firstName = m.first;
+  //     member.lastName = m.last;
+  //     member.needsNametag = true;
+  //     this.memberlist.push(member);
+  //   }
+  //   this.fillRowsFromMemberList();
+  // }
+
+  fillPreviewFromMemberList() {
+    this.rows = new Array<NametagsComponent.Row>();
+
+    let row = 0;
+    let col = 0;
+    for (let index = 0; index < 6; index++) {
+      row = Math.floor(index/2);
+      col = index % 2;
+      if (row >= this.rows.length) {
+        this.rows.push(new NametagsComponent.Row());
+      }
+      this.rows[row].cols[col] =
+        (index < this.memberlist.length)
+        ? Object.assign({}, this.memberlist[index])                          // shallow clone
+        : Object.assign(new Member('', false), {firstName:'',lastName:''});  // new empty member
     }
   }
 
+  private compareMember(left, right){
+    let ln: string;
+    let rn: string;
+    if (left.firstName != null && left.lastName != null) {
+      ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
+    }
+    else
+      ln = "";
+    if (right.firstName != null && right.lastName != null) {
+      rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
+    }
+    else rn = "";
+    //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
+    if (ln < rn) return -1;
+    if (ln > rn) return 1; else return 0;
+  }
+
+  public isNameTagBlank(member: Member) {
+    return member.firstName.length + member.lastName.length !== 0;
+  }
+
   onClickTable(member: Member) {
-    alert("onClickTable: " + member.firstName + ", " + member.lastName)
+    //alert("onClickTable: " + member.firstName + ", " + member.lastName)
   }
 
   toYN(value) {
     return value===true ? "Y" : "N";
   }
 
+}
+
+export module NametagsComponent {
+  export class Row {
+    public cols: Array<Member> = new Array<Member>();
+  }
 }

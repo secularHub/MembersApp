@@ -145,13 +145,6 @@ body {
   border-spacing: 0px;
   background-color: greenyellow;
 }
-.ZZZnametags-column {
-  display: table-column;
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
-  border-spacing: 0px;
-}
 .nametags-cell {
   display: table-cell;
   margin: 0px;
@@ -160,28 +153,15 @@ body {
   border-spacing: 0px;
   background-color: greenyellow;
 }
-.ZZZnametags-left {
-  display: inline;
-}
-.ZZZnametags-right {
-  display: block;
-}
-.ZZZnametags-tagcontainer { 
-  /* display: table; */
-  /*background-color: orange; */
-  border: 0px solid peachpuff; 
-}
-.ZZZnametags-tagbox { 
-  background-color: blue;
-  vertical-align: middle;
-  border: 0px solid red; 
-}
 .nametags-tag { 
   background-color: lightblue;
   border-width: 0;
-  width: 4.0in;
+  width:  4.0in;
   height: 3.0in;
   border: 0.02in solid white;
+}
+.nametags-tagcontent { 
+  ZZZheight: 3.0in;  /* May help when 5 tags are previewed */
 }
 
 .tag1 {
@@ -227,6 +207,12 @@ body {
   text-align: center;
   border: 0px solid peachpuff;
 }
+
+.nametags-gridcell {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
 
 /* -------------------------------------*/
 /* The following MIGHT be needed ??? -- probably not */
