@@ -5,7 +5,7 @@
 
   <div class="setheight no-print"></div>
   <div class="nametags-panel-body panel-body" [ngClass]="{'panel-body': !isPreview }">
-    <button type="button" class="btn-custom nametags-cornered" (click)="setPreview(true);" >Preview</button>
+    <button type="button" class="btn-custom nametags-cornered" (click)="onPreview()" >Preview</button>
     <div class="row">
       <div class="col-md-4">
           <div>
@@ -49,36 +49,33 @@
 <div *ngIf="isPreview" class="nametags-previewpage">
 
   <div class="nametags-controlpanel no-print nametags-cornered">
-    <button type="button" class="btn-custom nametags-cornered no-print" (click)="setPreview(false);" >Exit Preview</button>
+    <button type="button" class="btn-custom nametags-cornered no-print" (click)="onExitPreview()" >Exit Preview</button>
     
-    <p class="nametags-error nametags-pushdown">In progress. These don't work yet.</p>
-    <p>&nbsp;</p>
-
-    <p class="nametags-bold">Adjust Margins</p>
+    <p class="nametags-bold nametags-pushdown">Adjust Margins</p>
     <p class="nametags-sliderlabel">(-2.0 to 2.0)</p>
     <p class="nametags-sliderlabel">(tenths of an inch)</p>
     <p>&nbsp;</p>
     <p class="nametags-sliderlabel">Top Margin</p>
     <p class="nametags-sliderlabel">
-      <button type="button" class="glyphicon glyphicon-triangle-top" (click)="incTop(-0.1);" ></button>
+      <button type="button" class="glyphicon glyphicon-triangle-top" (click)="incTop(-0.1)" ></button>
       <input id="Top_Slider" class="nametags-slidervalue" [(ngModel)]="topSlider" (change)="topSliderChange($event)"/>
-      <button type="button" class="glyphicon glyphicon-triangle-bottom" (click)="incTop(0.1);" ></button>
+      <button type="button" class="glyphicon glyphicon-triangle-bottom" (click)="incTop(0.1)" ></button>
     </p>
       
     <p>&nbsp;</p>
     <p class="nametags-sliderlabel">Left Margin</p>
     <p class="nametags-sliderlabel">
-      <button type="button" class="glyphicon glyphicon-triangle-left" (click)="incLeft(-0.1);" ></button>
+      <button type="button" class="glyphicon glyphicon-triangle-left" (click)="incLeft(-0.1)" ></button>
       <input id="Left_Slider" class="nametags-slidervalue" [(ngModel)]="leftSlider" (change)="leftSliderChange($event)"/>
-      <button type="button" class="glyphicon glyphicon-triangle-right" (click)="incLeft(0.1);" ></button>
+      <button type="button" class="glyphicon glyphicon-triangle-right" (click)="incLeft(0.1)" ></button>
     </p>
 
     <p>&nbsp;</p>
     <p class="nametags-sliderlabel">Nudge Up &amp; Down</p>
     <p class="nametags-sliderlabel">
-      <button type="button" class="glyphicon glyphicon-triangle-top" (click)="incNudge(-0.1);" ></button>
+      <button type="button" class="glyphicon glyphicon-triangle-top" (click)="incNudge(-0.1)" ></button>
       <input id="Nudge_Slider" class="nametags-slidervalue" [(ngModel)]="nudgeSlider" (change)="nudgeSliderChange($event)"/>
-      <button type="button" class="glyphicon glyphicon-triangle-bottom" (click)="incNudge(0.1);" ></button>
+      <button type="button" class="glyphicon glyphicon-triangle-bottom" (click)="incNudge(0.1)" ></button>
     </p>
     <!--
     <ng2-slider min="-2" max="+2" value="0"

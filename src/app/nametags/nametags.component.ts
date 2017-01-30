@@ -9,7 +9,6 @@ import {MemberNJSService} from "../members/memberNJS.service";
   templateUrl: './nametags.component.html',
   styleUrls: ['./nametags.component.css'],
   providers: [ MemberNJSService ]
-
 })
 export class NametagsComponent implements OnInit {
   @Output() onTopChanged = new EventEmitter<number>();
@@ -39,12 +38,15 @@ export class NametagsComponent implements OnInit {
 
   changedTop(value:number) {
     this.onTopChanged.emit(value);
+    $('.nametags-page').animate({marginTop: '' +this.topSlider + 'in'}, 100);
   }
   changedLeft(value:number) {
     this.onLeftChanged.emit(value);
+    $('.nametags-page').animate({marginLeft: '' +this.leftSlider + 'in'}, 100);
   }
   changedNudge(value:number) {
     this.onNudgeChanged.emit(value);
+    $('.nametags-firstname').animate({marginTop: '' +this.nudgeSlider + 'in'}, 100);
   }
 
   incTop(value:number) {
@@ -133,6 +135,13 @@ export class NametagsComponent implements OnInit {
 
   onPreview() {
     this.setPreview(true);
+    // Set the default 'nudge' value.
+    setTimeout(() => {
+      let margin = $('.nametags-firstname').css( 'marginTop' );
+      let value: number = parseFloat(margin)/96;    // px to in (pixels to inches)
+      this.nudgeSlider = this.changeSlider(this.nudgeSlider, value, -2, 2, 0.1, 0);
+      }
+      , 100);
   }
 
   onExitPreview() {
