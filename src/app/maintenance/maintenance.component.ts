@@ -19,12 +19,21 @@ export class MaintenanceComponent implements OnInit {
   router: Router;
   member: Member;
   payments: Array<IPayment>;
-  //ems: Array<ExtendedMember>;
   memberlist: Array<Member>;
   ms: MemberNJSService;
   payloop = [];
   forloop = [];
   elseloop = [];
+
+  notifyMessage: string;
+  isShowRemoveFamily: boolean;
+  isShowDeleteMember: boolean;
+  firstNameFilter: string;
+  lastNameFilter: string;
+  familyFilter: boolean;
+  activeFilter: boolean;
+  VIPFilter: boolean;
+  nametagFilter: boolean;
 
   temp: string;
   filterName: string;
@@ -32,13 +41,7 @@ export class MaintenanceComponent implements OnInit {
     this.router = r;
     this.ms = lms;
   }
-  /*    private addDays(date: Date, days: number): Date {
-   console.log('adding ' + days + ' days');
-   console.log(date);
-   date.setDate(date.getDate() + parseInt(days));
-   console.log(date);
-   return date;
-   }*/
+  
   getLastPayment(ps: Array<IPayment>) : IPayment
   {
     let last : IPayment;
@@ -56,8 +59,9 @@ export class MaintenanceComponent implements OnInit {
     return last;
 
   }
-  private m: Member;
+//  private m: Member;
   private reconcile() {
+    this.notifyMessage = "This will take a while! Done once you can navigate again.";
     let tnow = new Date();
     let thist = this.ms.addMonths(tnow, -12);
     this.ms.getAllDocs().subscribe(r1 => {
@@ -65,8 +69,6 @@ export class MaintenanceComponent implements OnInit {
       for (let res2 of this.memberlist) {
         this.forloop.push(res2);
         let member = Object.assign({}, res2);
-//        if(member.memType == undefined)
-//          member.memType = "Not Active";
         if (member.memType === "VIP") {
           member.isActive = true;
         }
@@ -92,14 +94,23 @@ export class MaintenanceComponent implements OnInit {
               member.isActive = false;
           }
         }
-//        if (member.memType === undefined)
-//          member.memType = "Not Active";
         this.ms.putDoc(member);
       }
     });
+/*Need to figure out how to determine when the database is ready again, then clear the message and sort
+    this.notifyMessage = "";
+    this.populateMemberList();*/
   }
 
-  public onUsingTable ( al: Member) {
+  isChecked(b: boolean)
+  {
+    if(b)
+      return "Y";
+    else
+      return "N";
+  }
+
+  public onUsingTable ( al: Member) { /* This is for the control table */
     if(event.target["id"] === "filter") {
       this.temp = '';
     }
@@ -108,11 +119,72 @@ export class MaintenanceComponent implements OnInit {
     }
 
   }
+
+  onClickTable(member: Member) { /* This is for the membership table */
+  }
+
+  onDeleteMember() { /* This is for the membership table */
+  }
+
+  onRemoveFamily() { /* This is for the membership table */
+  }
+
+  private populateMemberList(){
+    this.memberlist = new Array<Member>();
+    this.ms.getAllDocs().subscribe(response => {
+        this.memberlist = response.sort(this.compareMember);
+//        this.memberlist = this.memberlist.filter(
+//            member => member.needsNametag === true
+//    });
+
+//        this.fillPreviewFromMemberList();
+      });
+  }
+
+/*&  fillPreviewFromMemberList() {
+    this.rows = new Array<NametagsComponent.Row>();
+
+    let row = 0;
+    let col = 0;
+    for (let index = 0; index < 6; index++) {
+      row = Math.floor(index/2);
+      col = index % 2;
+      if (row >= this.rows.length) {
+        this.rows.push(new NametagsComponent.Row());
+      }
+      this.rows[row].cols[col] =
+        (index < this.memberlist.length)
+        ? Object.assign({}, this.memberlist[index])                          // shallow clone
+        : Object.assign(new Member('', false), {firstName:'',lastName:''});  // new empty member
+    }
+  }
+*/
+  private compareMember(left, right){
+    let ln: string;
+    let rn: string;
+    if (left.firstName != null && left.lastName != null) {
+      ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
+    }
+    else
+      ln = "";
+    if (right.firstName != null && right.lastName != null) {
+      rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
+    }
+    else rn = "";
+    if (ln < rn) return -1;
+    if (ln > rn) return 1; else return 0;
+  }
+
   ngOnInit(){
     let jwt = localStorage.getItem('id_token');
     if(jwt.length == 0)
       this.router.navigate(['']);
       
     this.temp = '';
+
+    this.isShowDeleteMember = true;
+    this.isShowRemoveFamily = true;
+    this.notifyMessage = "";
+    this.populateMemberList();
   }
 }

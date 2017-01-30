@@ -346,7 +346,6 @@ export class MembersComponent implements OnInit {
         rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
       }
       else rn = "";
-      //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
       if (ln < rn) return -1;
       if (ln > rn) return 1; else return 0;
     }
@@ -362,7 +361,6 @@ export class MembersComponent implements OnInit {
       this.router.navigate(['']);
 
     let res: string;
-//    this.showInputs = true;
     //Here we do the initial call to get all of the id's from the database.
     //we are making the assumption that the data is in  a format we can use. validation is not yet implemented
     this.memberlist = new Array<Member>();
@@ -379,14 +377,6 @@ export class MembersComponent implements OnInit {
     }
     if (this.from !== 'extended') {
       this.ms.getAllDocs().subscribe(r1 => {
-        //this.memberlist = r1;
-        /*for (let em of r1) {
-          if (em.payments != null)
-            em.payments = em.payments.sort((l, r) => {
-              if (l.receivedDate < r.receivedDate) return 1;
-              if (l.receivedDate > r.receivedDate) return -1; else return 0;
-            });
-        }*/
         this.memberlist = r1.sort(this.compareMember);
 
         this.activecount = 0;
@@ -403,7 +393,6 @@ export class MembersComponent implements OnInit {
       this.member = new Member('', false);
       this.picked = this.member;
       this.onAddNewMember();
-//      this.payservice.ngOnInit();
 
     }
   }

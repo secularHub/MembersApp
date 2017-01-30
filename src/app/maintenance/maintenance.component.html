@@ -1,27 +1,89 @@
 <div class="panel-body">
   <div class="row">
-    <div class="col-md-12">
-
-      <table class="itemtable">
-        <tr>
+    <div class="col-md-8">
+      <div>
+        <h3>Global Tools</h3>
+      </div>     
+      <div class="submit">
+        <!--tr>
           <th>filter name</th>
           <th>filter</th>
           <th>convert</th>
-          <th>more</th>
+          <th>reconcile</th>
         </tr>
         <tr [class.itemselected]="item === selectedItem" (click)="onUsingTable(al)">
           <td class="price"><input type="text" class="btn" [(ngModel)]="filterName">name</td>
           <td class="price"><button id="filter" class="btn">filter</button></td>
           <td class="price"><button id="runconvert" class="btn">run converter</button></td>
-          <td class="price"><button id="reconcile" class="btn">reconcile</button></td>
         </tr>
-
-      </table>
+      </table-->
+        <button type="button" class="btn-custom" (click)="reconcile()">Reconcile All Members</button>
+      </div>
       <div>
-        elseloop = {{elseloop.length}}
+        {{notifyMessage}}
+<!--        elseloop = {{elseloop.length}}
         payloop = {{payloop.length}}
-        forloop = {{forloop.length}}
+        forloop = {{forloop.length}}-->
+      </div>
+    </div>
+   </div> 
+     <div class="row">
+      <div class="col-md-8">
+        <div>
+          <h3>Individual Member Tools</h3>
+        </div>
+        <div class="form-inline">
+          <div>
+            <label for="selfirstName">first name</label>
+            <input type="text" id="selfirstName" name="selfirstName" value="" class="form-control input-custom"  size="5" [(ngModel)]="firstNameFilter">
+            <label for="sellastName">last name</label>
+            <input type="text" id="sellastName" name="sellastName" value="" class="form-control input-custom"  size="5" [(ngModel)]="lastNameFilter">
+            <label for="selActive">is active</label>
+            <input type="checkbox" id="selActive" name="selActive" value="false" class="form-control" [(ngModel)]="activeFilter">
+            <label for="selVIP">is VIP</label>
+            <input type="checkbox" id="selVIP" name="selVIP" value="false" class="form-control" [(ngModel)]="VIPFilter">
+            <label for="selFamily">is family</label>
+            <input type="checkbox" id="selFamily" name="selFamily" value="false" class="form-control" [(ngModel)]="familyFilter">
+            <label for="selNametag">needs name tag</label>
+            <input type="checkbox" id="selNametag" name="selNametag" value="false" class="form-control" [(ngModel)]="nametagFilter">
+          </div>
+        </div>
+      </div>
+    </div>  
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table-container">
+            <tbody>
+            <tr>
+              <th>first name</th>
+              <th>last name</th>
+              <th>phone</th>
+              <th>email</th>
+              <!--th>address</th>
+              <th>city state zip</th-->
+              <th>active</th>
+            </tr>
+
+            <tr  *ngFor="let al of (memberlist | asFilter:activeFilter:familyFilter:VIPFilter:nametagFilter:firstNameFilter:lastNameFilter);" [class.itemselected]="item === selectedItem" (click)="onClickTable(al)" >
+
+              <td>{{al.firstName}}</td>
+              <td>{{al.lastName}}</td>
+              <td>{{al.phone}}</td>
+              <td>{{al.email}}</td>
+              <!--td>{{al.address}}</td>
+              <td>{{al.city}} {{al.state}} {{al.zip}}</td-->
+              <td>{{isChecked(al.isActive)}}</td>
+            </tr>
+          </tbody>
+        </table>    
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="submit">
+          <button *ngIf="isShowDeleteMember" type="button" class="btn-custom" (click)="onDeleteMember()" >Delete Member</button>
+          <button *ngIf="isShowRemoveFamily" type="button" class="btn-custom" (click)="onRemoveFamily()" >Remove Family</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
