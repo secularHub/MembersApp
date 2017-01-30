@@ -1,5 +1,5 @@
   
-<form (submit)="submitForm()" #memberForm="ngForm">
+<form (submit)="submitForm()" #memberForm="ngForm" autocomplete="off">
 
   <div *ngIf="showInputs">
     <div class="form-group">
@@ -26,7 +26,7 @@
       </div>
     </div>
 <!--    <div> 
-      {{saveResults}} <!-- This is the return message 
+      {{saveResults}}  This is the return message 
       ** Need to have this message display through the member component **
     </div>-->
   </div>
@@ -43,7 +43,7 @@
         <th>type</th>
       </tr>
       <tr  *ngFor="let tpay of payments" [class.itemselected]="item === selectedItem" (click)="onPaymentTable(tpay)">
-        <td> {{tpay.receivedDate}} </td>
+        <td> {{tpay.receivedDate | date:"yyyy-MM-dd"}}</td>
         <td> {{tpay.amount}}</td>
         <td>{{tpay.type}}</td>
       </tr>

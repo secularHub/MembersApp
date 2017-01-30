@@ -95,12 +95,12 @@
 
 .itemtable tr th{
   min-width: 3em;
-  padding: .5em;
+  padding: .5em 8px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 }
 .itemtable tr td{
-  padding: .2em;
+  padding: .2em 8px;
   max-height: 2em;
   color: yellow;
 

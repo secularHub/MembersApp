@@ -2,6 +2,10 @@
 
 /* Classes */
 
+.rightmarg {
+  color: red;
+}
+
 .setheight {
   height: 38px;
 }
