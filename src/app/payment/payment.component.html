@@ -3,7 +3,7 @@
 
   <div *ngIf="showInputs">
     <div class="form-group">
-      <div class="col-xs-7">
+      <div class="row col-xs-7 col-sm-6 col-lg-8">
         <div ><h3>Payment Information</h3></div>
         <div class="form-inline">
           <label for="paydate">Date</label>
@@ -15,7 +15,7 @@
         </div>
         <div class="form-inline">
           <label for="typ">Type</label>
-          <input [(ngModel)]="pay.type" id="typ" name="type" type="text" class="form-control">
+          <input [(ngModel)]="pay.type" id="typ" name="type" type="text" class="form-control" size="20">
         </div>
         <div class="submit">
           <button *ngIf="isShowSubmit" type="submit" class="btn-custom">Save</button>
@@ -25,16 +25,12 @@
         </div>
       </div>
     </div>
-<!--    <div> 
-      {{saveResults}}  This is the return message 
-      ** Need to have this message display through the member component **
-    </div>-->
-  </div>
+  </div> 
 </form>
 
 <!--</div>-->
 <!--<div class="col-md-5">-->
-<div *ngIf="showList" class="col-md-5" class="row">
+<div *ngIf="showList" class="row col-md-5">
   <div  id="scrolltableskinny">
     <table class="itemtable">
       <tr>
