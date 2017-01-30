@@ -1,0 +1,20 @@
+<div>
+  test
+</div>
+
+<p>
+  reports works!
+</p>
+<div class="body">
+<div *ngFor="let member of memberlist">
+  <div  class="theborder">
+    <div class="dmargin">
+      {{member.firstName}} {{member.lastName}} {{member.zip}}
+    </div>
+    <div>
+      {{member.phone}} {{member.skills}}
+    </div>
+  </div>
+</div>
+</div>
+

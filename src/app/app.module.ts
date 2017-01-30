@@ -11,6 +11,7 @@ import {routing} from "./app.routing";
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { NametagsComponent } from './nametags/nametags.component';
+import { ReportsComponent } from './reports/reports.component';
 //import {AuthHttp} from "angular2-jwt";
 
 
@@ -23,7 +24,8 @@ import { NametagsComponent } from './nametags/nametags.component';
     MaintenanceComponent,
     NavbarComponent,
     LoginComponent,
-    NametagsComponent
+    NametagsComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
