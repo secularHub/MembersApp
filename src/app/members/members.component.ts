@@ -143,6 +143,8 @@ export class MembersComponent implements OnInit {
     this.isShowToggleVIP = true;
     this.showInputs = true;
     this.usermode = "normal";
+    this.saveResults = "Member changes saved!";
+
   }
 
   Delete(p: Member) {
