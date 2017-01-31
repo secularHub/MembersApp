@@ -4,9 +4,11 @@ import {MaintenanceComponent} from "./maintenance/maintenance.component";
 import {LoginComponent} from "./login/login.component";
 import { NametagsComponent } from './nametags/nametags.component';
 import { ReportsComponent } from './reports/reports.component';
+import {LocationStrategy} from "@angular/common";
 
 //todo create some auth routes
 export const AppRoutes: Routes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'members', component: MembersComponent },
   { path: 'maintenance', component: MaintenanceComponent },
