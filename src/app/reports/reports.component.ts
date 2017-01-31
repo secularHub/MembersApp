@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 import {Member} from '../members/member';
 import {MemberNJSService} from "../members/memberNJS.service";
+import {escape} from "querystring";
 
 @Component({
   selector: 'app-reports',
@@ -10,7 +12,17 @@ import {MemberNJSService} from "../members/memberNJS.service";
 })
 export class ReportsComponent implements OnInit {
 
-  constructor(private ms: MemberNJSService) { }
+  constructor(private ms: MemberNJSService) {
+      this.isShowHeader = true;
+  }
+  //ops: {name: string; display: string;}
+
+  reportOptions = [{name: 'mailinglabelallReport', display:'Mailing Labels for all members'},
+    {name: 'mailinglabelactiveReport', display:'Mailing Labels for all ACTIVE members'},
+    {name: 'allemailReport', display:'All Member emails, comma delimmited'},
+    {name: 'activeemailReport', display:'ACTIVE Member emails, comma delimmited'},
+    {name: 'eoytaxReport', display:'End of year Tax Report for all paying members'}  ];
+
   memberlist: Array<Member>;
   justforspacing: string;
   mailinglabelallReport: string;
@@ -19,9 +31,12 @@ export class ReportsComponent implements OnInit {
   activeemailReport: string;
   eoytaxReport: string;
   isShowEmail: boolean;
+  isShowHeader: boolean;
   isShowSave: boolean;
   isShowPrint: boolean;
   isShowGenerate: boolean;
+  ops: {name: string; display: string;}
+  optionStates: Array<string>;
 
   private compareMember(left, right){
     let ln: string;
@@ -55,14 +70,25 @@ export class ReportsComponent implements OnInit {
     this.justforspacing = "Save is not working yet"
   }
 
-  onSelPrint(){
+  onSelPrint(opsForm: any){
+
+    //do logic based on ops
+    if(opsForm.ops.name === this.reportOptions[0].name)
+    {
+      //logic for mailing label report.
+    }
     this.isShowEmail = true;
     this.isShowSave = true;
     this.isShowPrint = true;
     this.isShowGenerate = false;
+    this.isShowHeader =false;
     this.justforspacing = "Print is not working yet"
   }
 
+  onKeyUp(key: KeyboardEvent){
+    if(key.keyCode === 27) //escape key
+      this.isShowHeader = true;
+  }
   onMailingLabelAll(){
     this.ms.getAllDocs().subscribe(r1 => {
       this.memberlist = r1.sort(this.compareMember);
