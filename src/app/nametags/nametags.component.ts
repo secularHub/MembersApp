@@ -193,7 +193,7 @@ export class NametagsComponent implements OnInit {
   //     member.needsNametag = true;
   //     this.memberlist.push(member);
   //   }
-  //   this.fillRowsFromMemberList();
+  //   this.fillPreviewFromMemberList();
   // }
 
   fillPreviewFromMemberList() {
@@ -232,7 +232,7 @@ export class NametagsComponent implements OnInit {
   }
 
   public isNameTagBlank(member: Member) {
-    return member.firstName.length + member.lastName.length !== 0;
+    return member.firstName.length + member.lastName.length === 0;
   }
 
   onClickTable(member: Member) {

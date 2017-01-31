@@ -1,10 +1,10 @@
 
 
   <!-- Main page -->
-<div *ngIf="!isPreview" class="nametags-panel panel" [ngClass]="{'panel': !isPreview }">
+<div *ngIf="!isPreview" class="panel">
 
   <div class="setheight no-print"></div>
-  <div class="nametags-panel-body panel-body" [ngClass]="{'panel-body': !isPreview }">
+  <div class="panel-body">
     <button type="button" class="btn-custom nametags-cornered" (click)="onPreview()" >Preview</button>
     <div class="row">
       <div class="col-md-4">
@@ -94,7 +94,7 @@
 
       <div *ngFor="let theRow of rows; let row = index" class="nametags-row">
         <div *ngFor="let item of theRow.cols; let col=index" class="nametags-cell">
-            <div class="tag{{row*2+col+1}} nametags-tag">
+            <div class="tag{{row*2+col+1}} nametags-tag" *ngIf="!isNameTagBlank(item)">
               <div class="nametags-tagcontent">
                 <div class="nametags-firstname">
                   {{item.firstName}}
@@ -103,7 +103,7 @@
                   {{item.lastName}}
                 </div>
                 <div class="nametags-logo-container">
-                  <img *ngIf="isNameTagBlank(item)" class="nametags-logo" [src]="logoUrl"/>
+                  <img class="nametags-logo" [src]="logoUrl"/>
                 </div>
               </div>
             </div>

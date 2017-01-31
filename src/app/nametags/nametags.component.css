@@ -120,14 +120,12 @@ body {
 }
 .nametags-page {
   page-break-after: always;
-  background-color: white;
   width: 8in;
   position:absolute;
   left: 0.25in;
   top: 1.0in;
 }
 .nametags-previewpage { 
-  background-color: lightgray;
 }
 .nametags-table {
   display: table;
@@ -135,7 +133,6 @@ body {
   padding: 0px;
   border: 0px;
   border-spacing: 0px;
-  background-color: yellow;
 }
 .nametags-row {
   display: table-row;
@@ -143,7 +140,6 @@ body {
   padding: 0px;
   border: 0px;
   border-spacing: 0px;
-  background-color: greenyellow;
 }
 .nametags-cell {
   display: table-cell;
@@ -151,17 +147,27 @@ body {
   padding: 0px;
   border: 0px;
   border-spacing: 0px;
-  background-color: greenyellow;
+  background-color: lightgray;
+
+  border: 0.02in solid white;
+  -moz-border-radius: 0.25in;
+  -webkit-border-radius: 0.25in;
+  border-radius: 0.25in; /* future proofing */
+  -khtml-border-radius:0.25in; /* for old Konqueror browsers */
 }
 .nametags-tag { 
   background-color: lightblue;
   border-width: 0;
   width:  4.0in;
   height: 3.0in;
-  border: 0.02in solid white;
+  display: inline-block;
+
+  -moz-border-radius: 0.25in;
+  -webkit-border-radius: 0.25in;
+  border-radius: 0.25in; /* future proofing */
+  -khtml-border-radius:0.25in; /* for old Konqueror browsers */
 }
 .nametags-tagcontent { 
-  ZZZheight: 3.0in;  /* May help when 5 tags are previewed */
 }
 
 .tag1 {
@@ -207,12 +213,10 @@ body {
   text-align: center;
   border: 0px solid peachpuff;
 }
-
 .nametags-gridcell {
   padding-left: 3px;
   padding-right: 3px;
 }
-
 
 /* -------------------------------------*/
 /* The following MIGHT be needed ??? -- probably not */
