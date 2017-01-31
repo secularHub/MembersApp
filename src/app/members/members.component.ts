@@ -122,7 +122,14 @@ export class MembersComponent implements OnInit {
   }
 
   submitForm() {
-    //let m = new Member('',false);
+    this.isShowAddFamily = true;
+    this.isShowSubmit = true;
+    this.isShowDiscard = false;
+    this.isShowToggleVIP = true;
+    this.showInputs = true;
+    this.usermode = "normal";
+    this.saveResults = "Member changes saved!";
+
     this.btnstyle = "btn-custom";
 //    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
 
@@ -134,17 +141,7 @@ export class MembersComponent implements OnInit {
     this.membercount = this.memberlist.length;
     this.memservice.saveMember(this.member).subscribe((saveRes => {
       this.member._rev = saveRes._rev;
-
     }));
-
-    this.isShowAddFamily = true;
-    this.isShowSubmit = true;
-    this.isShowDiscard = false;
-    this.isShowToggleVIP = true;
-    this.showInputs = true;
-    this.usermode = "normal";
-    this.saveResults = "Member changes saved!";
-
   }
 
   Delete(p: Member) {
@@ -176,8 +173,12 @@ export class MembersComponent implements OnInit {
   }
 
   onRefresh() {
-    this.saveResults = "";
-    this.ngOnInit();
+    if (!this.hasChanges()) {
+      this.saveResults = "";
+      this.ngOnInit();
+    }
+    else
+      this.onUsingTable(this.member);
   }
 
   onToggleVIP() {
@@ -241,18 +242,20 @@ export class MembersComponent implements OnInit {
   }
 
   onAddNewMember() {
-    this.saveResults = "";
-    this.btnstyle = "btn-custom";
-    this.isShowDiscard = true;
-    this.isShowSubmit = true;
-    this.isShowAddFamily = false;
-    this.isShowToggleVIP = false;
-    this.showInputs = true;
-    this.picked = new Member('', false);  //set placeholder
-    this.member = new Member('', false);
-    this.usermode = 'normal';
-//    this.payservice.ngOnInit();
-
+    if (!this.hasChanges()) {
+      this.saveResults = "";
+      this.btnstyle = "btn-custom";
+      this.isShowDiscard = true;
+      this.isShowSubmit = true;
+      this.isShowAddFamily = false;
+      this.isShowToggleVIP = false;
+      this.showInputs = true;
+      this.picked = new Member('', false);  //set placeholder
+      this.member = new Member('', false);
+      this.usermode = 'normal';
+    }
+    else
+      this.onUsingTable(this.member);
   }
 
   isChecked(b: boolean)
@@ -273,18 +276,12 @@ export class MembersComponent implements OnInit {
     this.isShowToggleVIP = true;
     this.selected = true;
     this.showInputs = true;
-    this.onAddNewMember();
-/*    if (this.picked != null) {
-      this.member = this.picked;
-      this.ms.getDoc(this.member._id).subscribe(m => {
-        this.member = Object.assign({}, m);
-        this.picked = m;
-        this.replaceMemberInList(this.picked);
-      });
-    }*/
+
+    this.saveResults = "";
+    this.ngOnInit();
   }
 
-  private hasChanges(): boolean { /*always returns false ?!?! Not sure this is working...*/
+  private hasChanges(): boolean { 
     if (JSON.stringify(this.member) === JSON.stringify(this.picked))
       return false;
     else
@@ -366,7 +363,7 @@ export class MembersComponent implements OnInit {
     //Here we do the initial call to get all of the id's from the database.
     //we are making the assumption that the data is in  a format we can use. validation is not yet implemented
     this.memberlist = new Array<Member>();
-    if (this.from === 'extended')  //from meanse user is coming from extendedMembers component so we don't have to go out to the server and recollect the data.
+    if (this.from === 'extended')  //from means user is coming from extendedMembers component so we don't have to go out to the server and recollect the data.
     {
       res = localStorage.getItem('members');
       if (res != null && res.indexOf('phone') > 0) {

@@ -25,6 +25,7 @@ export class AppComponent implements OnInit{
     this.login = false;
     this.router.navigate(['/members']);
   }
+
   routeToMembers(){
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
@@ -46,6 +47,14 @@ export class AppComponent implements OnInit{
     if(this.jwt.length > 0)
     {
       this.router.navigate(['/#nametags']);
+    }
+  }
+
+  routeToReports(){
+    this.jwt = localStorage.getItem('id_token');
+    if(this.jwt.length > 0)
+    {
+      this.router.navigate(['/#reports']);
     }
   }
 
