@@ -6,7 +6,7 @@
       <h3>Select Report: </h3>
 
       <form #opsForm="ngForm">
-        <select name="ops" ngModel>
+        <select name="ops" ngModel class="report-body">
           <option value="" disabled>choose</option>
           <option *ngFor="let ops of reportOptions" [ngValue]="ops">
             {{ ops.display }}

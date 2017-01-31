@@ -10,19 +10,20 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit{
 
-  constructor(public router: Router) { this.login = true;}
+  constructor(public router: Router) { this.login = true; this.outletText="hidden";}
 
   title: string;
   login: boolean;
   jwt: string;
   isMenuHidden: boolean = false;
-
+  outletText : string;
   public setMenuHidden(value: boolean) {
     this.isMenuHidden = value;
   }
 
   onLoginSuccess(){
     this.login = false;
+    this.outletText = "";
     this.router.navigate(['/members']);
   }
 
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit{
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
     {
-      this.router.navigate(['/#members']);
+      this.router.navigate(['/members']);
     }
   }
 
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit{
     this.jwt = localStorage.getItem('id_token');
     if(this.jwt.length > 0)
     {
-      this.router.navigate(['/#maintenance']);
+      this.router.navigate(['/maintenance']);
     }
   }
 
