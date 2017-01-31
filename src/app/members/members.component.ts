@@ -122,26 +122,30 @@ export class MembersComponent implements OnInit {
   }
 
   submitForm() {
-    this.isShowAddFamily = true;
-    this.isShowSubmit = true;
-    this.isShowDiscard = false;
-    this.isShowToggleVIP = true;
-    this.showInputs = true;
-    this.usermode = "normal";
-    this.saveResults = "Member changes saved!";
+    if (this.hasChanges()) {
+      this.isShowAddFamily = true;
+      this.isShowSubmit = true;
+      this.isShowDiscard = false;
+      this.isShowToggleVIP = true;
+      this.showInputs = true;
+      this.usermode = "normal";
+      this.saveResults = "Member changes saved!";
 
-    this.btnstyle = "btn-custom";
-//    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
+      this.btnstyle = "btn-custom";
+  //    this.Delete(this.memberd);  /*referenced saved for possible deletes*/
 
-    this.replaceMemberInList(this.member);
-    this.picked = this.member;
+      this.replaceMemberInList(this.member);
+      this.picked = this.member;
 
-    if (this.member._id == null || this.member._id.length === 0)
-      this.member._id = this.member.firstName + this.member.lastName + this.member.email;
-    this.membercount = this.memberlist.length;
-    this.memservice.saveMember(this.member).subscribe((saveRes => {
-      this.member._rev = saveRes._rev;
-    }));
+      if (this.member._id == null || this.member._id.length === 0)
+        this.member._id = this.member.firstName + this.member.lastName + this.member.email;
+      this.membercount = this.memberlist.length;
+      this.memservice.saveMember(this.member).subscribe((saveRes => {
+        this.member._rev = saveRes._rev;
+      }));
+    }
+    else
+      this.saveResults = "No changes, save not required!";
   }
 
   Delete(p: Member) {
@@ -305,7 +309,6 @@ export class MembersComponent implements OnInit {
       }*/
 //      this.memberd = al;
 //      this.picked = al;
-//      this.isShowRefresh = true;
       this.saveResults = "";
       if (this.picked.isFamily === false)
         this.isShowAddFamily = true;
@@ -317,7 +320,6 @@ export class MembersComponent implements OnInit {
       this.isShowAddFamily = !al.isFamily;
       this.isShowToggleVIP = true;
       this.isShowDiscard = false;
-
     }
     else{
       this.btnstyle = "btn-red";
