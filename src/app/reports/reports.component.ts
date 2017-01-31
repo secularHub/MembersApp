@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Member} from '../members/member';
 import {MemberNJSService} from "../members/memberNJS.service";
 
-
 @Component({
   selector: 'app-reports',
   providers: [MemberNJSService],
@@ -12,8 +11,18 @@ import {MemberNJSService} from "../members/memberNJS.service";
 export class ReportsComponent implements OnInit {
 
   constructor(private ms: MemberNJSService) { }
-
   memberlist: Array<Member>;
+  justforspacing: string;
+  mailinglabelallReport: string;
+  mailinglabelactiveReport: string;
+  allemailReport: string;
+  activeemailReport: string;
+  eoytaxReport: string;
+  isShowEmail: boolean;
+  isShowSave: boolean;
+  isShowPrint: boolean;
+  isShowGenerate: boolean;
+
   private compareMember(left, right){
     let ln: string;
     let rn: string;
@@ -26,24 +35,49 @@ export class ReportsComponent implements OnInit {
       rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
     }
     else rn = "";
-    //return (ln < rn) ? -1 : (ln > rn) ? 1: 0;
     if (ln < rn) return -1;
     if (ln > rn) return 1; else return 0;
   }
-  ngOnInit() {
 
+  onSelEmail(){
+    this.isShowEmail = true;
+    this.isShowSave = true;
+    this.isShowPrint = true;
+    this.isShowGenerate = false;
+    this.justforspacing = "Emailed is not working yet"
+  }
+
+  onSelSave(){
+    this.isShowEmail = true;
+    this.isShowSave = true;
+    this.isShowPrint = true;
+    this.isShowGenerate = false;
+    this.justforspacing = "Save is not working yet"
+  }
+
+  onSelPrint(){
+    this.isShowEmail = true;
+    this.isShowSave = true;
+    this.isShowPrint = true;
+    this.isShowGenerate = false;
+    this.justforspacing = "Print is not working yet"
+  }
+
+  onMailingLabelAll(){
     this.ms.getAllDocs().subscribe(r1 => {
-      //this.memberlist = r1;
-      /*for (let em of r1) {
-       if (em.payments != null)
-       em.payments = em.payments.sort((l, r) => {
-       if (l.receivedDate < r.receivedDate) return 1;
-       if (l.receivedDate > r.receivedDate) return -1; else return 0;
-       });
-       }*/
       this.memberlist = r1.sort(this.compareMember);
-
     });
+//    alert("you selected Mailing Label report for All members")
+    this.isShowEmail = true;
+    this.isShowSave = true;
+    this.isShowPrint = true;
+    this.isShowGenerate = false;
+    this.justforspacing = "Select Delivery Meathod"
+  }
+
+  ngOnInit() {
+    this.justforspacing = "Reports Page";
+    this.isShowGenerate = true;
   }
 
 }

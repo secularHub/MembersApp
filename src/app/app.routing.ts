@@ -9,10 +9,9 @@ import { ReportsComponent } from './reports/reports.component';
 export const AppRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'members', component: MembersComponent },
-  /*{ path: 'members', component: MembersComponent },*/
   { path: 'maintenance', component: MaintenanceComponent },
   { path: 'nametags', component: NametagsComponent },
-  {path: 'reports', component: ReportsComponent}
+  { path: 'reports', component: ReportsComponent}
 ];
 
 export const routing = RouterModule.forRoot(

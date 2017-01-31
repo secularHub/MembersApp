@@ -56,6 +56,7 @@ export class PaymentComponent implements OnInit {
   payments: Array<IPayment>;
   ecol: string;
   pay: IPayment;
+  paypicked: IPayment;
   showInputs: boolean;
   showList: boolean;
   isShowDelete: boolean;
@@ -68,6 +69,13 @@ export class PaymentComponent implements OnInit {
   datetry: any;
   usermode: string;
   private pmts: Array<IPayment>;
+
+  private hasChanges(): boolean { 
+    if (JSON.stringify(this.pay) === JSON.stringify(this.paypicked))
+      return false;
+    else
+      return true;
+  }
 
   set humanDate(e){
     let ee = e.split('/');
@@ -87,15 +95,19 @@ export class PaymentComponent implements OnInit {
       if (this.pay.amount <= 0 || (this.lmember.firstName == undefined && this.lmember.lastName == undefined))
         this.saveResults = "Invalid amount or name! Cannot add payment.";
       else {
-        this.isShowAddNew = false;
-        this.isShowSubmit = true;
-        this.isShowDiscard = true;
-        this.isShowDelete = false;
-        this.saveResults = "";
-        this.payments.push(this.pay);
-        this.OnSaved.emit(true);
-        this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
-        this.saveResults = "Payment saved successfully!";
+        if (this.hasChanges()){
+          this.isShowAddNew = false;
+          this.isShowSubmit = true;
+          this.isShowDiscard = true;
+          this.isShowDelete = false;
+          this.saveResults = "";
+          this.payments.push(this.pay);
+          this.OnSaved.emit(true);
+          this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
+          this.saveResults = "Payment saved successfully!";
+        }
+        else
+          this.saveResults = "No changes, save not required!"
       }
     this.pay =  {receivedDate: new Date(), amount: 0, type: "check", targetDate: new Date(), active: false, receivedDateNumeric : 0};
     this.OnResponse.emit(this.saveResults);
@@ -163,9 +175,8 @@ export class PaymentComponent implements OnInit {
     this.isShowSubmit = true;
     this.isShowDiscard = false;
     this.isShowDelete = true;
+    this.paypicked = this.pay;
     this.OnPayModified.emit(true);
-
-
   }
 
   ngOnInit(){

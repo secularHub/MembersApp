@@ -1,20 +1,44 @@
-<div>
-  test
-</div>
-
-<p>
-  reports works!
-</p>
-<div class="body">
-<div *ngFor="let member of memberlist">
-  <div  class="theborder">
-    <div class="dmargin">
-      {{member.firstName}} {{member.lastName}} {{member.zip}}
-    </div>
+<!-- Main Page -->
+<div class="panel-body">
+  <div class="col-md-6">
+    <h1>Reports Page</h1>
+    <h3>Select Report: </h3>
+    <select required class="report-body">
+      <option value="">choose</option>
+      <option value="mailinglabelallReport" (click)="onMailingLabelAll()">Mailing Labels for all members</option>
+      <option value="mailinglabelactiveReport">Mailing Labels for all ACTIVE members</option>
+      <option value="allemailReport">All Member emails, comma delimmited</option>
+      <option value="activeemailReport">ACTIVE Member emails, comma delimmited</option>
+      <option value="eoytaxReport">End of year Tax Report for all paying members</option>
+    </select>
+    <button *ngIf="isShowGenerate" type="button" class="btn-custom" (click)="onMailingLabelAll()">Generate</button>
     <div>
-      {{member.phone}} {{member.skills}}
+      <h1 *ngIf="isShowEmail">{{justforspacing}}</h1>
+      <button *ngIf="isShowEmail" type="button" class="btn-custom" (click)="onSelEmail()">Email</button>
+      <button *ngIf="isShowSave" type="button" class="btn-custom" (click)="onSelSave()">Save</button>
+      <button *ngIf="isShowPrint" type="button" class="btn-custom" (click)="onSelPrint()">Print</button>
     </div>
   </div>
-</div>
-</div>
 
+<!-- Reports -->
+  <div class="col-md-6">
+    <div class="report-body">
+      <div>
+        <h3>{{reportName}}</h3>
+      </div>
+      <div *ngFor="let member of memberlist">
+        <div class="theborder">
+          <div>
+            {{member.firstName}} {{member.lastName}}
+          </div>
+          <div>
+            {{member.city}} {{member.state}} {{member.zip}}
+          </div>  
+          <div>
+            {{member.phone}} {{member.skills}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
