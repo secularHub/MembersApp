@@ -39,21 +39,6 @@ export class NametagsComponent implements OnInit {
     this.isPreview = false;
   }
 
-  onPreview() {
-    this.isPreview = true;
-    // Set the default 'nudge' value.
-    setTimeout(() => {
-      let margin = $('.nametags-firstname').css( 'marginTop' );
-      let value: number = parseFloat(margin)/96;    // px to in (pixels to inches)
-      this.nudgeSlider = this.changeSlider(this.nudgeSlider, value, -2, 2, 0.1, 0);
-      }
-      , 100);
-  }
-
-  onExitPreview() {
-    this.isPreview = false;
-  }
-
   onClickTable(member: Member) {
     //alert("onClickTable: " + member.firstName + ", " + member.lastName)
   }
@@ -64,10 +49,22 @@ export class NametagsComponent implements OnInit {
     return this._isPreview;
   }
   set isPreview(value: boolean) {
+    let needsUpdate : boolean = (this._isPreview === false && value === true);
+
     this._isPreview = value;
     this.app.setMenuHidden(this._isPreview);
+
+    if (needsUpdate) {
+      // Set the default 'nudge' value (after waiting for preview page to load).
+      setTimeout(() => {
+        let margin = $('.nametags-firstname').css( 'marginTop' );
+        let value: number = parseFloat(margin)/96;    // px to in (pixels to inches)
+        this.nudgeSlider = this.changeSlider(this.nudgeSlider, value, -2, 2, 0.1, 0);
+        }
+        , 100);
+    }
   }  
-    
+
 
   changedTop(value: number) {
     $('.nametags-page').animate({marginTop: '' +this.topSlider + 'in'}, 100);

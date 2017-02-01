@@ -2,17 +2,7 @@
   <app-login (OnLoginSuccess)="onLoginSuccess($event)"></app-login>
 </div>
 <div *ngIf="!(login||isMenuHidden)" class="setheight">
-
-    <!--<nav>
-      <ul>
-        <li class="width20"></li>
-        <li><button (click)="routeToMembers()" class="btn-custom">Members</button></li>
-        <li><button (click)="routeToMaintenance()" class="btn-custom">Maintenance</button></li>
-        <li><button (click)="routeToNameTags()" class="btn-custom">Name Tags</button></li>
-      </ul>
-    </nav>-->
     <as-navbar *ngIf="!login"></as-navbar>
-
 </div>
 <div class="deal" hidden="{{outletText}}">
   <router-outlet></router-outlet>

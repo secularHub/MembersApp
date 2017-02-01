@@ -7,7 +7,7 @@ import { MembersComponent } from './members/members.component';
 import { FilterPipe } from './members/filter.pipe';
 import { PaymentComponent } from './payment/payment.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
-import {routing} from "./app.routing";
+import { routing } from "./app.routing";
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { NametagsComponent } from './nametags/nametags.component';
@@ -32,7 +32,6 @@ import { ReportsComponent } from './reports/reports.component';
     FormsModule,
     HttpModule,
     routing
-
   ],
   providers: [],
   bootstrap: [AppComponent]
