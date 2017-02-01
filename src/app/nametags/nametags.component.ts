@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import {Member} from '../members/member';
-import {Router} from '@angular/router';
-import {AppComponent} from '../app.component';
-import {MemberNJSService} from "../members/memberNJS.service";
+import { Member } from '../members/member';
+import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
+import { MemberNJSService } from "../members/memberNJS.service";
 
 @Component({
   selector: 'app-nametags',
@@ -11,14 +11,6 @@ import {MemberNJSService} from "../members/memberNJS.service";
   providers: [ MemberNJSService ]
 })
 export class NametagsComponent implements OnInit {
-  @Output() onTopChanged = new EventEmitter<number>();
-  @Output() onLeftChanged = new EventEmitter<number>();
-  @Output() onNudgeChanged = new EventEmitter<number>();
-
-  private router: Router;
-  private app: AppComponent;
-  private memservice: MemberNJSService;
-  
   member: Member;
   memberlist: Array<Member>;
   rows: Array<NametagsComponent.Row>;
@@ -27,55 +19,93 @@ export class NametagsComponent implements OnInit {
   leftSlider : number = 0.0;
   nudgeSlider : number = 0.0;
 
-  isPreview: boolean = false;
+  // TODO: Make the logo URL configurable in some way.
   logoUrl: string = "/assets/images/cropped-faceboook-logo-whole-hub-e1454810467184.png";
 
-  constructor(private r: Router, private ms: MemberNJSService, private a: AppComponent) {
-    this.router = r;
-    this.memservice = ms;
-    this.app = a;
+  constructor(
+    private router: Router, 
+    private memservice: MemberNJSService, 
+    private app: AppComponent) {
+      // empty
   }
 
-  changedTop(value:number) {
-    this.onTopChanged.emit(value);
+  ngOnInit() {
+    this.navigateToRootWhenNotLoggedIn();
+    this.populateMemberList();
+    this.isPreview = false;
+  }
+
+  ngOnDestroy() {
+    this.isPreview = false;
+  }
+
+  onPreview() {
+    this.isPreview = true;
+    // Set the default 'nudge' value.
+    setTimeout(() => {
+      let margin = $('.nametags-firstname').css( 'marginTop' );
+      let value: number = parseFloat(margin)/96;    // px to in (pixels to inches)
+      this.nudgeSlider = this.changeSlider(this.nudgeSlider, value, -2, 2, 0.1, 0);
+      }
+      , 100);
+  }
+
+  onExitPreview() {
+    this.isPreview = false;
+  }
+
+  onClickTable(member: Member) {
+    //alert("onClickTable: " + member.firstName + ", " + member.lastName)
+  }
+
+  // isPreview property
+  private _isPreview: boolean = false;
+  get isPreview(): boolean {
+    return this._isPreview;
+  }
+  set isPreview(value: boolean) {
+    this._isPreview = value;
+    this.app.setMenuHidden(this._isPreview);
+  }  
+    
+
+  changedTop(value: number) {
     $('.nametags-page').animate({marginTop: '' +this.topSlider + 'in'}, 100);
   }
-  changedLeft(value:number) {
-    this.onLeftChanged.emit(value);
-    $('.nametags-page').animate({marginLeft: '' +this.leftSlider + 'in'}, 100);
-  }
-  changedNudge(value:number) {
-    this.onNudgeChanged.emit(value);
-    $('.nametags-firstname').animate({marginTop: '' +this.nudgeSlider + 'in'}, 100);
-  }
-
-  incTop(value:number) {
+  incTop(value: number) {
     this.topSlider = this.changeSlider(this.topSlider, this.topSlider + value, -2, 2, 0.1, 0);
     this.changedTop(this.topSlider);
   }
-  incLeft(value:number) {
-    this.leftSlider = this.changeSlider(this.leftSlider, this.leftSlider + value, -2, 2, 0.1, 0);
-    this.changedLeft(this.leftSlider);
-  }
-  incNudge(value:number) {
-    this.nudgeSlider = this.changeSlider(this.nudgeSlider, this.nudgeSlider + value, -2, 2, 0.1, 0);
-    this.changedNudge(this.nudgeSlider);
-  }
-
   topSliderChange(event) {
     this.topSlider = this.changeSlider(this.topSlider, event.target.value, -2, 2, 0.1, 0);
     this.changedTop(this.topSlider);
   }
+
+  changedLeft(value: number) {
+    $('.nametags-page').animate({marginLeft: '' +this.leftSlider + 'in'}, 100);
+  }
+  incLeft(value: number) {
+    this.leftSlider = this.changeSlider(this.leftSlider, this.leftSlider + value, -2, 2, 0.1, 0);
+    this.changedLeft(this.leftSlider);
+  }
   leftSliderChange(event) {
     this.leftSlider = this.changeSlider(this.leftSlider, event.target.value, -2, 2, 0.1, 0);
     this.changedLeft(this.leftSlider);
+  }
+
+  changedNudge(value: number) {
+    $('.nametags-firstname').animate({marginTop: '' +this.nudgeSlider + 'in'}, 100);
+  }
+  incNudge(value: number) {
+    this.nudgeSlider = this.changeSlider(this.nudgeSlider, this.nudgeSlider + value, -2, 2, 0.1, 0);
+    this.changedNudge(this.nudgeSlider);
   }
   nudgeSliderChange(event) {
     this.nudgeSlider = this.changeSlider(this.nudgeSlider, event.target.value, -2, 2, 0.1, 0);
     this.changedNudge(this.nudgeSlider);
   }
 
-  changeSlider(original, value ,min:number, max:number, step:number, defaultValue:number):number {
+  changeSlider(original, value, min: number, max: number, step: number, defaultValue: number): number {
     let result: number;
     let newValue: number = this.toRange(value, -2, 2, 0.1, 0);
     if (isNaN(original)) {
@@ -97,14 +127,14 @@ export class NametagsComponent implements OnInit {
     return result;
   }
 
-  toRange(value, min:number, max:number, step:number, defaultValue:number):number {
+  toRange(value, min: number, max: number, step: number, defaultValue: number): number {
     if (isNaN(value)) value = defaultValue;
     let result: number = parseFloat(value);
 
     if (result < min) result = min;
     if (result > max) result = max;
 
-    let low:number = Math.floor(result/step)*step;
+    let low: number = Math.floor(result/step)*step;
     if ( (result-low) < (low+step-result)) {
       result = low;
     }
@@ -115,39 +145,8 @@ export class NametagsComponent implements OnInit {
     return result;
   }
 
-  ngOnInit() {
-    this.navigateToRootWhenNotLoggedIn();
-    this.populateMemberList();
-    this.setPreview(false);
-  }
 
-  ngOnDestroy() {
-    this.setPreview(false);
-  }
-
-  /* Use this method to change isPreview.  DO NOT change this.isValue directly. */
-  setPreview(value: boolean) {
-    //if (value !== this.isPreview) {
-      this.isPreview = value;
-      this.app.setMenuHidden(this.isPreview);
-    //}
-  }
-
-  onPreview() {
-    this.setPreview(true);
-    // Set the default 'nudge' value.
-    setTimeout(() => {
-      let margin = $('.nametags-firstname').css( 'marginTop' );
-      let value: number = parseFloat(margin)/96;    // px to in (pixels to inches)
-      this.nudgeSlider = this.changeSlider(this.nudgeSlider, value, -2, 2, 0.1, 0);
-      }
-      , 100);
-  }
-
-  onExitPreview() {
-    this.setPreview(false);
-  }
-
+  // TODO: This is common code (with routines elsewhere in app).  Needs to be merged.
   navigateToRootWhenNotLoggedIn() {
     let jwt = localStorage.getItem('id_token');
     if(jwt.length == 0)
@@ -156,14 +155,14 @@ export class NametagsComponent implements OnInit {
 
   private populateMemberList(){
     this.memberlist = new Array<Member>();
-    this.ms.getAllDocs().subscribe(response => {
+    this.memservice.getAllDocs().subscribe(response => {
         this.memberlist = response.sort(this.compareMember);
         this.memberlist = this.memberlist.filter(
             member => member.needsNametag === true
         );
 
-        this.fillPreviewFromMemberList();
         // this.fillMemberListFromSamples();  // only for initial testing
+        this.fillPreviewFromMemberList();
       });
   }
 
@@ -235,16 +234,13 @@ export class NametagsComponent implements OnInit {
     return member.firstName.length + member.lastName.length === 0;
   }
 
-  onClickTable(member: Member) {
-    //alert("onClickTable: " + member.firstName + ", " + member.lastName)
-  }
-
   toYN(value) {
     return value===true ? "Y" : "N";
   }
 
 }
 
+// Make Row an inner class of NametagsComponent
 export module NametagsComponent {
   export class Row {
     public cols: Array<Member> = new Array<Member>();
