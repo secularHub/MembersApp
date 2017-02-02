@@ -176,7 +176,6 @@ input.form-control {
 
 /* reposition the divs in the header cells and place in the blank area of the headercontainer */
 .table-container thead {
-  width: 100%;
   background: #28130f;
   color: lightblue;
   padding: 2px 2px;

@@ -30,7 +30,6 @@ export class MembersComponent implements OnInit {
   memberd: Member;
   showInputs: boolean;
   payments: Array<IPayment>;
-  //ems: Array<ExtendedMember>;
   memberlist: Array<Member>;
   membercount: number;
   activecount: number;
@@ -96,13 +95,7 @@ export class MembersComponent implements OnInit {
   getMember(): Member { /*don't think this is being used */
     return this.member;
   }
-  /*
-   getExtended(): Array<ExtendedMember>{
-   if(this.ems == null)
-   this.ems = new Array<ExtendedMember>();
-   return this.ems;
-   }
-   */
+  
   private replaceMemberInList(m: Member)
   {
     let temp: Member;
@@ -312,7 +305,6 @@ export class MembersComponent implements OnInit {
       this.saveResults = "";
       if (this.picked.isFamily === false)
         this.isShowAddFamily = true;
-//        this.ems = this.member.ExtendedMembers;
       this.payments = this.member.payments;
       this.selected = true;
       this.isShowSubmit = true;
@@ -365,7 +357,7 @@ export class MembersComponent implements OnInit {
     //Here we do the initial call to get all of the id's from the database.
     //we are making the assumption that the data is in  a format we can use. validation is not yet implemented
     this.memberlist = new Array<Member>();
-    if (this.from === 'extended')  //from means user is coming from extendedMembers component so we don't have to go out to the server and recollect the data.
+/*    if (this.from === 'extended')  //from means user is coming from extendedMembers component so we don't have to go out to the server and recollect the data.
     {
       res = localStorage.getItem('members');
       if (res != null && res.indexOf('phone') > 0) {
@@ -376,7 +368,7 @@ export class MembersComponent implements OnInit {
         this.member = new Member('', false);
       }
     }
-    if (this.from !== 'extended') {
+    if (this.from !== 'extended') {*/
       this.ms.getAllDocs().subscribe(r1 => {
         this.memberlist = r1.sort(this.compareMember);
 
@@ -395,6 +387,6 @@ export class MembersComponent implements OnInit {
       this.picked = this.member;
       this.onAddNewMember();
 
-    }
+//    }
   }
 }

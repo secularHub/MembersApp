@@ -38,7 +38,6 @@ export class Member {
   Notes: string;
   isFamily: boolean;
   memType: string;
-  //ExtendedMembers: Array<ExtendedMember>;
   payments: Array<IPayment>;
 
   constructor(email: string, done = false) {
