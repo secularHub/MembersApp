@@ -6,6 +6,7 @@ body{
   color: #3cb0fd;
 }
 
+/* .rightmarg seems to be unused */
 .rightmarg {
   color: red;
 }
@@ -33,6 +34,18 @@ body{
   color: lightblue;
 }
 
+/* NOTE:
+See http://www.w3schools.com/cssref/css_selectors.asp
+The selector:    .form-control input
+would match an input element inside of an element marked with class form-control.
+These selectors below are probably not matching because the HTML is like:
+    <input ... class="form-control">
+The input element IS of class form-control.
+To match an input element that IS of class form-control use a selector like:
+    input.form-control
+*/
+
+/*
 .form-control option{
   background-color: #1d2528;
   color: lightblue;
@@ -43,6 +56,10 @@ body{
   color: lightblue;
   max-height: 2em;
   max-width: 4em;
+}
+*/
+input.form-control {
+  margin: 3px 0px 3px 0px;
 }
 
 /* Button Styles */
@@ -95,6 +112,7 @@ body{
   font-size: 14px;
   padding: 5px 10px 5px 10px;
   text-decoration: none;
+  margin: 5px 0px 5px 0px;
 }
 
 .btn-custom:hover {
