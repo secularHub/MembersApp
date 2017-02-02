@@ -188,10 +188,16 @@ input.form-control {
 .table-container tr{
   display: table-row;
 }
+.table-container td{
+  padding: 2px 6px;
+}
+.table-container th{
+  padding: 2px 6px;
+}
 .table-container tbody{
   overflow-y: auto;
   height: 221px;
-  padding: 2px 2px;
+  padding: 2px 6px;
   display: table-row-group;
   width: calc(100% - 16px); /* assuming scrollbar width as 16px */
 }
