@@ -50,7 +50,7 @@ export class PaymentComponent implements OnInit {
   }
 //  @Output() OnTransDate = new EventEmitter<string>();
   @Output() OnResponse = new EventEmitter<string>();
-  @Output() OnSaved = new EventEmitter<boolean>();
+  @Output() OnSaved = new EventEmitter<Member>();
   @Output() OnPayModified = new EventEmitter<boolean>();
   lmember: Member;
   payments: Array<IPayment>;
@@ -70,7 +70,7 @@ export class PaymentComponent implements OnInit {
   usermode: string;
   private pmts: Array<IPayment>;
 
-  private hasChanges(): boolean { 
+  private hasChanges(): boolean {
     if (JSON.stringify(this.pay) === JSON.stringify(this.paypicked))
       return false;
     else
@@ -102,7 +102,7 @@ export class PaymentComponent implements OnInit {
           this.isShowDelete = false;
           this.saveResults = "";
           this.payments.push(this.pay);
-          this.OnSaved.emit(true);
+          this.OnSaved.emit(this.member);
           this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
           this.saveResults = "Payment saved successfully!";
         }
@@ -128,7 +128,7 @@ export class PaymentComponent implements OnInit {
     this.isShowDelete = false;
 //    this.showInputs = true;
     this.saveResults = "";
-    this.OnSaved.emit(true);
+    this.OnSaved.emit(this.member);
     this.pay =  {receivedDate: new Date(), amount: 0, type: "", targetDate: new Date(), active: false, receivedDateNumeric: 0};
     this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
   }

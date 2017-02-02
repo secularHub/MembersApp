@@ -95,7 +95,7 @@ export class MembersComponent implements OnInit {
   getMember(): Member { /*don't think this is being used */
     return this.member;
   }
-  
+
   private replaceMemberInList(m: Member)
   {
     let temp: Member;
@@ -132,8 +132,8 @@ export class MembersComponent implements OnInit {
 
       if (this.member._id == null || this.member._id.length === 0)
         this.member._id = this.member.firstName + this.member.lastName + this.member.email;
-      this.membercount = this.memberlist.length;
-      this.memservice.saveMember(this.member).subscribe((saveRes => {
+        this.membercount = this.memberlist.length;
+        this.memservice.saveMember(this.member).subscribe((saveRes => {
         this.member._rev = saveRes._rev;
       }));
     }
@@ -221,13 +221,19 @@ export class MembersComponent implements OnInit {
    }
    */
 
-  onSave(b: boolean) {
-      this.submitForm();
-/*    this.memservice.putDoc(this.member);
-    this.ms.getDoc(this.member._id).subscribe(m => {
-     this.member = Object.assign({}, m);
-     this.picked = m;
-    });*/
+  onSave(m: Member) {
+      this.member = m;
+      this.memservice.saveMember(this.member).subscribe((saveRes => {
+        this.member._rev = saveRes._rev;
+        this.ms.getDoc(m._id).subscribe(m => {
+          this.member = Object.assign({}, m);
+          this.picked = m;
+          this.replaceMemberInList(this.member);
+
+        });
+      }));
+
+
   }
 
   onPayModified(b: boolean){
@@ -278,7 +284,7 @@ export class MembersComponent implements OnInit {
     this.ngOnInit();
   }
 
-  private hasChanges(): boolean { 
+  private hasChanges(): boolean {
     if (JSON.stringify(this.member) === JSON.stringify(this.picked))
       return false;
     else
