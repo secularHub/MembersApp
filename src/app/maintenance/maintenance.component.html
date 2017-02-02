@@ -51,10 +51,10 @@
         </div>
       </div>
     </div>  
-      <div class="row">
-        <div class="col-md-8">
-          <table class="table-container">
-            <tbody>
+    <div class="row">
+      <div class="col-md-8">
+        <table class="table-container">
+          <thead>
             <tr>
               <th>first name</th>
               <th>last name</th>
@@ -64,7 +64,9 @@
               <th>city state zip</th-->
               <th>active</th>
             </tr>
+          </thead>
 
+          <tbody>
             <tr  *ngFor="let al of (memberlist | asFilter:activeFilter:familyFilter:VIPFilter:nametagFilter:firstNameFilter:lastNameFilter);" [class.itemselected]="item === selectedItem" (click)="onClickTable(al)" >
 
               <td>{{al.firstName}}</td>

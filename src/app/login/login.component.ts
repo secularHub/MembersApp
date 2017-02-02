@@ -13,11 +13,22 @@ import { confignjs} from '../members/config';
 })
 
 export class LoginComponent implements OnInit, AfterViewInit {
+
+  @Output() OnLoginSuccess = new EventEmitter<boolean>();
   @ViewChildren('username') vc;
   someData: string;
 
-  constructor(public router: Router,public http: Http) { }
-  @Output() OnLoginSuccess = new EventEmitter<boolean>();
+  constructor(public router: Router, public http: Http) {
+    // empty
+  }
+
+  ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.vc.first.nativeElement.focus();
+  }
+
   login(event, username, password) {
     event.preventDefault();
     let h = confignjs.hostlocal;
@@ -37,10 +48,5 @@ export class LoginComponent implements OnInit, AfterViewInit {
           console.log(error.text());
         }
       );
-  }
-  ngOnInit() {
-  }
-  ngAfterViewInit() {
-    this.vc.first.nativeElement.focus();
   }
 }

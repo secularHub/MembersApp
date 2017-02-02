@@ -45,45 +45,33 @@
       <div class="col-md-8">
           <div>
             <table class="table-container">
-<!--              <thead>
-                <tr>
+              <thead>
+              <tr>
                   <th>first name</th>
                   <th>last name</th>
                   <th>phone</th>
                   <th>email</th>
-
+  <!--
                   <th>address</th>
                   <th>city state zip</th>
-
+  -->
                   <th>active</th>
                 </tr>
               </thead>
--->
+
               <tbody>
-              <tr>
-                <th>first name</th>
-                <th>last name</th>
-                <th>phone</th>
-                <th>email</th>
-<!--
-                <th>address</th>
-                <th>city state zip</th>
--->
-                <th>active</th>
-              </tr>
+                <tr  *ngFor="let al of (memberlist | asFilter:activeFilter:familyFilter:VIPFilter:nametagFilter:firstNameFilter:lastNameFilter);" [class.itemselected]="item === selectedItem" (click)="onUsingTable(al)" >
 
-              <tr  *ngFor="let al of (memberlist | asFilter:activeFilter:familyFilter:VIPFilter:nametagFilter:firstNameFilter:lastNameFilter);" [class.itemselected]="item === selectedItem" (click)="onUsingTable(al)" >
-
-                <td> {{al.firstName}} </td>
-                <td> {{al.lastName}} </td>
-                <td>{{al.phone}}</td>
-                <td>{{al.email}}</td>
-<!--
-                <td> {{al.address}}</td>
-                <td> {{al.city}} {{al.state}} {{al.zip}}</td>
--->
-                <td>{{isChecked(al.isActive)}}</td>
-              </tr>
+                  <td> {{al.firstName}} </td>
+                  <td> {{al.lastName}} </td>
+                  <td>{{al.phone}}</td>
+                  <td>{{al.email}}</td>
+  <!--
+                  <td> {{al.address}}</td>
+                  <td> {{al.city}} {{al.state}} {{al.zip}}</td>
+  -->
+                  <td>{{isChecked(al.isActive)}}</td>
+                </tr>
             </tbody>
             </table>
           </div>

@@ -14,6 +14,15 @@ body{
   height: 38px;
 }
 
+.panel {
+  background-color: #1d2528;
+  color: lightblue;
+}
+
+.login-label {
+  width: 80px;
+}
+
 .form-inline{
   background-color: #1d2528;
   color: lightblue;
@@ -137,11 +146,11 @@ body{
   overflow-y: auto;
   height: 221px;
   background: #1d2528;
+  color: lightblue;
   border-spacing: 0;
   width:100%;
   display: block;
   float: left;
-
 }
 .table-container tr:nth-child(even){
   background-color: #28130f;
@@ -150,24 +159,23 @@ body{
 /* reposition the divs in the header cells and place in the blank area of the headercontainer */
 .table-container thead {
   width: 100%;
-  background: #000;
-  color: #c9182d;
+  background: #28130f;
+  color: lightblue;
   padding: 2px 2px;
   /*top: 0;*/
-  display: table;
+  display: table-header-group;
   /*margin-left: 1px;*/
   line-height: normal;
   width: calc(100% - 16px); /* assuming scrollbar width as 16px */
-
 }
 .table-container tr{
-  /*display: table;*/
+  display: table-row;
 }
 .table-container tbody{
   overflow-y: auto;
   height: 221px;
   padding: 2px 2px;
-  display: table;
+  display: table-row-group;
   width: calc(100% - 16px); /* assuming scrollbar width as 16px */
 }
 
