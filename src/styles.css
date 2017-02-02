@@ -33,6 +33,16 @@ body{
   background-color: #1d2528;
   color: lightblue;
 }
+.form-control-amt{
+  background-color: #1d2528;
+  color: lightblue;
+  width: 70px;
+}
+.form-control-pt{
+  background-color: #1d2528;
+  color: lightblue;
+  width: 120px;
+}
 
 /* NOTE:
 See http://www.w3schools.com/cssref/css_selectors.asp
@@ -168,7 +178,7 @@ input.form-control {
   border-spacing: 0;
   width:100%;
   display: block;
-  float: left;
+  float: right;
 }
 .table-container tr:nth-child(even){
   background-color: #28130f;
@@ -184,6 +194,7 @@ input.form-control {
   /*margin-left: 1px;*/
   line-height: normal;
   width: calc(100% - 16px); /* assuming scrollbar width as 16px */
+
 }
 .table-container tr{
   display: table-row;
