@@ -53,11 +53,6 @@
 .ng-invalid:not(form) {
   border-left: 5px solid orange; /* orange */
 }
-.form-group{
-  background-color: #1d2528;
-  color: lightblue;
-}
-
 .clred {
   color: #830000;
 }

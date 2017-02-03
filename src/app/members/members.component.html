@@ -17,15 +17,15 @@
         <div class="form-inline">
           <div>
             <label for="selActive">is active</label>
-            <input type="checkbox" id="selActive" name="selActive" value="false" class="form-control" [(ngModel)]="activeFilter">
+            <input type="checkbox" id="selActive" name="selActive" value="false" class="form-control input-custom" [(ngModel)]="activeFilter">
             <label for="selVIP">is VIP</label>
-            <input type="checkbox" id="selVIP" name="selVIP" value="false" class="form-control" [(ngModel)]="VIPFilter">
+            <input type="checkbox" id="selVIP" name="selVIP" value="false" class="form-control input-custom" [(ngModel)]="VIPFilter">
           </div>
           <div>
             <label for="selFamily">is family</label>
-            <input type="checkbox" id="selFamily" name="selFamily" value="false" class="form-control" [(ngModel)]="familyFilter">
+            <input type="checkbox" id="selFamily" name="selFamily" value="false" class="form-control input-custom" [(ngModel)]="familyFilter">
             <label for="selNametag">needs name tag</label>
-            <input type="checkbox" id="selNametag" name="selNametag" value="false" class="form-control" [(ngModel)]="nametagFilter">
+            <input type="checkbox" id="selNametag" name="selNametag" value="false" class="form-control input-custom" [(ngModel)]="nametagFilter">
           </div>
 
           <div>
@@ -85,7 +85,7 @@
     <div class="row">
       <div class="col-md-6">
         <div >
-          <h3>Member Information</h3>
+          <h3>Member Detail</h3>
         </div>
         <div class="form-group">
           <form (submit)="submitForm()" #memberForm="ngForm" autocomplete="off">
