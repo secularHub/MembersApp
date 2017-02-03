@@ -1,9 +1,7 @@
 <div *ngIf="login">
   <app-login (OnLoginSuccess)="onLoginSuccess($event)"></app-login>
 </div>
-<div *ngIf="!(login||isMenuHidden)" class="setheight">
-    <as-navbar *ngIf="!login"></as-navbar>
-</div>
+<as-navbar *ngIf="!login"></as-navbar>
 <div class="deal" hidden="{{outletText}}">
   <router-outlet></router-outlet>
 </div>

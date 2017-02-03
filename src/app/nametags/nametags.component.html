@@ -4,7 +4,7 @@
 <div *ngIf="!isPreview" class="panel">
 
   <div class="panel-body">
-    <button type="button" class="btn-custom nametags-cornered" (click)="isPreview=true" >Preview</button>
+    <button type="button" class="btn-custom nametags-cornered nametags-left" (click)="isPreview=true" >Preview</button>
     <div class="row">
       <div class="col-md-8">
         <h1>Name Tags Page</h1>
@@ -39,8 +39,8 @@
 <!-- Preview page -->
 <div *ngIf="isPreview" class="nametags-previewpage">
 
-  <div class="nametags-controlpanel no-print nametags-cornered">
-    <button type="button" class="btn-custom nametags-cornered no-print" (click)="isPreview=false" >Exit Preview</button>
+  <div class="nametags-controlpanel hidden-print nametags-cornered">
+    <button type="button" class="btn-custom nametags-cornered nametags-left" (click)="isPreview=false" >Exit Preview</button>
     
     <p class="nametags-bold nametags-pushdown">Adjust Margins</p>
     <p class="nametags-sliderlabel">(-2.0 to 2.0)</p>

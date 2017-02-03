@@ -8,4 +8,15 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class NavbarComponent  {
 
+  ngOnInit() {
+    this.setupClickForHover();
+  }
+
+  private setupClickForHover() {
+    $('.nav .menu-dropdown .menu-button').hover(
+      function() { $(this).click(); },
+      function() { /* do nothing */ }
+    );
+  }
+
 }

@@ -1,25 +1,15 @@
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Secular Hub Members</a>
-    </div>
-    <div id="navbar" class="collapse navbar-collapse">
+<ul class="nav navbar-nav hidden-print">
+  <div class="dropdown menu-dropdown">
+    <button class="btn btn-primary dropdown-toggle menu-button" type="button" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-menu-hamburger menu-icon"></span></button>
 
-      <ul class="nav navbar-nav">
-        <li><a [routerLink]="['members']">Members</a></li>
-        <li><a [routerLink]="['maintenance']">Maintenance</a></li>
-        <li><a [routerLink]="['nametags']">Name tags</a></li>
-        <li><a [routerLink]="['reports']">Reports</a></li>
-      </ul>
-
-    </div>
+    <ul class="dropdown-menu pull-right">
+      <li><a [routerLink]="['members']">Members</a></li>
+      <li><a [routerLink]="['maintenance']">Maintenance</a></li>
+      <li><a [routerLink]="['nametags']">Name tags</a></li>
+      <li><a [routerLink]="['reports']">Reports</a></li>
+    </ul>
+    
   </div>
-</nav>
-
+</ul>

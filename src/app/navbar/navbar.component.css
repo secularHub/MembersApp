@@ -1,3 +1,37 @@
-.set-height{
-  height: 50px;
+
+.menu-dropdown {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  margin: 5px;
+  z-index: 99999;
+}
+.menu-dropdown .menu-button {
+  border: 0px;
+  background-color: #1d2528;
+  color: lightblue;
+}
+.menu-dropdown .menu-icon {
+  color: lightblue;
+  font-size: 3em;
+}
+.menu-dropdown .menu-icon:hover {
+  color: green;
+}
+.menu-dropdown ul,
+.menu-dropdown a {
+  background-color: #28130f;
+  color: lightblue;
+  font-weight: bold;
+  font-size: large;
+}
+.menu-dropdown a:hover
+{
+  background-color: #415359;
+  color: #eef7fa;
+  font-weight: bold;
+  font-size: large;
+}
+.menu-dropdown li {
+  text-align: right;
 }
