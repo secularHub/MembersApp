@@ -80,11 +80,6 @@ h3{
 .widthZip{
   width: 70px;
 }
-.input-custom{
-  border-style: inset;
-  border-color: lightgreen;
-  height: 25px;
-}
 .deal{
   background-color: #1d2528;
   color: lightgrey;
@@ -95,10 +90,6 @@ h3{
   font-size: large;
   min-height: 20px;
   min-width: 50px;
-}
-.badge:hover {
-  background-color: orangered;
-  cursor: pointer;
 }
 .list-options {
   vertical-align: middle;
@@ -354,14 +345,6 @@ h3{
   background-color: #1d2528;
   color: #ade6fb;
   border-radius: 4px 0 0 4px;
-}
-
-.heroes .badge {
-  background-color: #1f2f2f;
-  position: relative;
-  font-size: 10;
-  font-weight: 200;
-  border-radius: 4px;
 }
 
 .station {

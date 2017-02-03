@@ -4,10 +4,39 @@ html{
   text-size-adjust: 100%;
 }
 
-/* Classes */
+h1{ /* colors of the heading text */
+  background: #1d2528;
+  color: #e5f1fd;
+}
+
+h2{
+  background: #1d2528;
+  color: lightblue;
+}
+
+h3{
+  background: #1d2528;
+  color: #5badff;
+}
+
 body{
   background: #1d2528;
-  color: #3cb0fd;
+  color: lightblue;
+}
+
+/*.heroes .badge {*/
+.badge {
+  background-color: darkslategrey;
+  color: lawngreen;
+  position: relative;
+  font-size: 14;
+  font-weight: 250;
+  border-radius: 4px;
+}
+
+.badge:hover {
+  background-color: grey;
+  cursor: pointer;
 }
 
 /* .rightmarg seems to be unused */
@@ -24,24 +53,50 @@ body{
   width: 80px;
 }
 
+.input-custom{
+  border-style: inset;
+  border-color: lightgreen;        /* Border color of the members component input fields */
+  height: 25px;                      /* This controls the height of all the input fields */
+}
+
+.form-group{
+  background-color: #1d2528;
+  color: lightblue;
+}
 .form-inline{
   background-color: #1d2528;
   color: lightblue;
 }
-
 .form-control {
   background-color: #1d2528;
   color: lightblue;
+}
+.form-control-dt{
+  background-color: #1d2528;
+  color: lightblue;
+  width: 150px;
+  border-bottom-color: #3c763d;
+  border-left-color: #3c763d;
+  border-right-color: #3c763d;
+  border-top-color: #3c763d;
 }
 .form-control-amt{
   background-color: #1d2528;
   color: lightblue;
   width: 70px;
+  border-bottom-color: #3c763d;
+  border-left-color: #3c763d;
+  border-right-color: #3c763d;
+  border-top-color: #3c763d;
 }
 .form-control-pt{
   background-color: #1d2528;
   color: lightblue;
   width: 120px;
+  border-bottom-color: #3c763d;
+  border-left-color: #3c763d;
+  border-right-color: #3c763d;
+  border-top-color: #3c763d;
 }
 
 /* NOTE:
@@ -120,7 +175,7 @@ input.form-control {
   font-family: Arial;
   color: yellow;
   font-size: 14px;
-  padding: 5px 10px 5px 10px;
+  padding: 3px 10px 3px 10px;
   text-decoration: none;
   /* margin: 5px 0px 5px 0px; */
 }
@@ -178,7 +233,6 @@ input.form-control {
   border-spacing: 0;
   width:100%;
   display: block;
-  float: right;
 }
 .table-container tr:nth-child(even){
   background-color: #28130f;
