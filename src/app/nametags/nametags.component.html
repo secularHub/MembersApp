@@ -10,24 +10,20 @@
         <h1>Name Tags Page</h1>
         <div>
           <table class="table-container">
-            <thead>
-              <tr>
-                <th class="nametags-gridcell">first name</th>
-                <th class="nametags-gridcell">last name</th>
-                <th class="nametags-gridcell">phone</th>
-                <th class="nametags-gridcell">email</th>
-                <th class="nametags-gridcell">active</th>
-              </tr>
-            </thead>
-
             <tbody>
-              <!-- <tr  *ngFor="let al of (memberlist | asFilter:activeFilter:familyFilter:VIPFilter:nametagFilter:firstNameFilter:lastNameFilter);" [class.itemselected]="item === selectedItem" (click)="onUsingTable(al)" > -->
-              <tr  *ngFor="let al of memberlist;" [class.itemselected]="item === selectedItem" (click)="onClickTable(al)" >
-                <td class="nametags-gridcell"> {{al.firstName}} </td>
-                <td class="nametags-gridcell"> {{al.lastName}} </td>
-                <td class="nametags-gridcell"> {{al.phone}} </td>
-                <td class="nametags-gridcell"> {{al.email}} </td>
-                <td class="nametags-gridcell"> {{ toYN(al.isActive) }} </td>
+              <tr>
+                <th>first name</th>
+                <th>last name</th>
+                <th>phone</th>
+                <th>email</th>
+                <th>active</th>
+              </tr>
+              <tr *ngFor="let al of memberlist;" [class.itemselected]="item === selectedItem" (click)="onClickTable(al)" >
+                <td> {{al.firstName}} </td>
+                <td> {{al.lastName}} </td>
+                <td> {{al.phone}} </td>
+                <td> {{al.email}} </td>
+                <td> {{ toYN(al.isActive) }} </td>
               </tr>
             </tbody>
           </table>

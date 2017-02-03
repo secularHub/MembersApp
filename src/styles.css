@@ -69,7 +69,7 @@ To match an input element that IS of class form-control use a selector like:
 }
 */
 input.form-control {
-  margin: 3px 0px 3px 0px;
+  /* margin: 3px 0px 3px 0px; */
 }
 
 /* Button Styles */
@@ -122,7 +122,7 @@ input.form-control {
   font-size: 14px;
   padding: 5px 10px 5px 10px;
   text-decoration: none;
-  margin: 5px 0px 5px 0px;
+  /* margin: 5px 0px 5px 0px; */
 }
 
 .btn-custom:hover {
@@ -186,30 +186,29 @@ input.form-control {
 
 /* reposition the divs in the header cells and place in the blank area of the headercontainer */
 .table-container thead {
-  background: #28130f;
-  color: lightblue;
+  background: #000;
+  color: #c9182d;
   padding: 2px 2px;
   /*top: 0;*/
-  display: table-header-group;
+  display: table;
   /*margin-left: 1px;*/
   line-height: normal;
   width: calc(100% - 16px); /* assuming scrollbar width as 16px */
-
 }
-.table-container tr{
-  display: table-row;
+.table-container tr {
+  /*display: table;*/
 }
-.table-container td{
+.table-container td {
   padding: 2px 6px;
 }
-.table-container th{
+.table-container th {
   padding: 2px 6px;
 }
-.table-container tbody{
+.table-container tbody {
   overflow-y: auto;
   height: 221px;
   padding: 2px 6px;
-  display: table-row-group;
+  display: table;
   width: calc(100% - 16px); /* assuming scrollbar width as 16px */
 }
 
