@@ -36,10 +36,6 @@
   min-height: 20px;
   min-width: 50px;
 }
-.badge:hover {
-  background-color: orangered;
-  cursor: pointer;
-}
 .list-options {
   vertical-align: middle;
   display: inline-block;
@@ -60,50 +56,10 @@
   color: #3c763d;
 }
 
-.itemtable {
-  background-color: #1f2f2f;
-  margin: 0 0 1em 0;
-  color: #a8af87;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: normal;
-  font-size: x-small;
-  padding-left: 4px;
-  max-height: 200px;
-  overflow: auto;
-
-}
-
 .image {
   border: 1px solid darkgray;
   border-collapse: collapse;
   width: 2em;
-}
-
-.itemtable tr {
-
-  color: #c0c9c7;
-}
-
-.itemtable tr th{
-  min-width: 3em;
-  padding: .5em 8px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-}
-.itemtable tr td{
-  padding: .2em 8px;
-  max-height: 2em;
-  color: yellow;
-
-}
-.input-short{
-  background-color: #1f2f2f;
-  border-color: #102020;
-  color: #ffc12b;
-  max-height: 2em;
-  width: 4em;
-  border-radius: 6px;
-  padding: .2em;
 }
 
 .input{
@@ -114,18 +70,6 @@
   max-height: 2em;
   width: auto;
   padding: .2em;
-}
-
-.itemtable tr.selected:hover {
-  background-color: #1f2f2f !important;
-  color: #c0c9c7;
-  cursor: pointer;
-}
-
-.itemtable tr:hover {
-  color: #c0c9c7;
-  background-color: #396763;
-  left: .1em;
 }
 
 .horizontal li {

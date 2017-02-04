@@ -122,10 +122,11 @@ To match an input element that IS of class form-control use a selector like:
   max-height: 2em;
   max-width: 4em;
 }
-*/
+
 input.form-control {
-  /* margin: 3px 0px 3px 0px; */
+  /* margin: 3px 0px 3px 0px; 
 }
+*/
 
 /* Button Styles */
 
@@ -219,10 +220,60 @@ input.form-control {
 */
 /* Table styles */
 
-#scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
-#scrolltable th div { position: absolute; margin-top: -20px; }
+/*Payment Table*/
+/*#scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
+#scrolltable th div { position: absolute; margin-top: -20px; }*/
 #scrolltableskinny { color:#FFFF99; margin-top: 20px; height: 240px; overflow: auto; }
-#scrolltableskinny th div { position: absolute; margin-top: -20px; }
+#scrolltableskinny th div { color:#FFFF99; position: absolute; margin-top: -20px; }
+
+.itemtable {
+  background-color: #1f2f2f;
+  margin: 0 0 1em 0;
+  color: #a8af87;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+  font-size: x-small;
+  padding-left: 4px;
+  max-height: 200px;
+  overflow: auto;
+}
+.itemtable tr {
+  color: #c0c9c7;
+}
+.itemtable tr th{
+  min-width: 3em;
+  padding: .5em 8px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.itemtable tr td{
+  padding: .2em 8px;
+  max-height: 2em;
+  color: lightblue;
+}
+.input-short{
+  background-color: #1f2f2f;
+  border-color: #102020;
+  color: #ffc12b;
+  max-height: 2em;
+  width: 4em;
+  border-radius: 6px;
+  padding: .2em;
+}
+.itemtable tr.selected:hover {
+  background-color: #1f2f2f !important;
+  color: #FFFF99;
+  cursor: pointer;
+}
+.itemtable tr:hover {
+  color: #FFFF99;
+  background-color: #396763;
+  left: .1em;
+}
+.itemtable td:hover {
+  color: #FFFF99;
+  background-color: #396763;
+  left: .1em;
+}
 
 /* this is for the data area that is scrollable */
 .table-container {
