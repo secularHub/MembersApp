@@ -137,14 +137,13 @@ export class PaymentComponent implements OnInit {
     this.isShowSubmit = true;
     this.isShowDiscard = true;
     this.isShowDelete = false;
-//    this.showInputs = true;
     this.saveResults = "";
     this.OnSaved.emit(this.member);
     this.pay =  {receivedDate: new Date(), amount: 0, type: "", targetDate: new Date(), active: false, receivedDateNumeric: 0};
     this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
   }
-
-  onAdd(){ /*Not being used at the moment */
+/* Not being used at the moment 
+  onAdd(){ 
     if ((this.member.firstName == undefined && this.member.lastName == undefined) || this.pay.amount <= 0)
       this.saveResults = "Invalid member or amount! Cannot add payment";
     else
@@ -159,7 +158,7 @@ export class PaymentComponent implements OnInit {
           this.saveResults = "Changes saved successfully!";
         else
           this.saveResults = "Save Failed! Refresh and try again."
-      });*/
+      });
       this.isShowAddNew = true;
       this.isShowSubmit = false;
       this.isShowDiscard = true;
@@ -169,7 +168,7 @@ export class PaymentComponent implements OnInit {
         this.lmember.index++;
       this.OnPayModified.emit(true);
     }
-
+*/
   onDiscard(){
     this.saveResults = "";
     this.isShowAddNew = false;
@@ -215,8 +214,3 @@ export class PaymentComponent implements OnInit {
      */
   }
 }
-
-
-/**
- * Created by fox21 on 12/18/2016.
- */

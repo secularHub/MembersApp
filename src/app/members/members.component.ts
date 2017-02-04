@@ -62,6 +62,7 @@ export class MembersComponent implements OnInit {
 //  private payservice: PaymentComponent;
 
   private showCompleted: Boolean;
+  logoUrl: string = "/assets/images/cropped-faceboook-logo-whole-hub-e1454810467184.png";
 
   //  memberlist: FirebaseListObservable<any[]>;
   constructor(private r: Router, private ms: MemberNJSService) {
