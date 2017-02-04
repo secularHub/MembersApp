@@ -130,7 +130,7 @@ export class PaymentComponent implements OnInit {
   }
 
   onDelete(){
-    this.Delete(this.pay);
+    this.Delete(this.paypicked);
     this.isShowAddNew = false;
     this.isShowSubmit = true;
     this.isShowDiscard = true;
