@@ -6,17 +6,18 @@ html{
 
 h1{ /* colors of the heading text */
   background: #1d2528;
-  color: #e5f1fd;
+  color: #FFCC99
+;
 }
 
 h2{
   background: #1d2528;
-  color: lightblue;
+  color: #FFCC99;
 }
 
 h3{
   background: #1d2528;
-  color: #5badff;
+  color: #FFCC99;
 }
 
 body{
@@ -24,10 +25,9 @@ body{
   color: lightblue;
 }
 
-/*.heroes .badge {*/
 .badge {
-  background-color: darkslategrey;
-  color: lawngreen;
+  background-color: #99FFFF;
+  color: #FF1F1F;
   position: relative;
   font-size: 14;
   font-weight: 250;
@@ -35,7 +35,7 @@ body{
 }
 
 .badge:hover {
-  background-color: grey;
+  background-color: #5cFFFF;
   cursor: pointer;
 }
 
@@ -55,7 +55,7 @@ body{
 
 .input-custom{
   border-style: inset;
-  border-color: lightgreen;        /* Border color of the members component input fields */
+  border-color: #5CFFFF;        /* Border color of the members component input fields */
   height: 25px;                      /* This controls the height of all the input fields */
 }
 
@@ -75,28 +75,28 @@ body{
   background-color: #1d2528;
   color: lightblue;
   width: 150px;
-  border-bottom-color: #3c763d;
-  border-left-color: #3c763d;
-  border-right-color: #3c763d;
-  border-top-color: #3c763d;
+  border-bottom-color: #5CFFFF;
+  border-left-color: #5CFFFF;
+  border-right-color: #5CFFFF;
+  border-top-color: #5CFFFF;
 }
 .form-control-amt{
   background-color: #1d2528;
   color: lightblue;
   width: 70px;
-  border-bottom-color: #3c763d;
-  border-left-color: #3c763d;
-  border-right-color: #3c763d;
-  border-top-color: #3c763d;
+  border-bottom-color: #5CFFFF;
+  border-left-color: #5CFFFF;
+  border-right-color: #5CFFFF;
+  border-top-color: #5CFFFF;
 }
 .form-control-pt{
   background-color: #1d2528;
   color: lightblue;
   width: 120px;
-  border-bottom-color: #3c763d;
-  border-left-color: #3c763d;
-  border-right-color: #3c763d;
-  border-top-color: #3c763d;
+  border-bottom-color: #5CFFFF;
+  border-left-color: #5CFFFF;
+  border-right-color: #5CFFFF;
+  border-top-color: #5CFFFF;
 }
 
 /* NOTE:
@@ -143,7 +143,7 @@ input.form-control {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family: Arial;
-  color: yellow;
+  color: #FFFF99;
   font-size: 14px;
   padding: 5px 10px 5px 10px;
   text-decoration: none;
@@ -160,12 +160,12 @@ input.form-control {
 }
 
 .btn-custom {
-  background: #3439db;
-  background-image: -webkit-linear-gradient(top, #3439db, #041d2d);
-  background-image: -moz-linear-gradient(top, #3439db, #041d2d);
-  background-image: -ms-linear-gradient(top, #3439db, #041d2d);
-  background-image: -o-linear-gradient(top, #3439db, #041d2d);
-  background-image: linear-gradient(to bottom, #3439db, #041d2d);
+  background: #99CCFF;
+  background-image: -webkit-linear-gradient(top, #99CCFF, #041d2d);
+  background-image: -moz-linear-gradient(top, #99CCFF, #041d2d);
+  background-image: -ms-linear-gradient(top, #99CCFF, #FF5C5C);
+  background-image: -o-linear-gradient(top, #99CCFF, #041d2d);
+  background-image: linear-gradient(to bottom, #99CCFF, #041d2d);
   -webkit-border-radius: 18;
   -moz-border-radius: 18;
   border-radius: 18px;
@@ -173,7 +173,7 @@ input.form-control {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family: Arial;
-  color: yellow;
+  color: #FFFF99;
   font-size: 14px;
   padding: 3px 10px 3px 10px;
   text-decoration: none;
@@ -181,15 +181,15 @@ input.form-control {
 }
 
 .btn-custom:hover {
-  background: #3f50d2;
-  background-image: -webkit-linear-gradient(top, #3f50d2, #363a5a);
-  background-image: -moz-linear-gradient(top, #3f50d2, #363a5a);
-  background-image: -ms-linear-gradient(top, #3f50d2, #363a5a);
-  background-image: -o-linear-gradient(top, #3f50d2, #363a5a);
-  background-image: linear-gradient(to bottom, #3f50d2, #363a5a);
+  background: #5CFFFF;
+  background-image: -webkit-linear-gradient(top, #5CFFFF, #363a5a);
+  background-image: -moz-linear-gradient(top, #5CFFFF, #363a5a);
+  background-image: -ms-linear-gradient(top, #5CFFFF, #FFCC99);
+  background-image: -o-linear-gradient(top, #5CFFFF, #363a5a);
+  background-image: linear-gradient(to bottom, #5CFFFF, #363a5a);
   text-decoration: none;
 }
-
+/*
 .btn {
   background: #242b30;
   background-image: -webkit-linear-gradient(top, #242b30, #20292e);
@@ -216,7 +216,7 @@ input.form-control {
   background-image: linear-gradient(to bottom, #000000, #111111);
   text-decoration: none;
 }
-
+*/
 /* Table styles */
 
 #scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
