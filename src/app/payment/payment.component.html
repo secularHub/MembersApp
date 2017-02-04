@@ -40,8 +40,8 @@
       </tr>
       <tr  *ngFor="let tpay of payments" [class.itemselected]="item === selectedItem" (click)="onPaymentTable(tpay)">
         <td nowrap> {{tpay.receivedDate.toLocaleString() | date:"yyyy-MM-dd"}}</td>
-        <td> {{tpay.amount}}</td>
-        <td>{{tpay.type}}</td>
+        <td nowrap> {{tpay.amount}}</td>
+        <td nowrap> {{tpay.type}}</td>
       </tr>
     </table>
   </div>
