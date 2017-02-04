@@ -39,9 +39,15 @@
         <th>type</th>
       </tr>
       <tr  *ngFor="let tpay of payments" [class.itemselected]="item === selectedItem" (click)="onPaymentTable(tpay)">
-        <td nowrap> {{tpay.receivedDate.toLocaleString() | date:"yyyy-MM-dd"}}</td>
+<<<<<<< HEAD
+        <td nowrap> {{tpay.receivedDate | date:"yyyy-MM-dd"}}</td>
         <td nowrap> {{tpay.amount}}</td>
         <td nowrap> {{tpay.type}}</td>
+=======
+        <td nowrap> {{tpay.receivedDate | date:"yyyy-MM-dd"}}</td>
+        <td> {{tpay.amount}}</td>
+        <td>{{tpay.type}}</td>
+>>>>>>> 3d9bccc4e516450cf2f80629ab104f67e7780eb0
       </tr>
     </table>
   </div>
