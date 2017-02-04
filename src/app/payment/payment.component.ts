@@ -79,8 +79,10 @@ export class PaymentComponent implements OnInit {
 
   set humanDate(e){
     let ee = e.split('-');
-    let d = new Date(Date.UTC(Number(ee[0]), Number(ee[1])-1, Number(ee[2])));
+    let d = new Date(Date.UTC(Number(ee[0]), Number(ee[1])-1, Number(ee[2])+1)) ;
+    //let utc = new Date(d.toUTCString());
     this.pay.receivedDate = new Date(d.toISOString().substring(0,19));
+    //this.pay.receivedDate = new Date(utc.toISOString().substring(0,19));
   }
   get humanDate(){
     if(this.pay != null) {
