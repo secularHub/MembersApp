@@ -96,12 +96,13 @@ export class PaymentComponent implements OnInit {
         this.saveResults = "Invalid amount or name! Cannot add payment.";
       else {
         if (this.hasChanges()){
+          this.Delete(this.paypicked);
+          this.member.payments.push(this.pay);
           this.isShowAddNew = false;
           this.isShowSubmit = true;
           this.isShowDiscard = true;
           this.isShowDelete = false;
           this.saveResults = "";
-          this.payments.push(this.pay);
           this.OnSaved.emit(this.member);
           this.payments = this.payments.sort((l,r) => {if (l.receivedDate < r.receivedDate) return 1; if(l.receivedDate > r.receivedDate) return -1; else return 0;});
           this.saveResults = "Payment saved successfully!";
@@ -109,6 +110,7 @@ export class PaymentComponent implements OnInit {
         else
           this.saveResults = "No changes, save not required!"
       }
+
     this.pay =  {receivedDate: new Date(), amount: 0, type: "check", targetDate: new Date(), active: false, receivedDateNumeric : 0};
     this.OnResponse.emit(this.saveResults);
   }
@@ -169,13 +171,13 @@ export class PaymentComponent implements OnInit {
   }
 
   public onPaymentTable(pay :IPayment){
-    this.pay = pay;
+    this.pay = Object.assign({},pay);
     this.saveResults = "";
     this.isShowAddNew = false;
     this.isShowSubmit = true;
     this.isShowDiscard = false;
     this.isShowDelete = true;
-    this.paypicked = this.pay;
+    this.paypicked = pay;
     this.OnPayModified.emit(true);
   }
 
