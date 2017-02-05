@@ -28,15 +28,6 @@
 
 /* alternate colors for rows */
 
-.top-logo img { 
-  height: 0.5in; 
-  width:  0.5in;
-  float: left;
- }
-.top-logo h3 { 
-  position: relative;
-}
-
 
 .table-header{
   height: 20px;

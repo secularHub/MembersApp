@@ -1,13 +1,13 @@
 
 <div class="panel">
   <div class="panel-body">
-    <!--div class="top-logo"> Would like to show the logo inline with the counts
-      <img [src]="logoUrl"/-->
-      <h3>Member Count: &nbsp;<span class="badge">{{membercount}}</span>
+    <div class="top-logo"> 
+      <img [src]="logoUrl"/>
+      <h3>| Member Count: &nbsp;<span class="badge">{{membercount}}</span>
       | Active Members: &nbsp;<span class="badge">{{activecount}}</span>
       | VIP Members: &nbsp;<span class="badge">{{vipcount}}</span>  </h3>
-    <!--/div-->
-    <div>
+    </div>
+    <div class="panel-body">
       {{bug}}
     </div>
     <div *ngIf="usermode==='normal'" class="row">

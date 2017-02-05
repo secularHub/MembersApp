@@ -44,6 +44,16 @@ body{
   color: red;
 }
 
+.top-logo img { 
+  height: 0.5in; 
+  width:  0.5in;
+  float: left;
+ }
+.top-logo h3 { 
+  position: relative;
+  float: left;
+}
+
 .panel {
   background-color: #1d2528;
   color: lightblue;
@@ -57,6 +67,9 @@ body{
   border-style: inset;
   border-color: #5CFFFF;        /* Border color of the members component input fields */
   height: 25px;                      /* This controls the height of all the input fields */
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px 40px;
 }
 
 .form-group{
@@ -79,6 +92,10 @@ body{
   border-left-color: #5CFFFF;
   border-right-color: #5CFFFF;
   border-top-color: #5CFFFF;
+  border-style: solid;
+  border-width: 1px;
+  height: 25px;                      
+  border-radius: 15px 40px;
 }
 .form-control-amt{
   background-color: #1d2528;
@@ -88,6 +105,10 @@ body{
   border-left-color: #5CFFFF;
   border-right-color: #5CFFFF;
   border-top-color: #5CFFFF;
+  border-style: solid;
+  border-width: 1px;
+  height: 25px;                      
+  border-radius: 15px 40px;
 }
 .form-control-pt{
   background-color: #1d2528;
@@ -97,6 +118,10 @@ body{
   border-left-color: #5CFFFF;
   border-right-color: #5CFFFF;
   border-top-color: #5CFFFF;
+  border-style: solid;
+  border-width: 1px;
+  height: 25px;                      
+  border-radius: 15px 40px;
 }
 
 /* NOTE:
@@ -269,7 +294,7 @@ input.form-control {
   background-color: #396763;
   left: .1em;
 }
-.itemtable td:hover {
+.itemtable tr td:hover {
   color: #FFFF99;
   background-color: #396763;
   left: .1em;
