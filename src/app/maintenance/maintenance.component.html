@@ -1,18 +1,18 @@
-<div class="panel-body">
-  <div class="row">
-    <div class="col-md-8">
-      <div>
-        <h1>Maintenance</h1>
-        <h3>Global Tools</h3>
-      </div>     
+<div class="panel">
+  <div class="panel-body">
+    <div class="top-logo"> 
+      <img [src]="logoUrl"/>
+      <h1>| Maintenance</h1>
+    </div>
+    <div>
+      <h3>Global Tools</h3>
+    </div>
       <div class="submit">
        <button type="button" class="btn-custom" (click)="reconcile()">Reconcile All Members</button>
       </div>
       <div>
         {{notifyMessage}}
       </div>
-    </div>
-   </div> 
      <div class="row">
       <div class="col-md-8">
         <div>
@@ -71,3 +71,4 @@
       </div>
     </div>
   </div>
+</div>

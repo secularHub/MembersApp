@@ -37,6 +37,8 @@ export class MaintenanceComponent implements OnInit {
 
   temp: string;
   filterName: string;
+  logoUrl: string = "/assets/images/cropped-faceboook-logo-whole-hub-e1454810467184.png";
+
   constructor(private r: Router, private lms: MemberNJSService){
     this.router = r;
     this.ms = lms;

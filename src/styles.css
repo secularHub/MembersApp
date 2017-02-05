@@ -5,9 +5,9 @@ html{
 }
 
 h1{ /* colors of the heading text */
+  margin: 0;
   background: #1d2528;
-  color: #FFCC99
-;
+  color: #FFCC99;
 }
 
 h2{
@@ -215,39 +215,7 @@ input.form-control {
   background-image: linear-gradient(to bottom, #5CFFFF, #363a5a);
   text-decoration: none;
 }
-/*
-.btn {
-  background: #242b30;
-  background-image: -webkit-linear-gradient(top, #242b30, #20292e);
-  background-image: -moz-linear-gradient(top, #242b30, #20292e);
-  background-image: -ms-linear-gradient(top, #242b30, #20292e);
-  background-image: -o-linear-gradient(top, #242b30, #20292e);
-  background-image: linear-gradient(to bottom, #242b30, #20292e);
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  font-family: Arial;
-  color: #a090f0;
-  font-size: 9px;
-  padding: 3px 3px 3px 3px;
-  text-decoration: none;
-}
 
-.btn:hover {
-  background: #000000;
-  background-image: -webkit-linear-gradient(top, #000000, #111111);
-  background-image: -moz-linear-gradient(top, #000000, #111111);
-  background-image: -ms-linear-gradient(top, #000000, #111111);
-  background-image: -o-linear-gradient(top, #000000, #111111);
-  background-image: linear-gradient(to bottom, #000000, #111111);
-  text-decoration: none;
-}
-*/
-/* Table styles */
-
-/*Payment Table*/
-/*#scrolltable { margin-top: 20px; height: 200px; overflow: auto; }
-#scrolltable th div { position: absolute; margin-top: -20px; }*/
 #scrolltableskinny { color:#FFFF99; margin-top: 20px; height: 240px; overflow: auto; }
 #scrolltableskinny th div { color:#FFFF99; position: absolute; margin-top: -20px; }
 

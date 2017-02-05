@@ -12,6 +12,8 @@ import {escape} from "querystring";
 })
 export class ReportsComponent implements OnInit {
 
+  logoUrl: string = "/assets/images/cropped-faceboook-logo-whole-hub-e1454810467184.png";
+
   constructor(private ms: MemberNJSService) {
       this.isShowHeader = true;
   }

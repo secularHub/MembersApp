@@ -1,10 +1,14 @@
 <!-- Main Page -->
 <div class="panel-body">
-  <div *ngIf="isShowHeader" class="row">
-    <div class="col-md-6">
-      <h1>Reports</h1>
+  <div *ngIf="isShowHeader">
+    <div class="top-logo"> 
+      <img [src]="logoUrl"/>
+      <h1>| Reports</h1>
+    </div>
+    <div>
       <h3>Select Report: </h3>
-
+    </div>
+    <div class="col-md-8">
       <form #opsForm="ngForm">
         <select name="ops" ngModel class="report-body">
           <option value="" disabled>choose</option>
@@ -30,6 +34,7 @@
       </div>
     </div>
   </div>
+
 <!-- Reports -->
   <div class="row" tabindex="0" id="secondrow" (keyup)="onKeyUp($event)">
     <div class="col-md-12">
