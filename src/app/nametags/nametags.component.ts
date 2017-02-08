@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Member } from '../members/member';
 import { Router } from '@angular/router';
-import { AppComponent } from '../app.component';
 import { MemberNJSService } from "../members/memberNJS.service";
 
 @Component({
@@ -25,8 +24,8 @@ export class NametagsComponent implements OnInit {
 
   constructor(
     private router: Router, 
-    private memservice: MemberNJSService, 
-    private app: AppComponent) {
+    private memservice: MemberNJSService
+    ) {
       // empty
   }
 
@@ -53,7 +52,6 @@ export class NametagsComponent implements OnInit {
     let needsUpdate : boolean = (this._isPreview === false && value === true);
 
     this._isPreview = value;
-    this.app.setMenuHidden(this._isPreview);
 
     if (needsUpdate) {
       // Set the default 'nudge' value (after waiting for preview page to load).

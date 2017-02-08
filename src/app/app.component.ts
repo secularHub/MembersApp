@@ -13,7 +13,6 @@ export class AppComponent implements OnInit{
   title: string;
   login: boolean;
   jwt: string;
-  isMenuHidden: boolean = false;
   outletText : string;
 
   constructor(public router: Router) {
@@ -31,10 +30,6 @@ export class AppComponent implements OnInit{
     this.login = false;
     this.outletText = "";
     this.routeToMembers();
-  }
-
-  public setMenuHidden(value: boolean) {
-    this.isMenuHidden = value;
   }
 
   // TODO: Consider having other code use these to do navigation,
