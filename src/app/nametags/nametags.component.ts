@@ -13,7 +13,8 @@ import { MemberNJSService } from "../members/memberNJS.service";
 export class NametagsComponent implements OnInit {
   member: Member;
   memberlist: Array<Member>;
-  rows: Array<NametagsComponent.Row>;
+
+  tagsPerPage: number = 6;
 
   topSlider : number = 0.0;
   leftSlider : number = 0.0;
@@ -146,70 +147,52 @@ export class NametagsComponent implements OnInit {
   // TODO: This is common code (with routines elsewhere in app).  Needs to be merged.
   navigateToRootWhenNotLoggedIn() {
     let jwt = localStorage.getItem('id_token');
-    if(jwt.length == 0)
+    if (jwt.length == 0) {
       this.router.navigate(['']);
+    }
   }
 
   private populateMemberList(){
     this.memberlist = new Array<Member>();
     this.memservice.getAllDocs().subscribe(response => {
-        this.memberlist = response.sort(this.compareMember);
-        this.memberlist = this.memberlist.filter(
-            member => member.needsNametag === true
-        );
-
-        // this.fillMemberListFromSamples();  // only for initial testing
-        this.fillPreviewFromMemberList();
-      });
+      this.memberlist = response.sort(this.compareMember);
+      this.memberlist = this.memberlist.filter(
+        member => member.needsNametag === true
+      );
+    });
   }
 
-  // fillMemberListFromSamples() {
-  //   let sampleMembers = [
-  //     {first: "Abe", last: "Arturo"},
-  //     {first: "Bob", last: "Brandon"},
-  //     {first: "Carl", last: "Crackin"},
-  //     {first: "Donny", last: "Dringle"},
-  //     {first: "Eve", last: "Easter"},
-  //     {first: "Fran", last: "Flynn"}
-  //   ];
-  //   let sampleMembersLong = [
-  //     {first: "Zed", last: "Zilby"},
-  //     {first: "Honeyblossum", last: "Zomi-Freaktastic"},
-  //     {first: "Ooo. Long Longoooo", last: "Forkulator"},
-  //     {first: "Ooo. Long Longoooo", last: "Perkinator Z"},
-  //     {first: "Blingie", last: "Richardson"},
-  //     {first: "Thomas", last: "Thompson"}
-  //   ];
+  pageTop(page: number): number {
+    return 1+page*11;     // inches
+  }
+  numPages(): number {
+    return  (this.memberlist.length <= 0)
+      ? 0
+      : 1 + Math.trunc((this.memberlist.length - 1) / this.tagsPerPage );
+  }
+  indexes(length: number) {
+    // return array of length n containing 0..n-1
+    let a: Array<number> = new Array<number>(length);
+    for (let i=0; i<a.length; i++) {
+      a[i] = i;
+    }
+    return a;
+  }
 
-  //   this.memberlist = new Array<Member>();
-  //   for (let m of sampleMembers) {
-  //     let member: Member = new Member('', false);
-  //     member.firstName = m.first;
-  //     member.lastName = m.last;
-  //     member.needsNametag = true;
-  //     this.memberlist.push(member);
-  //   }
-  //   this.fillPreviewFromMemberList();
-  // }
-
-  fillPreviewFromMemberList() {
-    this.rows = new Array<NametagsComponent.Row>();
-
-    let row = 0;
-    let col = 0;
-    for (let index = 0; index < 6; index++) {
-      row = Math.floor(index/2);
-      col = index % 2;
-      if (row >= this.rows.length) {
-        this.rows.push(new NametagsComponent.Row());
-      }
-      this.rows[row].cols[col] =
-        (index < this.memberlist.length)
+  getMemberByIndex(index: number): Member {
+    // returns clone of indicated member, or (when out of range) a new empty member.
+    return (0 <= index && index < this.memberlist.length)
         ? Object.assign({}, this.memberlist[index])                          // shallow clone
         : Object.assign(new Member('', false), {firstName:'',lastName:''});  // new empty member
-    }
+  }
+  getIndex(page: number, row: number, col: number): number {
+    return page*this.tagsPerPage + row*2 + col;
+  }
+  getMember(page: number, row: number, col: number): Member {
+    return this.getMemberByIndex(this.getIndex(page, row, col));
   }
 
+  // compareMember is common code.  Should be in Member class.
   private compareMember(left, right){
     let ln: string;
     let rn: string;
@@ -235,11 +218,4 @@ export class NametagsComponent implements OnInit {
     return value===true ? "Y" : "N";
   }
 
-}
-
-// Make Row an inner class of NametagsComponent
-export module NametagsComponent {
-  export class Row {
-    public cols: Array<Member> = new Array<Member>();
-  }
 }

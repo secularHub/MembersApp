@@ -73,41 +73,33 @@
       <input id="Nudge_Slider" class="nametags-slidervalue" [(ngModel)]="nudgeSlider" (change)="nudgeSliderChange($event)"/>
       <button type="button" class="glyphicon glyphicon-triangle-bottom" (click)="incNudge(0.1)" ></button>
     </p>
-    <!--
-    <ng2-slider min="-2" max="+2" value="0"
-      (onRangeChanged)="topValueChanged($event, 'Top_Slider')"></ng2-slider>
-    <ng2-slider min="-2" max="+2" value="0"
-      (onRangeChanged)="leftValueChanged($event, 'Left_Slider')"></ng2-slider>
-    <ng2-slider min="-1" max="+1" value="0" stepValue="0.1"
-      (onRangeChanged)="nudgeValueChanged($event, 'Nudge_Slider')"></ng2-slider>
-    -->
+
   </div>
 
-  <div class="nametags-page">
-
-  <!-- NOTE: <input  data-id="{{col.rowIndex}}-{{col.columnIndex}}" [value]="col.cellValue" (input)="col.cellValue = $event.target.value" (click)="model.selectColumn(col)" (keyup)="navigate($event)" /> -->
+  <div *ngFor="let page of indexes(numPages());" class="nametags-page" [style.top.in]="pageTop(page)">
     <div class="nametags-table">
 
-      <div *ngFor="let theRow of rows; let row = index" class="nametags-row">
-        <div *ngFor="let item of theRow.cols; let col=index" class="nametags-cell">
-            <div class="tag{{row*2+col+1}} nametags-tag" *ngIf="!isNameTagBlank(item)">
-              <div class="nametags-tagcontent">
-                <div class="nametags-firstname">
-                  {{item.firstName}}
-                </div>
-                <div class="nametags-lastname">
-                  {{item.lastName}}
-                </div>
-                <div class="nametags-logo-container">
-                  <img class="nametags-logo" [src]="logoUrl"/>
-                </div>
+      <div *ngFor="let row of indexes(3);" class="nametags-row">
+        <div *ngFor="let col of indexes(2);" class="nametags-cell" [attr.data-index]="getIndex(page,row,col)">
+
+          <div class="tag{{row*2+col+1}} nametags-tag" *ngIf="!isNameTagBlank(getMember(page,row,col))">
+            <div class="nametags-tagcontent">
+              <div class="nametags-firstname">
+                {{ getMember(page, row, col).firstName }}
+              </div>
+              <div class="nametags-lastname">
+                {{ getMember(page, row, col).lastName }}
+              </div>
+              <div class="nametags-logo-container">
+                <img class="nametags-logo" [src]="logoUrl"/>
               </div>
             </div>
+          </div>
+
         </div>
       </div>
 
     </div>
+  </div> <!-- end nametags-page -->
 
-  </div> <!-- nametags-page -->
-
-</div> <!-- nametags-previewpage -->
+</div> <!-- end nametags-previewpage -->
