@@ -9,6 +9,7 @@ import { AppComponent } from "./app.component";
 
 // TODO: create some auth routes
 export const AppRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'members', component: MembersComponent },
   { path: 'maintenance', component: MaintenanceComponent },
   { path: 'nametags', component: NametagsComponent },
