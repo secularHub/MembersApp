@@ -338,12 +338,12 @@ export class MembersComponent implements OnInit {
       let ln: string;
       let rn: string;
       if (left.firstName != null && left.lastName != null) {
-        ln = left.firstName.toLowerCase() + left.lastName.toLowerCase();
+        ln = left.firstName.toLowerCase() + left.lastName.toLowerCase() + left.joinedDate;
       }
       else
         ln = "";
       if (right.firstName != null && right.lastName != null) {
-        rn = right.firstName.toLowerCase() + right.lastName.toLowerCase();
+        rn = right.firstName.toLowerCase() + right.lastName.toLowerCase() + right.joinedDate;
       }
       else rn = "";
       if (ln < rn) return -1;
