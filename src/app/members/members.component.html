@@ -127,8 +127,12 @@
                 Family Of: {{member.parentName}}
               </div>
               <div class="form-inline">
+                <label for="td">Target Date </label>
+                <input type="date" [(ngModel)]="targetDate" id="td" name="targetDate">
+              </div>
+              <div class="form-inline">
                 <label for="skills">Notes</label>
-                <input [(ngModel)]="member.skills" id="skills" name="skills" type="text"class="form-control input-custom" size="50">
+                <input  [(ngModel)]="member.skills" id="skills" name="skills" type="text"class="form-control input-custom" size="50">
               </div>
               </div>
             <div class="submit">

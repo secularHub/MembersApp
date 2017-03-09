@@ -87,6 +87,26 @@ export class MembersComponent implements OnInit {
     //    this.memberlist = af.database.list('./members');
   }
 
+  set targetDate(e){ /* What gets Saved */
+    let ee = e.split('-');
+    if(ee.length > 0 && Number(ee[0]) > 2000) {
+      let d = new Date(Date.UTC(Number(ee[0]), Number(ee[1]) - 1, Number(ee[2]) + 1));
+      this.member.targetDate = new Date(d.toISOString().substring(0, 19));
+    }
+  }
+  get targetDate(){ /* What gets displayed */
+    if(this.member.targetDate != null) {
+      let d = new Date(this.member.targetDate.valueOf());
+      let s = d.toLocaleDateString();
+      let ee = s.split('/');
+      if(ee[0].length == 1)
+        ee[0] = "0" + ee[0];
+      if(ee[1].length == 1)
+        ee[1] = "0" + ee[1];
+      let final = ee[2] + "-" + ee[0] + "-" + ee[1];
+      return final;
+    }
+  }
   getPayments(): Array<IPayment> {
     if (this.payments == null)
       this.payments = new Array<IPayment>();

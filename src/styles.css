@@ -14,7 +14,10 @@ h2{
   background: #1d2528;
   color: #FFCC99;
 }
-
+input{
+  background: #1d2528;
+  color: lightblue;
+}
 h3{
   background: #1d2528;
   color: #FFCC99;
@@ -44,12 +47,12 @@ body{
   color: red;
 }
 
-.top-logo img { 
-  height: 0.5in; 
+.top-logo img {
+  height: 0.5in;
   width:  0.5in;
   float: left;
  }
-.top-logo h3 { 
+.top-logo h3 {
   position: relative;
   float: left;
 }
@@ -94,7 +97,7 @@ body{
   border-top-color: #5CFFFF;
   border-style: solid;
   border-width: 1px;
-  height: 25px;                      
+  height: 25px;
   border-radius: 15px 40px;
 }
 .form-control-amt{
@@ -107,7 +110,7 @@ body{
   border-top-color: #5CFFFF;
   border-style: solid;
   border-width: 1px;
-  height: 25px;                      
+  height: 25px;
   border-radius: 15px 40px;
 }
 .form-control-pt{
@@ -120,7 +123,7 @@ body{
   border-top-color: #5CFFFF;
   border-style: solid;
   border-width: 1px;
-  height: 25px;                      
+  height: 25px;
   border-radius: 15px 40px;
 }
 
@@ -149,7 +152,7 @@ To match an input element that IS of class form-control use a selector like:
 }
 
 input.form-control {
-  /* margin: 3px 0px 3px 0px; 
+  /* margin: 3px 0px 3px 0px;
 }
 */
 
