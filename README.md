@@ -1,5 +1,6 @@
+St4tebr1dge!
 # SecularHubMembers
-
+https://www.youtube.com/watch?v=Shhhn6lu0Nc
 
 #Prerequesites
 First make sure angular-cli is installed!
